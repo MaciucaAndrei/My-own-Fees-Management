@@ -8,5 +8,4 @@ import java.util.List;
 
 @Repository(forEntity = User.class)
 public abstract class UserRepository extends AbstractEntityRepository<User, Long> {
-    public abstract List<User> findByFirstNameOrderByCreateDateDesc(String name);
 }

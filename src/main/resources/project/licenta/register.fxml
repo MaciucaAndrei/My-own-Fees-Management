@@ -35,7 +35,7 @@
             <Font name="Times New Roman Bold" size="17.0" />
          </font>
       </PasswordField>
-      <Button fx:id="btnRegister" layoutX="222.0" layoutY="309.0" mnemonicParsing="false" text="Register">
+      <Button fx:id="btnRegister" onAction="#btnRegisterOnClick" layoutX="222.0" layoutY="309.0" mnemonicParsing="false" text="Register">
          <font>
             <Font name="Gadugi Bold" size="20.0" />
          </font>

@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "user_entity")
 public class User {
 
     @Id
@@ -11,22 +12,21 @@ public class User {
     private Long id;
 
     @Column
-    private String firstName;
+    private String username;
 
     @Column
-    private String lastName;
+    private String email;
 
     @Column
-    private LocalDate createDate;
-
-    public User(String firstName, String lastName, LocalDate createDate) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.createDate = createDate;
-    }
+    private String password;
 
     public User() {
+    }
 
+    public User(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
     }
 
     public Long getId() {
@@ -37,37 +37,38 @@ public class User {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getEmail() {
+        return email;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public LocalDate getCreateDate() {
-        return createDate;
+    public String getPassword() {
+        return password;
     }
 
-    public void setCreateDate(LocalDate createDate) {
-        this.createDate = createDate;
+    public void setPassword(String password) {
+        this.password = password;
     }
+
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", createDate=" + createDate +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 }

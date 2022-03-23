@@ -8,11 +8,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import project.licenta.entity.User;
+import project.licenta.service.UserService;
+import project.licenta.utils.GetInstance;
 
+import javax.enterprise.context.ApplicationScoped;
 import java.io.IOException;
 
+@ApplicationScoped
 public class Register {
-
 
     @FXML
     private Button btnRegister;
@@ -25,6 +29,7 @@ public class Register {
     @FXML
     private PasswordField txtPassNew;
 
+    private final UserService userService = GetInstance.of(UserService.class);
 
 
     public boolean Passvalidation(String p1, String p2) {
@@ -36,9 +41,15 @@ public class Register {
 
     public void btnRegisterOnClick(ActionEvent event) throws IOException {
 
+        String username = txtUser.getText();
+        String email = txtEmail.getText();
+        String password = txtPass.getText();
 
-        if (Passvalidation(txtPass.getText(),txtPassNew.getText()))
-        {
+        User user = new User(username, email, password);
+
+        User savedUser = userService.save(user);
+
+        if (Passvalidation(txtPass.getText(), txtPassNew.getText())) {
             Stage register = (Stage) btnRegister.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("login.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
