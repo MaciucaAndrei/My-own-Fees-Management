@@ -29,7 +29,7 @@ public class Register {
     @FXML
     private PasswordField txtPassNew;
 
-    private final UserService userService = GetInstance.of(UserService.class);
+    private UserService userService = GetInstance.of(UserService.class);
 
 
     public boolean Passvalidation(String p1, String p2) {
@@ -47,7 +47,7 @@ public class Register {
 
         User user = new User(username, email, password);
 
-        User savedUser = userService.save(user);
+        User save = userService.save(user);
 
         if (Passvalidation(txtPass.getText(), txtPassNew.getText())) {
             Stage register = (Stage) btnRegister.getScene().getWindow();

@@ -1,9 +1,9 @@
-package project.licenta.dbThread;
+package project.licenta.cdi;
 
 import org.apache.deltaspike.cdise.api.CdiContainer;
 import org.apache.deltaspike.cdise.api.CdiContainerLoader;
 
-public class DbThread implements Runnable {
+public class CDIContainerThread implements Runnable {
 
     private CdiContainer cdiContainer;
 
