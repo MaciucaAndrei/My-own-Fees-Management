@@ -18,4 +18,7 @@ public class UserService {
     public List<User> findAll() {
         return userRepository.findAll();
     }
+
+    public List<User>  findBy(User user) { return userRepository.findBy(user);}
+
 }
