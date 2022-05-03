@@ -57,6 +57,9 @@ public class Menu {
     @FXML
     private AnchorPane paneMenu;
 
+    @FXML
+    private Label label;
+
     private SemesterService semesterService= GetInstance.of(SemesterService .class);
 
 
@@ -166,15 +169,6 @@ public class Menu {
     public void start(String user)
     {
         this.user= user;
-        Label lblHello= new Label();
-        lblHello.setLayoutX(41);
-        lblHello.setLayoutY(20);
-        Font font = new Font("Gadugi",30);
-        lblHello.setFont(font);
-        Paint paint =Paint.valueOf("#d9e9f2");
-        lblHello.setTextFill(paint);
-        lblHello.setText("Hello, "+user);
-        paneMenu.getChildren().add(lblHello);
         SpinnerValueFactory<Integer> yearFactory =new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 4, 1);
         spnYear.setValueFactory(yearFactory);
         SpinnerValueFactory<Integer> semFactory =new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 2, 1);
@@ -188,9 +182,11 @@ public class Menu {
             return true;
         }else
         {
-            Alert a = new Alert(Alert.AlertType.ERROR);
-            a.setHeaderText("Completati toate campurile!");
-            a.show();
+            label.setText("Fill in all the fields");
+            Paint paint = Paint.valueOf("red");
+            label.setTextFill(paint);
+            Font font = new Font("Gadugi",15);
+            label.setFont(font);
             return false;
         }
     }
@@ -203,9 +199,11 @@ public class Menu {
            String semester_shortcuts = buttonText(semester);
            if(duplicate_shortcuts.equals(semester_shortcuts))
            {
-               Alert a = new Alert(Alert.AlertType.ERROR);
-               a.setHeaderText("Semestrul a fost deja adaugat!");
-               a.show();
+               label.setText("This semester was already added");
+               Paint paint = Paint.valueOf("red");
+               label.setTextFill(paint);
+               Font font = new Font("Gadugi",15);
+               label.setFont(font);
                return false;
            }
            if(semester.getUniversity().toLowerCase().equals(duplicate.getUniversity().toLowerCase()) &&
@@ -214,9 +212,11 @@ public class Menu {
                    semester.getUniversity_year().equals(duplicate.getUniversity_year()) &&
                    semester.getYear()==duplicate.getYear() && semester.getSemester()==duplicate.getSemester())
            {
-               Alert a = new Alert(Alert.AlertType.ERROR);
-               a.setHeaderText("Semestrul a fost deja adaugat!");
-               a.show();
+               label.setText("This semester was already added");
+               Paint paint = Paint.valueOf("red");
+               label.setTextFill(paint);
+               Font font = new Font("Gadugi",15);
+               label.setFont(font);
                return false;
            }
         }
@@ -238,24 +238,30 @@ public class Menu {
                     return true;
                 }else
                 {
-                    Alert a = new Alert(Alert.AlertType.ERROR);
-                    a.setHeaderText("Anul universitar nu poate fi din viitor !");
-                    a.show();
+                    label.setText("The university year cannot be from the future");
+                    Paint paint = Paint.valueOf("red");
+                    label.setTextFill(paint);
+                    Font font = new Font("Gadugi",15);
+                    label.setFont(font);
                     return false;
                 }
 
             }else
             {
-                Alert a = new Alert(Alert.AlertType.ERROR);
-                a.setHeaderText("Primul an trebuie sa fie mai mic decat al doilea !");
-                a.show();
+                label.setText("The university year must respect the chronological order");
+                Paint paint = Paint.valueOf("red");
+                label.setTextFill(paint);
+                Font font = new Font("Gadugi",15);
+                label.setFont(font);
                 return false;
             }
         }else
         {
-            Alert a = new Alert(Alert.AlertType.ERROR);
-            a.setHeaderText("Anul universitar trebuie sa fie sub forma: 2000-2001 !");
-            a.show();
+            label.setText("The university year must be in the form: 2000-2001");
+            Paint paint = Paint.valueOf("red");
+            label.setTextFill(paint);
+            Font font = new Font("Gadugi",15);
+            label.setFont(font);
             return false;
         }
     }
@@ -283,7 +289,7 @@ public class Menu {
             if(SemesterValidation(semester)) {
                 Semester save = semesterService.save(semester);
                 Alert a = new Alert(Alert.AlertType.CONFIRMATION);
-                a.setHeaderText("Adaugarea a avut  succes!");
+                a.setHeaderText("The semester has been successfully added");
                 a.show();
                 paneSemesterAdd.setVisible(false);
                 txtUniv.clear();

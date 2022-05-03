@@ -29,8 +29,8 @@ public class MainApp extends Application {
 
         initCdiContainer();
         FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("login.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
-        stage.setTitle("Login");
+        Scene scene = new Scene(fxmlLoader.load(), 807, 469);
+        stage.setTitle("myUniSit");
         stage.setScene(scene);
         stage.show();
 

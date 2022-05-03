@@ -11,84 +11,120 @@
 
 <AnchorPane prefHeight="587.0" prefWidth="764.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.licenta.Menu">
    <children>
-      <ImageView fitHeight="587.0" fitWidth="816.0" pickOnBounds="true">
+      <ImageView fitHeight="587.0" fitWidth="861.0" pickOnBounds="true">
          <image>
             <Image url="@images/login_background.jpg" />
          </image>
       </ImageView>
       <AnchorPane fx:id="paneMenu" layoutY="19.0" prefHeight="56.0" prefWidth="764.0">
          <children>
-            <ImageView fitHeight="87.0" fitWidth="814.0" layoutX="-1.0" layoutY="-15.0" pickOnBounds="true">
+            <ImageView fitHeight="98.0" fitWidth="861.0" layoutX="-1.0" layoutY="-26.0" pickOnBounds="true">
                <image>
                   <Image url="@images/menu_background.jpg" />
                </image>
             </ImageView>
-            <Button fx:id="btnLogout" layoutX="700.0" layoutY="7.0" mnemonicParsing="false" onAction="#btnLogoutOnClick" style="-fx-background-color: transparent;" text="Log out" textFill="#d9e9f2">
+            <Button fx:id="btnLogout" layoutX="747.0" layoutY="7.0" mnemonicParsing="false" onAction="#btnLogoutOnClick" style="-fx-background-color: transparent;" text="Log out" textFill="#d9e9f2">
                <font>
                   <Font name="Gadugi Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="btnAddSemester" layoutX="561.0" mnemonicParsing="false" onAction="#btnAddSemesterOnClick" style="-fx-background-color: transparent;" text="Adauga &#10;semestru" textAlignment="CENTER" textFill="#d9e9f2">
+            <Button fx:id="btnAddSemester" layoutX="591.0" layoutY="7.0" mnemonicParsing="false" onAction="#btnAddSemesterOnClick" style="-fx-background-color: transparent;" text="Add semester" textAlignment="CENTER" textFill="#d9e9f2">
                <font>
                   <Font name="Gadugi Bold" size="20.0" />
                </font>
             </Button>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="paneSemesterAdd" layoutX="358.0" layoutY="110.0" prefHeight="442.0" prefWidth="444.0" visible="false">
-         <children>
-            <ImageView fitHeight="43.0" fitWidth="40.0" layoutX="65.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="63.0" fitWidth="195.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/university_icon.png" />
+                  <Image url="@images/icon.png" />
                </image>
             </ImageView>
-            <TextField fx:id="txtUniv" layoutX="171.0" layoutY="46.0" prefHeight="26.0" prefWidth="244.0" promptText="Universitate" style="-fx-background-color: transparent; -fx-text-inner-color: #d9e9f2;">
-               <font>
-                  <Font name="Times New Roman" size="16.0" />
-               </font></TextField>
-            <TextField fx:id="txtColl" layoutX="171.0" layoutY="102.0" prefHeight="26.0" prefWidth="244.0" promptText="Facultate" style="-fx-background-color: transparent; -fx-text-inner-color: #d9e9f2;">
-               <font>
-                  <Font name="Times New Roman" size="16.0" />
-               </font></TextField>
-            <TextField fx:id="txtDep" layoutX="171.0" layoutY="152.0" prefHeight="26.0" prefWidth="244.0" promptText="Specializare" style="-fx-background-color: transparent; -fx-text-inner-color: #d9e9f2;">
-               <font>
-                  <Font name="Times New Roman" size="16.0" />
-               </font></TextField>
-            <TextField fx:id="txtUniv_year" layoutX="174.0" layoutY="207.0" promptText="An universitar" style="-fx-background-color: transparent; -fx-text-inner-color: #d9e9f2;">
-               <font>
-                  <Font name="Times New Roman" size="16.0" />
-               </font></TextField>
-            <Label layoutX="25.0" layoutY="239.0" text="An de studiu" textFill="#d9e9f2">
-               <font>
-                  <Font name="Gabriola" size="30.0" />
-               </font></Label>
-            <Spinner fx:id="spnYear" layoutX="174.0" layoutY="245.0" />
-            <Spinner fx:id="spnSem" layoutX="174.0" layoutY="294.0" />
-            <Label layoutX="31.0" layoutY="288.0" text="Semestru" textFill="#d9e9f2">
-               <font>
-                  <Font name="Gabriola" size="30.0" />
-               </font></Label>
-            <Button fx:id="btnAdd" layoutX="142.0" layoutY="364.0" mnemonicParsing="false" onAction="#btnAddOnClick" prefHeight="46.0" prefWidth="213.0" style="-fx-background-color: #000080; -fx-background-radius: 90;" text="Adauga" textFill="#d9e9f2">
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="paneSemesterAdd" layoutX="374.0" layoutY="117.0" prefHeight="450.0" prefWidth="439.0" visible="false">
+         <children>
+            <Button fx:id="btnAdd" layoutX="151.0" layoutY="370.0" mnemonicParsing="false" onAction="#btnAddOnClick" prefHeight="46.0" prefWidth="213.0" style="-fx-background-color: #000080; -fx-background-radius: 90;" text="Add" textFill="#d9e9f2">
                <font>
                   <Font name="Gadugi Bold" size="20.0" />
                </font></Button>
-            <ImageView fitHeight="43.0" fitWidth="40.0" layoutX="65.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/college_icon.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="43.0" fitWidth="40.0" layoutX="65.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/department_icon.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="38.0" fitWidth="50.0" layoutX="60.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/year_icon.png" />
-               </image>
-            </ImageView>
+            <AnchorPane layoutX="131.0" layoutY="55.0" prefHeight="35.0" prefWidth="256.0" style="-fx-background-color: #003d66;">
+               <children>
+                  <ImageView fitHeight="35.0" fitWidth="40.0" layoutY="-1.0">
+                     <image>
+                        <Image url="@images/university_icon.png" />
+                     </image>
+                  </ImageView>
+                  <TextField fx:id="txtUniv" layoutX="34.0" layoutY="-1.0" prefHeight="35.0" prefWidth="231.0" promptText="University" style="-fx-background-color: transparent; -fx-text-inner-color: d9e9f2;">
+                     <font>
+                        <Font name="Times New Roman Bold" size="16.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="131.0" layoutY="104.0" prefHeight="35.0" prefWidth="256.0" style="-fx-background-color: #003d66;">
+               <children>
+                  <ImageView fitHeight="35.0" fitWidth="40.0" layoutY="-1.0">
+                     <image>
+                        <Image url="@images/college_icon.png" />
+                     </image>
+                  </ImageView>
+                  <TextField fx:id="txtColl" layoutX="34.0" layoutY="-1.0" prefHeight="35.0" prefWidth="231.0" promptText="College" style="-fx-background-color: transparent; -fx-text-inner-color: d9e9f2;">
+                     <font>
+                        <Font name="Times New Roman Bold" size="16.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="132.0" layoutY="152.0" prefHeight="35.0" prefWidth="256.0" style="-fx-background-color: #003d66;">
+               <children>
+                  <ImageView fitHeight="35.0" fitWidth="40.0" layoutY="-1.0">
+                     <image>
+                        <Image url="@images/department_icon.png" />
+                     </image>
+                  </ImageView>
+                  <TextField fx:id="txtDep" layoutX="34.0" layoutY="-1.0" prefHeight="35.0" prefWidth="231.0" promptText="Department" style="-fx-background-color: transparent; -fx-text-inner-color: d9e9f2;">
+                     <font>
+                        <Font name="Times New Roman Bold" size="16.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="131.0" layoutY="201.0" prefHeight="35.0" prefWidth="256.0" style="-fx-background-color: #003d66;">
+               <children>
+                  <ImageView fitHeight="35.0" fitWidth="40.0" layoutY="-1.0">
+                     <image>
+                        <Image url="@images/year_icon.png" />
+                     </image>
+                  </ImageView>
+                  <TextField fx:id="txtUniv_year" layoutX="34.0" layoutY="-1.0" prefHeight="35.0" prefWidth="231.0" promptText="University year" style="-fx-background-color: transparent; -fx-text-inner-color: d9e9f2;">
+                     <font>
+                        <Font name="Times New Roman Bold" size="16.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="131.0" layoutY="255.0" prefHeight="38.0" prefWidth="266.0" style="-fx-background-color: #003d66;">
+               <children>
+                  <Label layoutX="14.0" prefHeight="38.0" prefWidth="100.0" text="Year of study" textFill="#d9e9f2">
+                     <font>
+                        <Font name="Gabriola" size="20.0" />
+                     </font>
+                  </Label>
+                  <Spinner fx:id="spnYear" layoutX="152.0" layoutY="6.0" prefHeight="26.0" prefWidth="100.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="131.0" layoutY="312.0" prefHeight="38.0" prefWidth="266.0" style="-fx-background-color: #003d66;">
+               <children>
+                  <Label layoutX="14.0" prefHeight="38.0" prefWidth="100.0" text="Semester" textFill="#d9e9f2">
+                     <font>
+                        <Font name="Gabriola" size="20.0" />
+                     </font>
+                  </Label>
+                  <Spinner fx:id="spnSem" layoutX="152.0" layoutY="6.0" prefHeight="26.0" prefWidth="100.0" />
+               </children>
+            </AnchorPane>
+            <Label fx:id="label" layoutX="104.0" layoutY="14.0" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="paneButtons" layoutX="27.0" layoutY="117.0" prefHeight="428.0" prefWidth="200.0" />
+      <AnchorPane fx:id="paneButtons" layoutX="34.0" layoutY="117.0" prefHeight="428.0" prefWidth="200.0" />
    </children>
 </AnchorPane>

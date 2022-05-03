@@ -4,10 +4,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import project.licenta.entity.User;
@@ -31,6 +30,8 @@ public class Login {
     private Button btnLogin;
     @FXML
     private Button btnRegister;
+    @FXML
+    private Label label;
 
     private UserService userService = GetInstance.of(UserService.class);
 
@@ -40,9 +41,11 @@ public class Login {
             return true;
         }else
         {
-            Alert a = new Alert(Alert.AlertType.ERROR);
-            a.setHeaderText("Completati toate campurile!");
-            a.show();
+            label.setText("Fill in all the fields");
+            Paint paint = Paint.valueOf("red");
+            label.setTextFill(paint);
+            Font font = new Font("Gadugi",15);
+            label.setFont(font);
             return false;
         }
     }
@@ -55,25 +58,29 @@ public class Login {
             for (User all : users) {
                 if (all.getUsername().equals(user)) {
                     flag = 1;
-                    if (all.getPassword().equals(pass)) {
+                    if (all.getPassword()==pass.hashCode()) {
 
                         Alert a = new Alert(Alert.AlertType.CONFIRMATION);
                         a.setHeaderText("Autentificare cu succes!");
                         a.show();
                         return true;
                     } else {
-                        Alert a = new Alert(Alert.AlertType.ERROR);
-                        a.setHeaderText("Parola introdusa este incorecta!");
-                        a.show();
+                        label.setText("The password entered is incorrect");
+                        Paint paint = Paint.valueOf("red");
+                        label.setTextFill(paint);
+                        Font font = new Font("Gadugi",15);
+                        label.setFont(font);
                         return false;
                     }
                 }
 
             }
             if (flag == 0) {
-                Alert a = new Alert(Alert.AlertType.ERROR);
-                a.setHeaderText("Nu exista niciun utilizator cu acest nume de utlizator!");
-                a.show();
+                label.setText("The username doesn't exist");
+                Paint paint = Paint.valueOf("red");
+                label.setTextFill(paint);
+                Font font = new Font("Gadugi",15);
+                label.setFont(font);
                 return false;
             }
         }
@@ -101,5 +108,10 @@ public class Login {
         Scene scene= new Scene(fxmlLoader.load());
         login.setScene(scene);
 
+    }
+
+    public void start(String user)
+    {
+        txtUser.setText(user);
     }
 }

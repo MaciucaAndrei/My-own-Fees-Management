@@ -4,10 +4,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import project.licenta.entity.User;
 import project.licenta.service.UserService;
@@ -31,7 +31,10 @@ public class Register {
     private PasswordField txtPass;
     @FXML
     private PasswordField txtPassNew;
-
+    @FXML
+    private Button btnLogin;
+    @FXML
+    private Label label;
     private UserService userService = GetInstance.of(UserService.class);
 
 
@@ -45,9 +48,13 @@ public class Register {
              return true;
          }else
          {
-             Alert a= new Alert(Alert.AlertType.ERROR);
-             a.setHeaderText("Emailul este invalid");
-             a.show();
+             label.setText("Email is invalid");
+             Paint paint = Paint.valueOf("red");
+             label.setTextFill(paint);
+             Font font = new Font("Gadugi",15);
+             label.setFont(font);
+             label.setLayoutX(75);
+             label.setLayoutY(125);
              return false;
          }
     }
@@ -56,9 +63,13 @@ public class Register {
         if (p1.equals(p2)) {
             return true;
         }else {
-            Alert a = new Alert(Alert.AlertType.ERROR);
-            a.setHeaderText("Parolele nu coincid!");
-            a.show();
+            label.setText("Passwords doesn't match");
+            Paint paint = Paint.valueOf("red");
+            label.setTextFill(paint);
+            Font font = new Font("Gadugi",15);
+            label.setFont(font);
+            label.setLayoutX(75);
+            label.setLayoutY(125);
             return false;
         }
     }
@@ -69,9 +80,13 @@ public class Register {
             return true;
         }else
         {
-            Alert a = new Alert(Alert.AlertType.ERROR);
-            a.setHeaderText("Completati toate campurile!");
-            a.show();
+            label.setText("Fill in all the fields");
+            Paint paint = Paint.valueOf("red");
+            label.setTextFill(paint);
+            Font font = new Font("Gadugi",15);
+            label.setFont(font);
+            label.setLayoutX(75);
+            label.setLayoutY(125);
             return false;
         }
     }
@@ -85,25 +100,30 @@ public class Register {
             {
                 if(user.getUsername().equals(u))
                 {
-                    Alert a= new Alert(Alert.AlertType.ERROR);
-                    a.setHeaderText("Nume de utilizator deja existent!");
-                    a.show();
+                    label.setText("Username already used");
+                    Paint paint = Paint.valueOf("red");
+                    label.setTextFill(paint);
+                    Font font = new Font("Gadugi",15);
+                    label.setFont(font);
+                    label.setLayoutX(75);
+                    label.setLayoutY(125);
                     return false;
                 }
                 if(user.getEmail().equals(e))
                 {
-                    Alert a= new Alert(Alert.AlertType.ERROR);
-                    a.setHeaderText("Email deja existent!");
-                    a.show();
+                    label.setText("Email already used");
+                    Paint paint = Paint.valueOf("red");
+                    label.setTextFill(paint);
+                    Font font = new Font("Gadugi",15);
+                    label.setFont(font);
+                    label.setLayoutX(75);
+                    label.setLayoutY(125);
                     return false;
                 }
 
             }
-            User user = new User(txtUser.getText(), txtEmail.getText(), txtPass.getText());
+            User user = new User(txtUser.getText(), txtEmail.getText(), txtPass.getText().hashCode());
             User save = userService.save(user);
-            Alert a= new Alert(Alert.AlertType.CONFIRMATION);
-            a.setHeaderText("Contul a fost inregistrat cu succes!");
-            a.show();
             return true;
         }
         return false;
@@ -111,11 +131,21 @@ public class Register {
 
     public void btnRegisterOnClick(ActionEvent event) throws IOException {
         if (RegisterValidation(txtUser.getText(),txtEmail.getText())) {
-            Stage register = (Stage) btnRegister.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("login.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-            register.setScene(scene);
+            FXMLLoader loader= new FXMLLoader(getClass().getResource("login.fxml"));
+            Stage stage =(Stage) btnLogin.getScene().getWindow();
+            stage.setScene(new Scene(loader.load()));
+           Login login = loader.getController();
+           login.start(txtUser.getText());
+            stage.show();
         }
+    }
+
+    public void btnLoginOnClick(ActionEvent event) throws IOException
+    {
+        Stage register = (Stage) btnLogin.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("login.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        register.setScene(scene);
     }
 
 

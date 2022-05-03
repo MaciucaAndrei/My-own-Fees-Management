@@ -10,51 +10,83 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.licenta.Login">
+<AnchorPane prefHeight="469.0" prefWidth="807.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.licenta.Login">
    <children>
-      <ImageView fitHeight="400.0" fitWidth="600.0" layoutX="-1.0" layoutY="-1.0">
+      <ImageView fitHeight="469.0" fitWidth="807.0" layoutX="-1.0">
          <image>
             <Image url="@images/login_background.jpg" />
          </image>
       </ImageView>
-      <Label layoutX="237.0" layoutY="46.0" text="Log in " textAlignment="CENTER" textFill="#d9e9f2">
+      <Button fx:id="btnRegister" layoutX="594.0" layoutY="274.0" mnemonicParsing="false" onAction="#btnRegisterOnClick" prefHeight="34.0" prefWidth="89.0" style="-fx-background-color: transparent;" text="Click here" textFill="NAVY">
          <font>
-            <Font name="Gadugi Bold" size="35.0" />
+            <Font name="Gadugi Bold" size="12.0" />
+         </font>
+      </Button>
+      <AnchorPane layoutX="55.0" layoutY="42.0" prefHeight="374.0" prefWidth="328.0" style="-fx-border-color: #000080; -fx-border-width: 0 5 0 0;">
+         <children>
+            <AnchorPane layoutX="18.0" layoutY="132.0" prefHeight="34.0" prefWidth="249.0" style="-fx-background-color: #003d66;">
+               <children>
+                  <ImageView fitHeight="30.0" fitWidth="40.0" layoutY="4.0">
+                     <image>
+                        <Image url="@images/user_icon.png" />
+                     </image>
+                  </ImageView>
+                  <TextField fx:id="txtUser" layoutX="34.0" layoutY="4.0" prefHeight="30.0" prefWidth="231.0" promptText="Username" style="-fx-background-color: transparent; -fx-text-inner-color: d9e9f2;">
+                     <font>
+                        <Font name="Times New Roman Bold" size="16.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="16.0" layoutY="201.0" prefHeight="38.0" prefWidth="266.0" style="-fx-background-color: #003d66;">
+               <children>
+                  <PasswordField fx:id="txtPass" layoutX="39.0" layoutY="5.0" prefHeight="31.0" prefWidth="231.0" promptText="Password" style="-fx-background-color: transparent; -fx-text-inner-color: d9e9f2;">
+                     <font>
+                        <Font name="Times New Roman Bold" size="17.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </PasswordField>
+                  <ImageView fitHeight="30.0" fitWidth="40.0" layoutY="4.0">
+                     <image>
+                        <Image url="@images/pass_icon.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <Button fx:id="btnLogin" layoutX="69.0" layoutY="266.0" mnemonicParsing="false" onAction="#btnLoginOnClick" prefHeight="43.0" prefWidth="163.0" style="-fx-background-color: #000080; -fx-background-radius: 90;" text="Login" textFill="#d9e9f2">
+               <font>
+                  <Font name="Gadugi Bold" size="20.0" />
+               </font>
+            </Button>
+            <Label layoutX="56.0" layoutY="28.0" text="Please Login " textAlignment="CENTER" textFill="#d9e9f2">
+               <font>
+                  <Font name="Gadugi Bold" size="35.0" />
+               </font>
+            </Label>
+            <Label fx:id="label" layoutX="42.0" layoutY="98.0" />
+         </children>
+      </AnchorPane>
+      <ImageView fitHeight="63.0" fitWidth="195.0" layoutX="512.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/icon.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="434.0" layoutY="129.0" text="Univerisity situation management" textFill="#d9e9f2">
+         <font>
+            <Font name="Gadugi Bold" size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="txtUser" layoutX="177.0" layoutY="148.0" opacity="0.29" prefHeight="26.0" prefWidth="240.0" promptText="Username">
+      <Label layoutX="418.0" layoutY="190.0" text="start using a management system for your university &#10;situation, but also for other student activities&#10;&#10;" textFill="#d9e9f2">
          <font>
-            <Font name="Times New Roman Bold" size="16.0" />
+            <Font name="Gadugi" size="15.0" />
          </font>
-      </TextField>
-      <PasswordField fx:id="txtPass" layoutX="177.0" layoutY="184.0" opacity="0.29" prefHeight="26.0" prefWidth="240.0" promptText="Password">
+      </Label>
+      <Label layoutX="484.0" layoutY="282.0" prefHeight="18.0" prefWidth="139.0" text="Don't have a account?" textFill="#d9e9f2">
          <font>
-            <Font name="Times New Roman Bold" size="17.0" />
+            <Font name="Gadugi Bold" size="12.0" />
          </font>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </PasswordField>
-      <Button fx:id="btnLogin" layoutX="170.0" layoutY="243.0" mnemonicParsing="false" onAction="#btnLoginOnClick" prefHeight="43.0" prefWidth="240.0" style="-fx-background-color: #000080; -fx-background-radius: 90;" text="Log in" textFill="#d9e9f2">
-         <font>
-            <Font name="Gadugi Bold" size="20.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnRegister" layoutX="170.0" layoutY="304.0" mnemonicParsing="false" onAction="#btnRegisterOnClick" prefHeight="43.0" prefWidth="240.0" style="-fx-background-color: #000080; -fx-background-radius: 90;" text="Register" textFill="#d9e9f2">
-         <font>
-            <Font name="Gadugi Bold" size="20.0" />
-         </font>
-      </Button>
-      <AnchorPane layoutX="237.0" layoutY="97.0" prefHeight="7.0" prefWidth="105.0" style="-fx-background-color: #000080;" />
-      <ImageView fitHeight="30.0" fitWidth="40.0" layoutX="110.0" layoutY="148.0">
-         <image>
-            <Image url="@images/user_icon.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="33.0" fitWidth="40.0" layoutX="110.0" layoutY="184.0">
-         <image>
-            <Image url="@images/pass_icon.png" />
-         </image>
-      </ImageView>
+      </Label>
    </children>
 </AnchorPane>
