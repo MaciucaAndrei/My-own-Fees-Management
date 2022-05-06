@@ -10,7 +10,7 @@ public class SemesterService {
         @Inject
         private SemesterRepository semesterRepository;
 
-        public Semester save(Semester subject) {return  semesterRepository.save(subject);}
+        public Semester save(Semester semester) {return  semesterRepository.save(semester);}
 
         public List<Semester> findAll() {return  semesterRepository.findAll();}
 

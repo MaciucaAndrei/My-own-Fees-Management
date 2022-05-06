@@ -1,5 +1,6 @@
 package project.licenta;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -96,25 +97,22 @@ public class Register {
         EmailValidation(txtEmail.getText()) && PassValidation(txtPass.getText(),txtPassNew.getText()))
         {
             List<User> all = userService.findAll();
-            for(User user : all)
-            {
-                if(user.getUsername().equals(u))
-                {
+            for(User user : all) {
+                if (user.getUsername().equals(u)) {
                     label.setText("Username already used");
                     Paint paint = Paint.valueOf("red");
                     label.setTextFill(paint);
-                    Font font = new Font("Gadugi",15);
+                    Font font = new Font("Gadugi", 15);
                     label.setFont(font);
                     label.setLayoutX(75);
                     label.setLayoutY(125);
                     return false;
                 }
-                if(user.getEmail().equals(e))
-                {
+                if (user.getEmail().equals(e)) {
                     label.setText("Email already used");
                     Paint paint = Paint.valueOf("red");
                     label.setTextFill(paint);
-                    Font font = new Font("Gadugi",15);
+                    Font font = new Font("Gadugi", 15);
                     label.setFont(font);
                     label.setLayoutX(75);
                     label.setLayoutY(125);
@@ -122,7 +120,8 @@ public class Register {
                 }
 
             }
-            User user = new User(txtUser.getText(), txtEmail.getText(), txtPass.getText().hashCode());
+            String cryptedpass = BCrypt.withDefaults().hashToString(12, txtPass.getText().toCharArray());
+            User user = new User(txtUser.getText(), txtEmail.getText(),cryptedpass);
             User save = userService.save(user);
             return true;
         }

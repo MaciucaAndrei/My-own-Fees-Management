@@ -147,7 +147,7 @@ public class Menu {
                 button.setStyle("-fx-background-color: transparent");
                 button.setOnAction(e-> {
                     try {
-                        Subjects_view(e);
+                        Semesters_view(button.getText());
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
@@ -157,12 +157,14 @@ public class Menu {
         }
     }
 
-    public void Subjects_view(ActionEvent event) throws IOException
+    public void Semesters_view(String semester) throws IOException
     {
-        Stage view= (Stage) btnAdd.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("subjects_view.fxml"));
-        Scene scene= new Scene(fxmlLoader.load());
-        view.setScene(scene);
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("subjects_view.fxml"));
+        Stage stage =(Stage) btnAdd.getScene().getWindow();
+        stage.setScene(new Scene(loader.load()));
+        Subjects_view menu = loader.getController();
+        menu.start(user,semester);
+        stage.show();
     }
 
 

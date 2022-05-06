@@ -113,7 +113,7 @@ public class Semester {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "Semester{" +
                 "id=" + id +
                 ", username='" + user + '\'' +
                 ", university='" + university + '\'' +

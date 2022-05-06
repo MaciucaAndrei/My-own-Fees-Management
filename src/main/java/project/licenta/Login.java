@@ -1,5 +1,6 @@
 package project.licenta;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -58,8 +59,8 @@ public class Login {
             for (User all : users) {
                 if (all.getUsername().equals(user)) {
                     flag = 1;
-                    if (all.getPassword()==pass.hashCode()) {
-
+                    BCrypt.Result result = BCrypt.verifyer().verify(pass.toCharArray(), all.getPassword());
+                    if (result.verified) {
                         Alert a = new Alert(Alert.AlertType.CONFIRMATION);
                         a.setHeaderText("Autentificare cu succes!");
                         a.show();
