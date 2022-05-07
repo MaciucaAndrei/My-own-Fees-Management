@@ -2,6 +2,7 @@ package project.licenta.entity;
 
 
 import javax.persistence.*;
+import java.util.HashMap;
 
 @Entity
 @Table(name = "subjects_entity")
@@ -20,16 +21,20 @@ public class Subjects {
     @Column
     private String subject_name;
 
+    @Column
+    private HashMap<String,String> teacher;
+
     public Subjects()
     {
 
     }
 
-    public Subjects(String user,String semester,String subject_name)
+    public Subjects(String user,String semester,String subject_name,HashMap<String,String> teacher)
     {
         this.user=user;
         this.semester=semester;
         this.subject_name=subject_name;
+        this.teacher=teacher;
     }
     public String getUser()
     {
@@ -56,6 +61,8 @@ public class Subjects {
     {
         this.subject_name=subject_name;
     }
+    public HashMap<String, String> getTeacher(){return teacher;}
+    public void setTeacher(HashMap<String,String> teacher){this.teacher=teacher;}
 
     @Override
     public String toString()
@@ -65,6 +72,7 @@ public class Subjects {
                 ", user='" + user + '\'' +
                 ", semester='" + semester + '\'' +
                 ", subject_name='" + subject_name + '\'' +
+                ", teacher='" + teacher + '\'' +
                 '}';
     }
 

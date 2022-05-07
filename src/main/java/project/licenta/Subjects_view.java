@@ -1,17 +1,16 @@
 package project.licenta;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import project.licenta.entity.Course;
 import project.licenta.entity.Semester;
 import project.licenta.entity.Subjects;
 import project.licenta.service.SubjectsService;
@@ -20,6 +19,8 @@ import project.licenta.utils.GetInstance;
 
 import javax.security.auth.Subject;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Subjects_view {
@@ -46,7 +47,19 @@ public class Subjects_view {
     private TextField txtSubjectName;
 
     @FXML
+    private TextField txtTeacher;
+
+    @FXML
     private AnchorPane paneAdd;
+
+    @FXML
+    private ComboBox<String> cmbTeacher;
+
+    @FXML
+    private Button btnPlus;
+
+    @FXML
+    private Label lblTeachers;
 
     @FXML
     private Label label;
@@ -73,7 +86,7 @@ public class Subjects_view {
                 Paint paint = Paint.valueOf("#d9e9f2");
                 button.setTextFill(paint);
                 button.setStyle("-fx-background-color: transparent");
-               button.setOnAction(e-> {
+                button.setOnAction(e-> {
                     try {
                         buttonOnClick(subject);
                     } catch (IOException ex) {
@@ -87,12 +100,12 @@ public class Subjects_view {
 
     public void buttonOnClick(Subjects subject) throws IOException
     {
-        /*FXMLLoader loader= new FXMLLoader(getClass().getResource("subjects_view.fxml"));
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("course_view.fxml"));
         Stage stage =(Stage) btnAdd.getScene().getWindow();
         stage.setScene(new Scene(loader.load()));
-        Subjects_view menu = loader.getController();
-        menu.start(user,semester);
-        stage.show();*/
+        Course_view course = loader.getController();
+        course.start(subject);
+        stage.show();
     }
 
     public void start(String user,String semester)
@@ -127,12 +140,20 @@ public class Subjects_view {
     public void btnAddOnClick(ActionEvent event)
     {
         paneAdd.setVisible(true);
+        cmbTeacher.getItems().addAll("Course","Laboratory","Seminar");
+    }
+
+    public void btnPlusOnClick(ActionEvent event)
+    {
+        String text=txtTeacher.getText()+"/"+cmbTeacher.getValue()+"\n"+lblTeachers.getText();
+        lblTeachers.setText(text);
+        txtTeacher.clear();
     }
 
     public void btnNewSubjectOnClick(ActionEvent event)
     {
         int flag=0;
-        if(!txtSubjectName.getText().isBlank()) {
+        if(!txtSubjectName.getText().isBlank() && !lblTeachers.getText().isBlank()) {
             List<Subjects> all = subjectsService.findAll();
             for (Subjects subjects : all) {
                 if (txtSubjectName.getText().equals(subjects.getSubject_name())) {
@@ -155,13 +176,21 @@ public class Subjects_view {
         }
         if(flag==0)
         {
-            Subjects subject = new Subjects(user,semester,txtSubjectName.getText());
+            String[]arrayTeachers=lblTeachers.getText().toString().split("\n");
+            HashMap<String,String>hashTeachers= new HashMap<String,String>();
+            for(String teacher : arrayTeachers)
+            {
+                String[] values= teacher.split("/");
+                hashTeachers.put(values[1],values[0]);
+            }
+            Subjects subject = new Subjects(user,semester,txtSubjectName.getText(),hashTeachers);
             Subjects save = subjectsService.save(subject);
             Alert a = new Alert(Alert.AlertType.CONFIRMATION);
             a.setHeaderText("The subject has been successfully added");
             a.show();
             paneAdd.setVisible(false);
             txtSubjectName.clear();
+            txtTeacher.clear();
             showButtons(user,semester);
         }
     }
