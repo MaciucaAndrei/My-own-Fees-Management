@@ -59,6 +59,9 @@ public class Subjects_view {
     private Button btnPlus;
 
     @FXML
+    private Button btnTimetable;
+
+    @FXML
     private Label lblTeachers;
 
     @FXML
@@ -193,5 +196,15 @@ public class Subjects_view {
             txtTeacher.clear();
             showButtons(user,semester);
         }
+    }
+
+    public void btnTimetableOnClick(ActionEvent e) throws IOException
+    {
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("timetable.fxml"));
+        Stage stage =(Stage) btnBack.getScene().getWindow();
+        stage.setScene(new Scene(loader.load()));
+        Timetable menu = loader.getController();
+        menu.start(user,semester);
+        stage.show();
     }
 }

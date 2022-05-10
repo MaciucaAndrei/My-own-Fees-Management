@@ -13,9 +13,11 @@ import javafx.stage.Stage;
 import project.licenta.entity.Semester;
 import project.licenta.service.SemesterService;
 import project.licenta.utils.GetInstance;
+import project.licenta.utils.Timeline;
 
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 public class Menu {

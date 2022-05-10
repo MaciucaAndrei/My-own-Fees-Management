@@ -9,26 +9,27 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="616.0" prefWidth="906.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.licenta.Subjects_view">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.licenta.Subjects_view">
    <children>
-      <ImageView fitHeight="617.0" fitWidth="914.0" layoutX="-3.0" pickOnBounds="true">
+      <ImageView fitHeight="617.0" fitWidth="933.0" layoutX="-5.0" layoutY="62.0" pickOnBounds="true">
          <image>
             <Image url="@images/login_background.jpg" />
          </image>
       </ImageView>
       <AnchorPane fx:id="paneMenu" layoutX="10.0" layoutY="29.0" prefHeight="56.0" prefWidth="838.0">
          <children>
-            <ImageView fitHeight="92.0" fitWidth="914.0" layoutX="-13.0" layoutY="-26.0" pickOnBounds="true">
+            <ImageView fitHeight="92.0" fitWidth="931.0" layoutX="-13.0" layoutY="-26.0" pickOnBounds="true">
                <image>
                   <Image url="@images/menu_background.jpg" />
                </image>
             </ImageView>
-            <Button fx:id="btnLogout" layoutX="788.0" layoutY="-2.0" mnemonicParsing="false" onAction="#btnLogoutOnClick" style="-fx-background-color: transparent;" text="Log out" textFill="#d9e9f2">
+            <Button fx:id="btnLogout" layoutX="788.0" layoutY="-2.0" mnemonicParsing="false" onAction="#btnLogoutOnClick" prefHeight="43.0" prefWidth="106.0" style="-fx-background-color: transparent;" text="Log out" textFill="#d9e9f2">
                <font>
                   <Font name="Gadugi Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="btnBack" layoutX="577.0" layoutY="1.0" mnemonicParsing="false" onAction="#btnBackOnClick" style="-fx-background-color: transparent;" text="Back to semesters" textAlignment="CENTER" textFill="#d9e9f2">
+            <Button fx:id="btnBack" layoutX="571.0" layoutY="-2.0" mnemonicParsing="false" onAction="#btnBackOnClick" style="-fx-background-color: transparent;" text="Back to semesters" textAlignment="CENTER" textFill="#d9e9f2">
                <font>
                   <Font name="Gadugi Bold" size="20.0" />
                </font>
@@ -38,6 +39,11 @@
                   <Image url="@images/icon.png" />
                </image>
             </ImageView>
+            <Button fx:id="btnTimetable" layoutX="453.0" layoutY="-2.0" mnemonicParsing="false" onAction="#btnTimetableOnClick" style="-fx-background-color: transparent;" text="Timetable" textAlignment="CENTER" textFill="#d9e9f2">
+               <font>
+                  <Font name="Gadugi Bold" size="20.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="paneButtons" layoutX="32.0" layoutY="188.0" prefHeight="406.0" prefWidth="200.0">
