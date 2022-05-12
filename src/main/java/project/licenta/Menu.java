@@ -6,18 +6,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import project.licenta.entity.Semester;
 import project.licenta.service.SemesterService;
 import project.licenta.utils.GetInstance;
-import project.licenta.utils.Timeline;
 
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 
 public class Menu {
@@ -149,7 +146,7 @@ public class Menu {
                 button.setStyle("-fx-background-color: transparent");
                 button.setOnAction(e-> {
                     try {
-                        Semesters_view(button.getText());
+                        Semesters_view(button.getText(),semester);
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
@@ -159,13 +156,13 @@ public class Menu {
         }
     }
 
-    public void Semesters_view(String semester) throws IOException
+    public void Semesters_view(String semester,Semester s) throws IOException
     {
         FXMLLoader loader= new FXMLLoader(getClass().getResource("subjects_view.fxml"));
         Stage stage =(Stage) btnAdd.getScene().getWindow();
         stage.setScene(new Scene(loader.load()));
         Subjects_view menu = loader.getController();
-        menu.start(user,semester);
+        menu.start(user,semester,s);
         stage.show();
     }
 
@@ -282,6 +279,17 @@ public class Menu {
     public void btnAddSemesterOnClick(ActionEvent event)
     {
         paneSemesterAdd.setVisible(true);
+        List<Semester> all = semesterService.findAll();
+        for(Semester semester : all)
+        {
+            if(semester.getUser().equals(this.user))
+            {
+                txtUniv.setText(semester.getUniversity());
+                txtColl.setText(semester.getCollege());
+                txtDep.setText(semester.getDepartment());
+                txtUniv_year.setText(semester.getUniversity_year());
+            }
+        }
     }
     public void btnAddOnClick(ActionEvent event)
     {

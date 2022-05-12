@@ -6,22 +6,29 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import project.licenta.entity.AllSubjects;
 import project.licenta.entity.Course;
 import project.licenta.entity.Semester;
 import project.licenta.entity.Subjects;
+import project.licenta.service.AllSubjectsService;
 import project.licenta.service.SubjectsService;
 import project.licenta.service.UserService;
 import project.licenta.utils.GetInstance;
 
 import javax.security.auth.Subject;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 
 public class Subjects_view {
 
@@ -38,45 +45,51 @@ public class Subjects_view {
     private Label lblSemester;
 
     @FXML
-    private Button btnAdd;
+    private Button btnActual;
+
+    @FXML
+    private Button btnPrevious;
+
+    @FXML
+    private Button btnOptional;
 
     @FXML
     private Button btnNewSubject;
 
     @FXML
-    private TextField txtSubjectName;
-
-    @FXML
-    private TextField txtTeacher;
+    private Button btnPreviousSubject;
 
     @FXML
     private AnchorPane paneAdd;
 
     @FXML
-    private ComboBox<String> cmbTeacher;
+    private AnchorPane panePrevious;
 
     @FXML
-    private Button btnPlus;
+    private ComboBox<String> cmbSubject;
 
     @FXML
     private Button btnTimetable;
 
     @FXML
-    private Label lblTeachers;
+    private Label lblNew;
 
     @FXML
-    private Label label;
+    private Label lblPrevious;
 
     private String user;
-    private String semester;
+    private String semester_text;
+    private Semester semester;
+    private List<ComboBox<String>> previousyears = new ArrayList<ComboBox<String>>();
     private SubjectsService subjectsService =GetInstance.of(SubjectsService .class);
+    private AllSubjectsService allSubjectsService =GetInstance.of(AllSubjectsService .class);
 
 
     public void showButtons(String user, String semester)
     {
         List<Subjects> subjects = subjectsService.findAll();
         double x=30;
-        double y=60;
+        double y=80;
         for(Subjects subject : subjects) {
             if (user.equals(subject.getUser()) && semester.equals(subject.getSemester())) {
                 Button button = new Button();
@@ -104,25 +117,26 @@ public class Subjects_view {
     public void buttonOnClick(Subjects subject) throws IOException
     {
         FXMLLoader loader= new FXMLLoader(getClass().getResource("course_view.fxml"));
-        Stage stage =(Stage) btnAdd.getScene().getWindow();
+        Stage stage =(Stage) btnBack.getScene().getWindow();
         stage.setScene(new Scene(loader.load()));
         Course_view course = loader.getController();
         course.start(subject);
         stage.show();
     }
 
-    public void start(String user,String semester)
+    public void start(String user,String semester,Semester s)
     {
         this.user= user;
-        this.semester=semester;
+        this.semester_text=semester;
+        this.semester=s;
         lblSemester.setText(semester);
         Font font = new Font("Gadugi", 20);
         lblSemester.setFont(font);
         Paint paint = Paint.valueOf("#d9e9f2");
         lblSemester.setTextFill(paint);
         showButtons(user,semester);
-
     }
+
     public void btnBackOnClick(ActionEvent event) throws IOException
     {
         FXMLLoader loader= new FXMLLoader(getClass().getResource("menu.fxml"));
@@ -140,71 +154,141 @@ public class Subjects_view {
         login.setScene(scene);
     }
 
-    public void btnAddOnClick(ActionEvent event)
+    public void optionsCombo(String text,ComboBox<String> combo,int year, int semester)
     {
-        paneAdd.setVisible(true);
-        cmbTeacher.getItems().addAll("Course","Laboratory","Seminar");
+        List<AllSubjects> all = allSubjectsService.findAll();
+
+        for(AllSubjects subject : all)
+        {
+            if(subject.getCode().equals(text)&&subject.getYear()==year&&subject.getSemester()==semester)
+            {
+                combo.getItems().add(subject.getSubject_name());
+            }
+        }
+
+    }
+    public boolean subjectValidation(Label label,String name) {
+        List<Subjects> all = subjectsService.findAll();
+        if (name == null) {
+            label.setText("Fill in  the field");
+            Paint paint = Paint.valueOf("red");
+            label.setTextFill(paint);
+            Font font = new Font("Gadugi", 10);
+            label.setFont(font);
+            return false;
+        }
+        for (Subjects subjects : all) {
+            if (subjects.getUser().equals(user) && subjects.getSemester().equals(semester_text) && subjects.getSubject_name().equals(name)) {
+                label.setText("This subject has been already added");
+                Paint paint = Paint.valueOf("red");
+                label.setTextFill(paint);
+                Font font = new Font("Gadugi", 10);
+                label.setFont(font);
+                return false;
+            }
+        }
+        return true;
     }
 
-    public void btnPlusOnClick(ActionEvent event)
+
+
+    public void btnActualOnClick(ActionEvent e)
     {
-        String text=txtTeacher.getText()+"/"+cmbTeacher.getValue()+"\n"+lblTeachers.getText();
-        lblTeachers.setText(text);
-        txtTeacher.clear();
+        paneAdd.setVisible(true);
+        String text= semester_text.substring(4,6)+"."+semester.getDepartment().substring(0,1);
+        optionsCombo(text,cmbSubject,semester.getYear(),semester.getSemester());
+    }
+
+    public void btnOptionalOnClick(ActionEvent e)
+    {
+        paneAdd.setVisible(true);
+        String text= semester_text.substring(4,6)+".O";
+        optionsCombo(text,cmbSubject,semester.getYear(),semester.getSemester());
+    }
+
+    public void btnPreviousOnClick(ActionEvent e)
+    {
+        panePrevious.setVisible(true);
+        List<AllSubjects>all  = allSubjectsService.findAll();
+        String principal= semester_text.substring(4,6)+"."+semester.getDepartment().substring(0,1);
+        String optional = semester_text.substring(4,6)+".O";
+        double y= 40;
+        for(int i=1;i<semester.getYear();i++)
+        {
+            AnchorPane pane = new AnchorPane();
+            pane.setPrefWidth(256);
+            pane.setPrefHeight(35);
+            pane.setLayoutX(65);
+            pane.setLayoutY(y);
+            y=y+50;
+            pane.setStyle("-fx-background-color: #003d66");
+            Label label = new Label();
+            label.setText("Year "+i);
+            label.setLayoutX(8);
+            label.setLayoutY(5);
+            Paint paint = Paint.valueOf("#d9e9f2");
+            label.setTextFill(paint);
+            Font font = new Font("Gadugi", 15);
+            label.setFont(font);
+            pane.getChildren().add(label);
+            ComboBox<String> combo = new ComboBox<String>();
+            combo.setPrefWidth(241);
+            combo.setPrefHeight(26);
+            combo.setLayoutX(49);
+            combo.setLayoutY(1);
+            combo.setPromptText("subjects name");
+            for(AllSubjects subjects : all)
+            {
+                if((subjects.getCode().equals(principal)||subjects.getCode().equals(optional)) && subjects.getYear()==i
+                        && subjects.getSemester()==semester.getSemester())
+                {
+                    combo.getItems().add(subjects.getSubject_name());
+                }
+            }
+            previousyears.add(combo);
+            pane.getChildren().add(combo);
+            panePrevious.getChildren().add(pane);
+        }
+
     }
 
     public void btnNewSubjectOnClick(ActionEvent event)
     {
-        int flag=0;
-        if(!txtSubjectName.getText().isBlank() && !lblTeachers.getText().isBlank()) {
-            List<Subjects> all = subjectsService.findAll();
-            for (Subjects subjects : all) {
-                if (txtSubjectName.getText().equals(subjects.getSubject_name())) {
-                    flag = 1;
-                    label.setText("This subject name already exists");
-                    Paint paint = Paint.valueOf("red");
-                    label.setTextFill(paint);
-                    Font font = new Font("Gadugi", 15);
-                    label.setFont(font);
-                }
-
-            }
-        }else
+        if(subjectValidation(lblNew,cmbSubject.getValue()))
         {
-            label.setText("Fill in  the field");
-            Paint paint = Paint.valueOf("red");
-            label.setTextFill(paint);
-            Font font = new Font("Gadugi",10);
-            label.setFont(font);
-        }
-        if(flag==0)
-        {
-            String[]arrayTeachers=lblTeachers.getText().toString().split("\n");
-            HashMap<String,String>hashTeachers= new HashMap<String,String>();
-            for(String teacher : arrayTeachers)
-            {
-                String[] values= teacher.split("/");
-                hashTeachers.put(values[1],values[0]);
-            }
-            Subjects subject = new Subjects(user,semester,txtSubjectName.getText(),hashTeachers);
-            Subjects save = subjectsService.save(subject);
+            Subjects newSubject = new Subjects(user, semester_text, cmbSubject.getValue());
+            Subjects save = subjectsService.save(newSubject);
             Alert a = new Alert(Alert.AlertType.CONFIRMATION);
             a.setHeaderText("The subject has been successfully added");
             a.show();
             paneAdd.setVisible(false);
-            txtSubjectName.clear();
-            txtTeacher.clear();
-            showButtons(user,semester);
+            lblNew.setText("");
+            cmbSubject.getItems().clear();
+            showButtons(user, semester_text);
+        }
+
+    }
+
+    public void btnPreviousSubjectOnClick(ActionEvent event)
+    {
+        for(ComboBox<String> cmb : previousyears) {
+           if(cmb.getValue()!=null) {
+               if (subjectValidation(lblPrevious, cmb.getValue())) {
+                   Subjects newSubject = new Subjects(user, semester_text, cmb.getValue());
+                   Subjects save = subjectsService.save(newSubject);
+                   Alert a = new Alert(Alert.AlertType.CONFIRMATION);
+                   a.setHeaderText("The subject has been successfully added");
+                   a.show();
+                   panePrevious.setVisible(false);
+                   lblPrevious.setText("");
+                   previousyears.clear();
+                   showButtons(user, semester_text);
+               }
+           }
         }
     }
 
-    public void btnTimetableOnClick(ActionEvent e) throws IOException
-    {
-        FXMLLoader loader= new FXMLLoader(getClass().getResource("timetable.fxml"));
-        Stage stage =(Stage) btnBack.getScene().getWindow();
-        stage.setScene(new Scene(loader.load()));
-        Timetable menu = loader.getController();
-        menu.start(user,semester);
-        stage.show();
-    }
+
+
+
 }

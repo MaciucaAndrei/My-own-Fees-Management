@@ -1,8 +1,5 @@
 package project.licenta.entity;
 
-import org.jboss.weld.contexts.beanstore.HashMapBeanStore;
-import project.licenta.utils.Timeline;
-
 import javax.persistence.*;
 import java.util.HashMap;
 
@@ -35,8 +32,6 @@ public class Semester {
     @Column
     private int semester;
 
-    @Column
-    private HashMap<String,String> timeline;
     public Semester()
     {
 
@@ -116,8 +111,6 @@ public class Semester {
         this.semester = semester;
     }
 
-    public HashMap<String,String> getTimeline(){return this.timeline;}
-    public void setTimeline(HashMap<String,String> timeline){this.timeline=timeline;}
     @Override
     public String toString() {
         return "Semester{" +

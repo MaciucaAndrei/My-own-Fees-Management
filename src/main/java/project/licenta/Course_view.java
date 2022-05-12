@@ -81,12 +81,7 @@ public class Course_view {
         this.user = subject.getUser();
         lblSemester.setText(subject.getSemester());
         lblCourse.setText(subject.getSubject_name());
-        HashMap<String,String> teachers = subject.getTeacher();
-        for(String key : teachers.keySet())
-        {
-            lblTeachers.setText(key+": "+teachers.get(key)+"\n"+lblTeachers.getText());
-        }
-        showButtons(subject.getUser(), subject.getSemester());
+
 
     }
 
