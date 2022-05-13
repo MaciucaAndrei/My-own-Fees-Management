@@ -39,6 +39,9 @@ public class Menu {
     private Spinner<Integer> spnSem;
 
     @FXML
+    private CheckBox chbTaxes;
+
+    @FXML
     private Button btnAddSemester;
 
     @FXML
@@ -297,7 +300,7 @@ public class Menu {
                 ,txtUniv_year.getText().toString())&&Univ_yearValidation(txtUniv_year.getText().toString()))
         {
             Semester semester= new Semester(user,txtUniv.getText().toString(),txtColl.getText().toString()
-                    ,txtDep.getText().toString(),txtUniv_year.getText().toString(),spnYear.getValue(),spnSem.getValue());
+                    ,txtDep.getText().toString(),txtUniv_year.getText().toString(),spnYear.getValue(),spnSem.getValue(),chbTaxes.isSelected());
             if(SemesterValidation(semester)) {
                 Semester save = semesterService.save(semester);
                 Alert a = new Alert(Alert.AlertType.CONFIRMATION);

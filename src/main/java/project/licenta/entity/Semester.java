@@ -32,12 +32,16 @@ public class Semester {
     @Column
     private int semester;
 
+    @Column
+    private boolean taxes;
+
+
     public Semester()
     {
 
     }
 
-    public Semester(String user,String university, String college, String department, String university_year, int year, int semester)
+    public Semester(String user,String university, String college, String department, String university_year, int year, int semester,boolean taxes)
     {
         this.user=user;
         this.university=university;
@@ -46,6 +50,7 @@ public class Semester {
         this.university_year=university_year;
         this.year=year;
         this.semester=semester;
+        this.taxes=taxes;
     }
     public Long getId() {
         return id;
@@ -111,6 +116,10 @@ public class Semester {
         this.semester = semester;
     }
 
+    public boolean getTaxes(){return taxes;}
+
+    public void setTaxes(boolean taxes){this.taxes=taxes;}
+
     @Override
     public String toString() {
         return "Semester{" +
@@ -122,6 +131,7 @@ public class Semester {
                 ", university year='" + university_year + '\'' +
                 ", year='" + year + '\'' +
                 ", semester='" + semester + '\'' +
+                ", taxes='" + taxes + '\'' +
                 '}';
     }
 

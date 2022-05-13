@@ -1,34 +1,23 @@
 package project.licenta;
 
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import project.licenta.entity.AllSubjects;
-import project.licenta.entity.Course;
 import project.licenta.entity.Semester;
 import project.licenta.entity.Subjects;
 import project.licenta.service.AllSubjectsService;
 import project.licenta.service.SubjectsService;
-import project.licenta.service.UserService;
 import project.licenta.utils.GetInstance;
-
-import javax.security.auth.Subject;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Scanner;
 
 public class Subjects_view {
 
@@ -69,7 +58,7 @@ public class Subjects_view {
     private ComboBox<String> cmbSubject;
 
     @FXML
-    private Button btnTimetable;
+    private Button btnSemesterfee;
 
     @FXML
     private Label lblNew;
@@ -135,6 +124,10 @@ public class Subjects_view {
         Paint paint = Paint.valueOf("#d9e9f2");
         lblSemester.setTextFill(paint);
         showButtons(user,semester);
+        if(s.getTaxes())
+        {
+            btnSemesterfee.setVisible(true);
+        }
     }
 
     public void btnBackOnClick(ActionEvent event) throws IOException
@@ -286,6 +279,16 @@ public class Subjects_view {
                }
            }
         }
+    }
+
+    public void btnSemesterfeeOnClick(ActionEvent e) throws IOException
+    {
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("semesterfee.fxml"));
+        Stage stage =(Stage) btnBack.getScene().getWindow();
+        stage.setScene(new Scene(loader.load()));
+        Semesterfee menu = loader.getController();
+        menu.start(user,semester_text,semester);
+        stage.show();
     }
 
 

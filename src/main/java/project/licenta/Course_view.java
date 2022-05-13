@@ -82,7 +82,6 @@ public class Course_view {
         lblSemester.setText(subject.getSemester());
         lblCourse.setText(subject.getSubject_name());
 
-
     }
 
     public void btnBackOnClick(ActionEvent event) throws IOException

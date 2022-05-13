@@ -37,7 +37,7 @@
                   <Image url="@images/icon.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnTimetable" layoutX="453.0" layoutY="-2.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Timetable" textAlignment="CENTER" textFill="#d9e9f2">
+            <Button fx:id="btnSemesterfee" layoutX="422.0" layoutY="-2.0" mnemonicParsing="false" onAction="#btnSemesterfeeOnClick" style="-fx-background-color: transparent;" text="Semester fee" textAlignment="CENTER" textFill="#d9e9f2" visible="false">
                <font>
                   <Font name="Gadugi Bold" size="20.0" />
                </font>
