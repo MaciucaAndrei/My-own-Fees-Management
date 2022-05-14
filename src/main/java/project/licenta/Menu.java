@@ -45,6 +45,9 @@ public class Menu {
     private Button btnAddSemester;
 
     @FXML
+    private Button btnLibrary;
+
+    @FXML
     private Button btnAdd;
 
     @FXML
@@ -317,6 +320,16 @@ public class Menu {
                 showButtons(user);
             }
         }
+    }
+
+    public void btnLibraryOnClick(ActionEvent e) throws IOException
+    {
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("library.fxml"));
+        Stage stage =(Stage) btnAdd.getScene().getWindow();
+        stage.setScene(new Scene(loader.load()));
+        Library menu = loader.getController();
+        menu.start(user);
+        stage.show();
     }
 
 }

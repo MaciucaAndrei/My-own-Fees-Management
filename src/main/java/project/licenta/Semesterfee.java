@@ -87,7 +87,7 @@ public class Semesterfee {
             return false;
         }
 
-        if(txtAmount.getText()==null || txtAmount.getText().isBlank())
+        if(txtAmount.getText().isBlank())
         {
             lblError.setText("Fill in  the field");
             Paint paint = Paint.valueOf("red");

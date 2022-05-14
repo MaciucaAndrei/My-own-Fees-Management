@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="587.0" prefWidth="764.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.licenta.Menu">
+<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.licenta.Menu">
    <children>
       <ImageView fitHeight="616.0" fitWidth="861.0" pickOnBounds="true">
          <image>
@@ -39,7 +39,7 @@
                   <Image url="@images/icon.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnAddSemester1" layoutX="497.0" layoutY="7.0" mnemonicParsing="false" onAction="#btnAddSemesterOnClick" style="-fx-background-color: transparent;" text="Library" textAlignment="CENTER" textFill="#d9e9f2">
+            <Button fx:id="btnLibrary" layoutX="497.0" layoutY="7.0" mnemonicParsing="false" onAction="#btnLibraryOnClick" style="-fx-background-color: transparent;" text="Library" textAlignment="CENTER" textFill="#d9e9f2">
                <font>
                   <Font name="Gadugi Bold" size="20.0" />
                </font>

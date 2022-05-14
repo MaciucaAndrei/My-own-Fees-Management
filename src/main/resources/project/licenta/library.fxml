@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane prefHeight="600.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.licenta.Library">
+   <content>
+      <AnchorPane prefHeight="800.0" prefWidth="908.0">
+         <children>
+            <ImageView fitHeight="800.0" fitWidth="897.0" layoutX="6.0" pickOnBounds="true">
+               <image>
+                  <Image url="@images/login_background.jpg" />
+               </image>
+            </ImageView>
+            <AnchorPane fx:id="paneMenu" layoutY="19.0" prefHeight="73.0" prefWidth="895.0">
+               <children>
+                  <ImageView fitHeight="98.0" fitWidth="898.0" layoutX="-1.0" layoutY="-26.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@images/menu_background.jpg" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="btnLogout" layoutX="777.0" layoutY="7.0" mnemonicParsing="false" onAction="#btnLogoutOnClick" style="-fx-background-color: transparent;" text="Log out" textFill="#d9e9f2">
+                     <font>
+                        <Font name="Gadugi Bold" size="20.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnBack" layoutX="570.0" layoutY="7.0" mnemonicParsing="false" onAction="#btnBackOnClick" style="-fx-background-color: transparent;" text="Back to semesters" textAlignment="CENTER" textFill="#d9e9f2">
+                     <font>
+                        <Font name="Gadugi Bold" size="20.0" />
+                     </font>
+                  </Button>
+                  <ImageView fitHeight="63.0" fitWidth="195.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icon.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="paneAdd" layoutX="461.0" layoutY="102.0" prefHeight="454.0" prefWidth="365.0" visible="false">
+               <children>
+                  <Button fx:id="btnNewBook" layoutX="158.0" layoutY="364.0" mnemonicParsing="false" onAction="#btnNewBookOnClick" prefHeight="46.0" prefWidth="213.0" style="-fx-background-color: #000080; -fx-background-radius: 90;" text="Add" textFill="#d9e9f2">
+                     <font>
+                        <Font name="Gadugi Bold" size="20.0" />
+                     </font>
+                  </Button>
+                  <AnchorPane layoutX="131.0" layoutY="55.0" prefHeight="35.0" prefWidth="256.0" style="-fx-background-color: #003d66;">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="40.0" layoutY="-1.0">
+                           <image>
+                              <Image url="@images/Subject_icon.png" />
+                           </image>
+                        </ImageView>
+                        <TextField fx:id="txtBookName" layoutX="34.0" layoutY="-1.0" prefHeight="35.0" prefWidth="231.0" promptText="Book name" style="-fx-background-color: transparent; -fx-text-inner-color: d9e9f2;">
+                           <font>
+                              <Font name="Times New Roman Bold" size="16.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="131.0" layoutY="104.0" prefHeight="35.0" prefWidth="256.0" style="-fx-background-color: #003d66;">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="40.0" layoutY="-1.0">
+                           <image>
+                              <Image url="@images/author_icon.png" />
+                           </image>
+                        </ImageView>
+                        <TextField fx:id="txtBookAuthor" layoutX="34.0" layoutY="-1.0" prefHeight="35.0" prefWidth="231.0" promptText="Author" style="-fx-background-color: transparent; -fx-text-inner-color: d9e9f2;">
+                           <font>
+                              <Font name="Times New Roman Bold" size="16.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="132.0" layoutY="152.0" prefHeight="35.0" prefWidth="256.0" style="-fx-background-color: #003d66;">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="40.0" layoutY="-1.0">
+                           <image>
+                              <Image url="@images/publishing_icon.png" />
+                           </image>
+                        </ImageView>
+                        <TextField fx:id="txtPublishingHouse" layoutX="34.0" layoutY="-1.0" prefHeight="35.0" prefWidth="231.0" promptText="Publishing house" style="-fx-background-color: transparent; -fx-text-inner-color: d9e9f2;">
+                           <font>
+                              <Font name="Times New Roman Bold" size="16.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="131.0" layoutY="201.0" prefHeight="35.0" prefWidth="256.0" style="-fx-background-color: #003d66;">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="40.0" layoutY="-1.0">
+                           <image>
+                              <Image url="@images/year_icon.png" />
+                           </image>
+                        </ImageView>
+                        <TextField fx:id="txtYear" layoutX="34.0" layoutY="-1.0" prefHeight="35.0" prefWidth="231.0" promptText="Year of appearance" style="-fx-background-color: transparent; -fx-text-inner-color: d9e9f2;">
+                           <font>
+                              <Font name="Times New Roman Bold" size="16.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="131.0" layoutY="255.0" prefHeight="38.0" prefWidth="266.0" style="-fx-background-color: #003d66;">
+                     <children>
+                        <Label layoutX="14.0" prefHeight="38.0" prefWidth="100.0" text="Loan date" textFill="#d9e9f2">
+                           <font>
+                              <Font name="Gabriola" size="20.0" />
+                           </font>
+                        </Label>
+                        <DatePicker fx:id="dtpLoan" layoutX="90.0" layoutY="6.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="132.0" layoutY="311.0" prefHeight="38.0" prefWidth="290.0" style="-fx-background-color: #003d66;">
+                     <children>
+                        <Label layoutX="14.0" prefHeight="38.0" prefWidth="100.0" text="Date of return" textFill="#d9e9f2">
+                           <font>
+                              <Font name="Gabriola" size="20.0" />
+                           </font>
+                        </Label>
+                        <DatePicker fx:id="dtpReturn" layoutX="114.0" layoutY="6.0" />
+                     </children>
+                  </AnchorPane>
+                  <Label fx:id="lblError" layoutX="104.0" layoutY="14.0" />
+               </children>
+            </AnchorPane>
+            <Label layoutX="48.0" layoutY="188.0" text="To see all the books" textFill="#d9e9f2">
+               <font>
+                  <Font name="Gadugi Bold" size="15.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnAdd" layoutX="144.0" layoutY="151.0" mnemonicParsing="false" onAction="#btnAddOnClick" prefHeight="31.0" prefWidth="90.0" style="-fx-background-color: transparent;" text="Click here" textAlignment="JUSTIFY" textFill="#010056">
+               <font>
+                  <Font name="Gadugi Bold" size="15.0" />
+               </font>
+            </Button>
+            <TableView fx:id="tblBooks" layoutX="33.0" layoutY="253.0" prefHeight="151.0" prefWidth="270.0" visible="false" />
+            <Label layoutX="48.0" layoutY="156.0" text="To add a book " textFill="#d9e9f2">
+               <font>
+                  <Font name="Gadugi Bold" size="15.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnView" layoutX="189.0" layoutY="183.0" mnemonicParsing="false" onAction="#btnViewOnClick" prefHeight="31.0" prefWidth="90.0" style="-fx-background-color: transparent;" text="Click here" textAlignment="JUSTIFY" textFill="#010056">
+               <font>
+                  <Font name="Gadugi Bold" size="15.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </content>
+</ScrollPane>

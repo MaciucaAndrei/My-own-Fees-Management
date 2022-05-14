@@ -162,7 +162,7 @@ public class Subjects_view {
     }
     public boolean subjectValidation(Label label,String name) {
         List<Subjects> all = subjectsService.findAll();
-        if (name == null) {
+        if (name.isBlank()) {
             label.setText("Fill in  the field");
             Paint paint = Paint.valueOf("red");
             label.setTextFill(paint);
