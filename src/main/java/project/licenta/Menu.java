@@ -18,6 +18,7 @@ import project.licenta.service.ReminderService;
 import project.licenta.service.SemesterService;
 import project.licenta.utils.GetInstance;
 import project.licenta.utils.Notification;
+import project.licenta.utils.NotificationThread;
 
 import java.awt.*;
 import java.io.IOException;
@@ -191,6 +192,8 @@ public class Menu {
         SpinnerValueFactory<Integer> semFactory =new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 2, 1);
         spnSem.setValueFactory(semFactory);
         showButtons(user);
+        NotificationThread nt= new NotificationThread(user);
+        nt.start();
 
     }
 

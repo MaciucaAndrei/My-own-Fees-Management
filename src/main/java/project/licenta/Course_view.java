@@ -9,9 +9,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import project.licenta.entity.Reminder;
 import project.licenta.entity.Semester;
 import project.licenta.entity.Subjects;
 import project.licenta.entity.Taxes;
+import project.licenta.service.ReminderService;
 import project.licenta.service.SubjectsService;
 import project.licenta.service.TaxesService;
 import project.licenta.utils.GetInstance;
@@ -19,7 +21,6 @@ import project.licenta.utils.GetInstance;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 
 public class Course_view {
@@ -32,19 +33,38 @@ public class Course_view {
     @FXML
     private Button btnLogout;
     @FXML
+    private Button btnPaid;
+    @FXML
+    private Button btnNewTaxes;
+    @FXML
+    private Button btnReminder;
+    @FXML
+    private Button btnNewReminder;
+    @FXML
     private Label lblError;
+    @FXML
+    private Label lblErrorReminder;
     @FXML
     private AnchorPane panePaid;
     @FXML
+    private AnchorPane paneReminder;
+    @FXML
     private DatePicker dtpPaid;
     @FXML
+    private DatePicker dtpReminder;
+    @FXML
     private ComboBox<String> cmbTaxType;
+    @FXML
+    private ComboBox<String> cmbDays;
+    @FXML
+    private ComboBox<String> cmbReminderType;
     @FXML
     private TextField txtAmount;
     private String user;
     private Semester semester;
     private SubjectsService subjectsService = GetInstance.of(SubjectsService.class);
     private TaxesService taxesService= GetInstance.of(TaxesService.class);
+    private ReminderService reminderService= GetInstance.of(ReminderService.class);
 
 
     public void start(Subjects subject, Semester semester)
@@ -64,7 +84,22 @@ public class Course_view {
         cmbTaxType.getItems().add("The fee for the third presentation");
         cmbTaxType.getItems().add("Subject fee");
     }
-    public boolean fieldsValidation(String amount, Calendar date,String tax)
+    public void btnReminderOnClick(ActionEvent event)
+    {
+        Calendar c= Calendar.getInstance();
+        LocalDate date= LocalDate.of(c.get(Calendar.YEAR),c.get(Calendar.MONTH)+1,c.get(Calendar.DAY_OF_MONTH));
+        dtpReminder.setValue(date);
+        paneReminder.setVisible(true);
+        cmbDays.getItems().add("Day");
+        cmbDays.getItems().add("Week");
+        cmbDays.getItems().add("Month");
+        cmbReminderType.getItems().add("The fee for the third presentation");
+        cmbReminderType.getItems().add("Subject fee");
+        cmbReminderType.getItems().add("A project");
+        cmbReminderType.getItems().add("A test");
+        cmbReminderType.getItems().add("Exam");
+    }
+    public boolean paidFieldsValidation(String amount, Calendar date,String tax)
     {
         Calendar c = Calendar.getInstance();
         String university_year = semester.getUniversity_year();
@@ -130,12 +165,62 @@ public class Course_view {
         }
         return true;
     }
+    public boolean reminderFieldsValidation(String days,Calendar date,String reminder)
+    {
+        Calendar c = Calendar.getInstance();
+        String university_year = semester.getUniversity_year();
+        String[] years=university_year.split("-");
+        if(date.getTimeInMillis()< c.getTimeInMillis())
+        {
+            lblErrorReminder.setText("The reminder cannot be from the past");
+            Paint paint = Paint.valueOf("red");
+            lblErrorReminder.setTextFill(paint);
+            Font font = new Font("Gadugi", 10);
+            lblErrorReminder.setFont(font);
+            return false;
+        }
+        if(date.get(Calendar.YEAR)<Integer.parseInt(years[1]))
+        {
+            lblErrorReminder.setText("The reminder date must be in the semester's university year");
+            Paint paint = Paint.valueOf("red");
+            lblErrorReminder.setTextFill(paint);
+            Font font = new Font("Gadugi", 10);
+            lblErrorReminder.setFont(font);
+            return false;
+        }
+
+        if(days.isBlank()|| reminder.isBlank())
+        {
+            lblErrorReminder.setText("Fill in  the field");
+            Paint paint = Paint.valueOf("red");
+            lblErrorReminder.setTextFill(paint);
+            Font font = new Font("Gadugi", 10);
+            lblErrorReminder.setFont(font);
+            return false;
+        }
+        List<Reminder>all = reminderService.findAll();
+        String message = lblCourse.getText()+": "+reminder;
+        for(Reminder t : all)
+        {
+            if(t.getUsername().equals(user) && t.getMessage().equals(message) && t.getDays().equals(days)
+                    && t.getDeadline().get(Calendar.YEAR)==date.get(Calendar.YEAR) && t.getDeadline().get(Calendar.MONTH)==date.get(Calendar.MONTH)
+                    && t.getDeadline().get(Calendar.DAY_OF_MONTH)==date.get(Calendar.DAY_OF_MONTH)) {
+                lblErrorReminder.setText("The reminder was been already added");
+                Paint paint = Paint.valueOf("red");
+                lblErrorReminder.setTextFill(paint);
+                Font font = new Font("Gadugi", 10);
+                lblErrorReminder.setFont(font);
+                return false;
+            }
+        }
+        return true;
+    }
 
     public void btnNewTaxesOnClick(ActionEvent e)
     {
         Calendar c= Calendar.getInstance();
         c.set(dtpPaid.getValue().getYear(), dtpPaid.getValue().getMonthValue()-1,dtpPaid.getValue().getDayOfMonth());
-        if(fieldsValidation(txtAmount.getText(),c,cmbTaxType.getValue()))
+        if(paidFieldsValidation(txtAmount.getText(),c,cmbTaxType.getValue()))
         {
             String taxes_type= cmbTaxType.getValue()+" for "+lblCourse.getText();
             Taxes taxes = new Taxes(user,taxes_type,c,Double.parseDouble(txtAmount.getText()));
@@ -150,6 +235,40 @@ public class Course_view {
             cmbTaxType.getItems().clear();
         }
     }
+
+    public void btnNewReminderOnClick(ActionEvent event)
+    {
+        Calendar c= Calendar.getInstance();
+        c.set(dtpReminder.getValue().getYear(), dtpReminder.getValue().getMonthValue()-1,dtpReminder.getValue().getDayOfMonth());
+        String title="";
+        if(reminderFieldsValidation(cmbDays.getValue(),c,cmbReminderType.getValue()))
+        {
+            switch(cmbReminderType.getValue())
+            {
+                case "The fee for the third presentation":
+                    case "Subject fee": {
+                        title = "Reminder you need to pay";
+                        break;
+                    }
+                default: {
+                    title = "Reminder you need to study ";
+                    break;
+                }
+            }
+            String message=   lblCourse.getText()+": "+cmbReminderType.getValue();
+            Reminder reminder = new Reminder(user,title,message,c,cmbDays.getValue());
+            Reminder save= reminderService.save(reminder);
+            Alert a = new Alert(Alert.AlertType.CONFIRMATION);
+            a.setHeaderText("The reminder has been successfully registered");
+            a.show();
+            paneReminder.setVisible(false);
+            lblErrorReminder.setText("");
+            cmbDays.getItems().clear();
+            dtpPaid.getEditor().clear();
+            cmbReminderType.getItems().clear();
+        }
+    }
+
 
     public void btnBackOnClick(ActionEvent event) throws IOException
     {

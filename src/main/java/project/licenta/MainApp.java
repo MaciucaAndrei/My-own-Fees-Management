@@ -29,8 +29,6 @@ public class MainApp extends Application {
 
 
         initCdiContainer();
-        NotificationThread nt= new NotificationThread();
-        nt.start();
         FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 807, 469);
         stage.setTitle("myUniSit");
