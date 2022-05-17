@@ -7,6 +7,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
@@ -19,6 +22,7 @@ import project.licenta.service.BooksService;
 import project.licenta.utils.GetInstance;
 import project.licenta.utils.TableBooks;
 
+import java.awt.*;
 import java.awt.print.Book;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -155,7 +159,7 @@ public class Library {
         dtpLoan.setValue(l);
         dtpReturn.setValue(l);
     }
-    public void btnBackOnClick(ActionEvent e) throws IOException
+    public void btnBackOnClick(ActionEvent e) throws IOException, AWTException
     {
         FXMLLoader loader= new FXMLLoader(getClass().getResource("menu.fxml"));
         Stage stage =(Stage) btnBack.getScene().getWindow();

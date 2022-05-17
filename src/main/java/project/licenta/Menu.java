@@ -5,14 +5,21 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import project.licenta.entity.Reminder;
 import project.licenta.entity.Semester;
+import project.licenta.service.ReminderService;
 import project.licenta.service.SemesterService;
 import project.licenta.utils.GetInstance;
+import project.licenta.utils.Notification;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
@@ -46,6 +53,9 @@ public class Menu {
 
     @FXML
     private Button btnLibrary;
+
+    @FXML
+    private Button btnCosts;
 
     @FXML
     private Button btnAdd;
@@ -173,7 +183,7 @@ public class Menu {
     }
 
 
-    public void start(String user)
+    public void start(String user) throws AWTException
     {
         this.user= user;
         SpinnerValueFactory<Integer> yearFactory =new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 4, 1);
@@ -181,6 +191,7 @@ public class Menu {
         SpinnerValueFactory<Integer> semFactory =new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 2, 1);
         spnSem.setValueFactory(semFactory);
         showButtons(user);
+
     }
 
     public boolean FieldsValidation(String u,String c, String d, String y)
@@ -332,4 +343,8 @@ public class Menu {
         stage.show();
     }
 
+    public void btnCostsOnClick(ActionEvent event)
+    {
+
+    }
 }

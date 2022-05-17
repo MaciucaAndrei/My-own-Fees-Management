@@ -44,6 +44,11 @@
                   <Font name="Gadugi Bold" size="20.0" />
                </font>
             </Button>
+            <Button fx:id="btnCosts" layoutX="401.0" layoutY="7.0" mnemonicParsing="false" onAction="#btnCostsOnClick" style="-fx-background-color: transparent;" text="Costs" textAlignment="CENTER" textFill="#d9e9f2">
+               <font>
+                  <Font name="Gadugi Bold" size="20.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="paneSemesterAdd" layoutX="374.0" layoutY="117.0" prefHeight="482.0" prefWidth="439.0" visible="false">

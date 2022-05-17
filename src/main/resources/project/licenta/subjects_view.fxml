@@ -27,7 +27,7 @@
                   <Font name="Gadugi Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="btnBack" layoutX="571.0" layoutY="-2.0" mnemonicParsing="false" onAction="#btnBackOnClick" style="-fx-background-color: transparent;" text="Back to semesters" textAlignment="CENTER" textFill="#d9e9f2">
+            <Button fx:id="btnBack" layoutX="621.0" layoutY="-2.0" mnemonicParsing="false" onAction="#btnBackOnClick" style="-fx-background-color: transparent;" text="Back to menu" textAlignment="CENTER" textFill="#d9e9f2">
                <font>
                   <Font name="Gadugi Bold" size="20.0" />
                </font>

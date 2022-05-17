@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.apache.deltaspike.cdise.api.CdiContainer;
 import org.apache.deltaspike.cdise.api.CdiContainerLoader;
+import project.licenta.utils.NotificationThread;
 
 import java.io.IOException;
 
@@ -28,6 +29,8 @@ public class MainApp extends Application {
 
 
         initCdiContainer();
+        NotificationThread nt= new NotificationThread();
+        nt.start();
         FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 807, 469);
         stage.setTitle("myUniSit");

@@ -6,6 +6,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -16,6 +19,7 @@ import project.licenta.service.UserService;
 import project.licenta.utils.GetInstance;
 
 import javax.enterprise.context.ApplicationScoped;
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -88,7 +92,7 @@ public class Login {
         return false;
     }
 
-    public void btnLoginOnClick(ActionEvent event) throws IOException
+    public void btnLoginOnClick(ActionEvent event) throws IOException, AWTException
     {
         if(LoginValidation(txtUser.getText(),txtPass.getText()))
         {

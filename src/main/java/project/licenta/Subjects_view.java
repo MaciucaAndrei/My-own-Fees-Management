@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
@@ -15,6 +17,8 @@ import project.licenta.entity.Subjects;
 import project.licenta.service.AllSubjectsService;
 import project.licenta.service.SubjectsService;
 import project.licenta.utils.GetInstance;
+
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -93,7 +97,7 @@ public class Subjects_view {
                 button.setStyle("-fx-background-color: transparent");
                 button.setOnAction(e-> {
                     try {
-                        buttonOnClick(subject);
+                        buttonOnClick(subject,this.semester);
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
@@ -103,13 +107,13 @@ public class Subjects_view {
         }
     }
 
-    public void buttonOnClick(Subjects subject) throws IOException
+    public void buttonOnClick(Subjects subject,Semester semester) throws IOException
     {
         FXMLLoader loader= new FXMLLoader(getClass().getResource("course_view.fxml"));
         Stage stage =(Stage) btnBack.getScene().getWindow();
         stage.setScene(new Scene(loader.load()));
         Course_view course = loader.getController();
-        course.start(subject);
+        course.start(subject,semester);
         stage.show();
     }
 
@@ -130,7 +134,7 @@ public class Subjects_view {
         }
     }
 
-    public void btnBackOnClick(ActionEvent event) throws IOException
+    public void btnBackOnClick(ActionEvent event) throws IOException, AWTException
     {
         FXMLLoader loader= new FXMLLoader(getClass().getResource("menu.fxml"));
         Stage stage =(Stage) btnBack.getScene().getWindow();
