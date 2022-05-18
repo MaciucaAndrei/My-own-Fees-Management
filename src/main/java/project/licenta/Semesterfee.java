@@ -174,11 +174,11 @@ public class Semesterfee {
         }
         List<Reminder>all = reminderService.findAll();
         String message = "Semester fee for "+semester_text;
-        for(Reminder t : all)
+        for(Reminder reminder : all)
         {
-            if(t.getUsername().equals(user) && t.getMessage().equals(message) && t.getDays().equals(days)
-            && t.getDeadline().get(Calendar.YEAR)==date.get(Calendar.YEAR) && t.getDeadline().get(Calendar.MONTH)==date.get(Calendar.MONTH)
-            && t.getDeadline().get(Calendar.DAY_OF_MONTH)==date.get(Calendar.DAY_OF_MONTH)) {
+            if(reminder.getUsername().equals(user) && reminder.getMessage().equals(message) && reminder.getDays().equals(days)
+            && reminder.getDeadline().get(Calendar.YEAR)==date.get(Calendar.YEAR) && reminder.getDeadline().get(Calendar.MONTH)==date.get(Calendar.MONTH)
+            && reminder.getDeadline().get(Calendar.DAY_OF_MONTH)==date.get(Calendar.DAY_OF_MONTH)) {
                 lblErrorReminder.setText("The reminder was been already added");
                 Paint paint = Paint.valueOf("red");
                 lblErrorReminder.setTextFill(paint);

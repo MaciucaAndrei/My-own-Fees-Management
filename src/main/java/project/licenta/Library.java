@@ -1,15 +1,13 @@
 package project.licenta;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
@@ -17,8 +15,9 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import project.licenta.entity.Books;
-import project.licenta.entity.Taxes;
+import project.licenta.entity.Reminder;
 import project.licenta.service.BooksService;
+import project.licenta.service.ReminderService;
 import project.licenta.utils.GetInstance;
 import project.licenta.utils.TableBooks;
 
@@ -40,9 +39,23 @@ public class Library {
     @FXML
     private Button btnNewBook;
     @FXML
+    private Button btnReminder;
+    @FXML
+    private Button btnNewReminder;
+    @FXML
     private AnchorPane paneAdd;
     @FXML
+    private AnchorPane paneReminder;
+    @FXML
     private Label lblError;
+    @FXML
+    private Label lblErrorReminder;
+    @FXML
+    private ComboBox<String> cmbBookName;
+    @FXML
+    private DatePicker dtpDeadline;
+    @FXML
+    private ComboBox<String> cmbDays;
     @FXML
     private TextField txtBookName;
     @FXML
@@ -62,6 +75,7 @@ public class Library {
 
     private String user;
     private BooksService booksService= GetInstance.of(BooksService.class);
+    private ReminderService reminderService= GetInstance.of(ReminderService.class);
 
 
 
@@ -231,5 +245,86 @@ public class Library {
             }
         }
         tblBooks.setPrefWidth(Region.USE_COMPUTED_SIZE);
+    }
+
+    public void btnReminderOnClick(ActionEvent event)
+    {
+        List<Books> all = booksService.findAll();
+        Calendar c= Calendar.getInstance();
+        for(Books book : all)
+        {
+            if(book.getUser().equals(user) && book.getDate_of_return().getTimeInMillis()>c.getTimeInMillis())
+            {
+                cmbBookName.getItems().add(book.getBook_name());
+            }
+        }
+        LocalDate l = LocalDate.now();
+        dtpDeadline.setValue(l);
+        cmbDays.getItems().addAll("Day","Week","Month");
+        paneReminder.setVisible(true);
+    }
+
+    public void cmbBookNameOnChange(ActionEvent event)
+    {
+        List<Books> all = booksService.findAll();
+        Calendar c= Calendar.getInstance();
+        for(Books book : all)
+        {
+            if(book.getUser().equals(user) && book.getBook_name().equals(cmbBookName.getValue()))
+            {
+                LocalDate l= LocalDate.of(book.getDate_of_return().get(Calendar.YEAR),book.getDate_of_return().get(Calendar.MONTH)+1
+                ,book.getDate_of_return().get(Calendar.DAY_OF_MONTH));
+                dtpDeadline.setValue(l);
+            }
+        }
+    }
+
+    public boolean reminderFieldsValidation(String book,String days)
+    {
+        if(book == null || days == null)
+        {
+            lblErrorReminder.setText("Fill in all the fields ");
+            Paint paint = Paint.valueOf("red");
+            lblErrorReminder.setTextFill(paint);
+            Font font = new Font("Gadugi", 10);
+            lblErrorReminder.setFont(font);
+            return false;
+        }
+        List<Reminder> all =  reminderService.findAll();
+        String title= "Reminder you need to return: ";
+        String message= book;
+        for(Reminder reminder : all)
+        {
+            if(reminder.getUsername().equals(user) && reminder.getMessage().equals(message) && reminder.getDays().equals(days))
+            {
+                lblErrorReminder.setText("The reminder was been already added");
+                Paint paint = Paint.valueOf("red");
+                lblErrorReminder.setTextFill(paint);
+                Font font = new Font("Gadugi", 10);
+                lblErrorReminder.setFont(font);
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void btnNewReminderOnClick(ActionEvent event)
+    {
+        if(reminderFieldsValidation(cmbBookName.getValue(),cmbDays.getValue()))
+        {
+            Calendar c = Calendar.getInstance();
+            c.set(dtpDeadline.getValue().getYear(),dtpDeadline.getValue().getMonthValue()-1,dtpDeadline.getValue().getDayOfMonth());
+            String title ="Reminder you need to return: ";
+            String message=cmbBookName.getValue();
+            Reminder reminder = new Reminder(user,title,message,c,cmbDays.getValue());
+            Reminder save= reminderService.save(reminder);
+            Alert a = new Alert(Alert.AlertType.CONFIRMATION);
+            a.setHeaderText("The reminder has been successfully registered");
+            a.show();
+            paneReminder.setVisible(false);
+            lblErrorReminder.setText("");
+            cmbDays.getItems().clear();
+            dtpDeadline.getEditor().clear();
+        }
     }
 }
