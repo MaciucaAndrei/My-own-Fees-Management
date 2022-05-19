@@ -1,5 +1,6 @@
 package project.licenta;
 
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import project.licenta.entity.Books;
 import project.licenta.entity.Reminder;
 import project.licenta.service.BooksService;
@@ -71,7 +73,15 @@ public class Library {
     @FXML
     private Button btnView;
     @FXML
+    private Button btnCosts;
+    @FXML
     private TableView<TableBooks> tblBooks;
+    @FXML
+    private Label lblMenu;
+    @FXML
+    private Label lblMenuClose;
+    @FXML
+    private AnchorPane paneSlider;
 
     private String user;
     private BooksService booksService= GetInstance.of(BooksService.class);
@@ -100,6 +110,38 @@ public class Library {
         tblBooks.getColumns().add(columnYear);
         tblBooks.getColumns().add(columnLoan);
         tblBooks.getColumns().add(columnDay);
+        paneSlider.setTranslateX(-230);
+        lblMenu.setOnMouseClicked(event -> {
+            TranslateTransition slide = new TranslateTransition();
+            slide.setDuration(Duration.seconds(0.4));
+            slide.setNode(paneSlider);
+
+            slide.setToX(0);
+            slide.play();
+
+            paneSlider.setTranslateX(-230);
+
+            slide.setOnFinished((ActionEvent e)-> {
+                lblMenu.setVisible(false);
+                lblMenuClose.setVisible(true);
+            });
+        });
+
+        lblMenuClose.setOnMouseClicked(event -> {
+            TranslateTransition slide = new TranslateTransition();
+            slide.setDuration(Duration.seconds(0.4));
+            slide.setNode(paneSlider);
+
+            slide.setToX(-230);
+            slide.play();
+
+            paneSlider.setTranslateX(0);
+
+            slide.setOnFinished((ActionEvent e)-> {
+                lblMenu.setVisible(true);
+                lblMenuClose.setVisible(false);
+            });
+        });
     }
 
     public boolean fieldsValidation(String name, String author, String house, String year, Calendar loan, Calendar date_of_return)
@@ -172,6 +214,15 @@ public class Library {
         LocalDate l = LocalDate.now();
         dtpLoan.setValue(l);
         dtpReturn.setValue(l);
+    }
+    public void btnCostsOnClick(ActionEvent e) throws IOException
+    {
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("costs.fxml"));
+        Stage stage =(Stage) btnBack.getScene().getWindow();
+        stage.setScene(new Scene(loader.load()));
+        Costs menu = loader.getController();
+        menu.start(user);
+        stage.show();
     }
     public void btnBackOnClick(ActionEvent e) throws IOException, AWTException
     {

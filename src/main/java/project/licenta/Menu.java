@@ -346,8 +346,14 @@ public class Menu {
         stage.show();
     }
 
-    public void btnCostsOnClick(ActionEvent event)
+    public void btnCostsOnClick(ActionEvent event) throws IOException
     {
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("costs.fxml"));
+        Stage stage =(Stage) btnAdd.getScene().getWindow();
+        stage.setScene(new Scene(loader.load()));
+        Costs menu = loader.getController();
+        menu.start(user);
+        stage.show();
 
     }
 }
