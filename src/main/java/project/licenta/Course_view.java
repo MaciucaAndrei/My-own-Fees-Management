@@ -1,5 +1,6 @@
 package project.licenta;
 
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import project.licenta.entity.Reminder;
 import project.licenta.entity.Semester;
 import project.licenta.entity.Subjects;
@@ -60,6 +62,13 @@ public class Course_view {
     private ComboBox<String> cmbReminderType;
     @FXML
     private TextField txtAmount;
+    @FXML
+    private AnchorPane paneSlider;
+    @FXML
+    private Label lblMenu;
+    @FXML
+    private Label lblMenuClose;
+
     private String user;
     private Semester semester;
     private SubjectsService subjectsService = GetInstance.of(SubjectsService.class);
@@ -72,7 +81,39 @@ public class Course_view {
         this.user = subject.getUser();
         this.semester=semester;
         lblSemester.setText(subject.getSemester());
-        lblCourse.setText(subject.getSubject_name());
+        lblCourse.setText(subject.getSubject_name().toUpperCase());
+        paneSlider.setTranslateX(-250);
+        lblMenu.setOnMouseClicked(event -> {
+            TranslateTransition slide = new TranslateTransition();
+            slide.setDuration(Duration.seconds(0.4));
+            slide.setNode(paneSlider);
+
+            slide.setToX(0);
+            slide.play();
+
+            paneSlider.setTranslateX(-250);
+
+            slide.setOnFinished((ActionEvent e)-> {
+                lblMenu.setVisible(false);
+                lblMenuClose.setVisible(true);
+            });
+        });
+
+        lblMenuClose.setOnMouseClicked(event -> {
+            TranslateTransition slide = new TranslateTransition();
+            slide.setDuration(Duration.seconds(0.4));
+            slide.setNode(paneSlider);
+
+            slide.setToX(-250);
+            slide.play();
+
+            paneSlider.setTranslateX(0);
+
+            slide.setOnFinished((ActionEvent e)-> {
+                lblMenu.setVisible(true);
+                lblMenuClose.setVisible(false);
+            });
+        });
 
     }
     public void btnPaidOnClick(ActionEvent event)

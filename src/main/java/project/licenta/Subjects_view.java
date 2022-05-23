@@ -1,5 +1,6 @@
 package project.licenta;
 
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,10 +8,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import project.licenta.entity.AllSubjects;
 import project.licenta.entity.Semester;
 import project.licenta.entity.Subjects;
@@ -69,6 +72,14 @@ public class Subjects_view {
 
     @FXML
     private Label lblPrevious;
+    @FXML
+    private Label lblMenu;
+    @FXML
+    private Label lblMenuClose;
+    @FXML
+    private AnchorPane paneSlider;
+    @FXML
+    private ScrollPane scpaneButtons;
 
     private String user;
     private String semester_text;
@@ -104,6 +115,10 @@ public class Subjects_view {
                 });
                 paneButtons.getChildren().add(button);
             }
+            if(y>scpaneButtons.getWidth())
+            {
+               scpaneButtons.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+            }
         }
     }
 
@@ -132,6 +147,40 @@ public class Subjects_view {
         {
             btnSemesterfee.setVisible(true);
         }
+        paneSlider.setTranslateX(-303);
+        lblMenu.setOnMouseClicked(event -> {
+            scpaneButtons.setVisible(false);
+            TranslateTransition slide = new TranslateTransition();
+            slide.setDuration(Duration.seconds(0.4));
+            slide.setNode(paneSlider);
+
+            slide.setToX(0);
+            slide.play();
+
+            paneSlider.setTranslateX(-303);
+
+            slide.setOnFinished((ActionEvent e)-> {
+                lblMenu.setVisible(false);
+                lblMenuClose.setVisible(true);
+            });
+        });
+
+        lblMenuClose.setOnMouseClicked(event -> {
+            scpaneButtons.setVisible(true);
+            TranslateTransition slide = new TranslateTransition();
+            slide.setDuration(Duration.seconds(0.4));
+            slide.setNode(paneSlider);
+
+            slide.setToX(-303);
+            slide.play();
+
+            paneSlider.setTranslateX(0);
+
+            slide.setOnFinished((ActionEvent e)-> {
+                lblMenu.setVisible(true);
+                lblMenuClose.setVisible(false);
+            });
+        });
     }
 
     public void btnBackOnClick(ActionEvent event) throws IOException, AWTException
