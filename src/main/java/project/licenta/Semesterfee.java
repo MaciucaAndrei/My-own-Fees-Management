@@ -1,5 +1,6 @@
 package project.licenta;
 
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import project.licenta.entity.Reminder;
 import project.licenta.entity.Semester;
 import project.licenta.entity.Taxes;
@@ -59,6 +61,12 @@ public class Semesterfee {
     private Label lblError;
     @FXML
     private Label lblErrorReminder;
+    @FXML
+    private AnchorPane paneSlider;
+    @FXML
+    private Label lblMenu;
+    @FXML
+    private Label lblMenuClose;
 
     private String user;
     private String semester_text;
@@ -73,6 +81,38 @@ public class Semesterfee {
         this.semester_text=semester_text;
         this.semester=semester;
         lblSemester.setText(semester_text);
+        paneSlider.setTranslateX(-240);
+        lblMenu.setOnMouseClicked(event -> {
+            TranslateTransition slide = new TranslateTransition();
+            slide.setDuration(Duration.seconds(0.4));
+            slide.setNode(paneSlider);
+
+            slide.setToX(0);
+            slide.play();
+
+            paneSlider.setTranslateX(-240);
+
+            slide.setOnFinished((ActionEvent e)-> {
+                lblMenu.setVisible(false);
+                lblMenuClose.setVisible(true);
+            });
+        });
+
+        lblMenuClose.setOnMouseClicked(event -> {
+            TranslateTransition slide = new TranslateTransition();
+            slide.setDuration(Duration.seconds(0.4));
+            slide.setNode(paneSlider);
+
+            slide.setToX(-240);
+            slide.play();
+
+            paneSlider.setTranslateX(0);
+
+            slide.setOnFinished((ActionEvent e)-> {
+                lblMenu.setVisible(true);
+                lblMenuClose.setVisible(false);
+            });
+        });
     }
 
     public void btnPaidOnClick(ActionEvent e) {
@@ -179,7 +219,7 @@ public class Semesterfee {
             if(reminder.getUsername().equals(user) && reminder.getMessage().equals(message) && reminder.getDays().equals(days)
             && reminder.getDeadline().get(Calendar.YEAR)==date.get(Calendar.YEAR) && reminder.getDeadline().get(Calendar.MONTH)==date.get(Calendar.MONTH)
             && reminder.getDeadline().get(Calendar.DAY_OF_MONTH)==date.get(Calendar.DAY_OF_MONTH)) {
-                lblErrorReminder.setText("The reminder was been already added");
+                lblErrorReminder.setText("The reminder has been already added");
                 Paint paint = Paint.valueOf("red");
                 lblErrorReminder.setTextFill(paint);
                 Font font = new Font("Gadugi", 10);

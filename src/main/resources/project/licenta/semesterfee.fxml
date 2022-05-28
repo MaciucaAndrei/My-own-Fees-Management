@@ -29,7 +29,7 @@
                   <Font name="Gadugi Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="btnBack" layoutX="654.0" layoutY="-2.0" mnemonicParsing="false" onAction="#btnBackOnClick" style="-fx-background-color: transparent;" text="Back to menu" textAlignment="CENTER" textFill="#d9e9f2">
+            <Button fx:id="btnBack" layoutX="703.0" layoutY="-2.0" mnemonicParsing="false" onAction="#btnBackOnClick" style="-fx-background-color: transparent;" text="Semester" textAlignment="CENTER" textFill="#d9e9f2">
                <font>
                   <Font name="Gadugi Bold" size="20.0" />
                </font>
@@ -44,22 +44,36 @@
                   <Font name="Gadugi Bold" size="20.0" />
                </font>
             </Button>
+            <Label fx:id="lblMenu" layoutX="198.0" layoutY="9.0" textFill="#ece3e3">
+               <font>
+                  <Font name="Gadugi" size="16.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/menu.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <Label fx:id="lblMenuClose" layoutX="198.0" layoutY="9.0" textFill="#ece3e3">
+               <font>
+                  <Font name="Gadugi" size="16.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/menu.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
          </children>
       </AnchorPane>
       <Label fx:id="lblSemester" layoutX="51.0" layoutY="119.0" textFill="#d9e9f2">
          <font>
             <Font name="Gadugi Bold" size="20.0" />
          </font></Label>
-      <Label layoutX="51.0" layoutY="199.0" text="If semester fee was paid" textFill="#d9e9f2">
-         <font>
-            <Font name="Gadugi Bold" size="15.0" />
-         </font>
-      </Label>
-      <Button fx:id="btnPaid" layoutX="221.0" layoutY="194.0" mnemonicParsing="false" onAction="#btnPaidOnClick" prefHeight="31.0" prefWidth="90.0" style="-fx-background-color: transparent;" text="Click here" textAlignment="JUSTIFY" textFill="#010056">
-         <font>
-            <Font name="Gadugi Bold" size="15.0" />
-         </font>
-      </Button>
       <AnchorPane fx:id="panePaid" layoutX="471.0" layoutY="119.0" prefHeight="237.0" prefWidth="466.0" visible="false">
          <children>
             <Label fx:id="lblError" layoutX="14.0" layoutY="14.0" />
@@ -123,15 +137,19 @@
             </Button>
          </children>
       </AnchorPane>
-      <Label layoutX="51.0" layoutY="238.0" text="To add a reminder" textFill="#d9e9f2">
-         <font>
-            <Font name="Gadugi Bold" size="15.0" />
-         </font>
-      </Label>
-      <Button fx:id="btnReminder" layoutX="221.0" layoutY="233.0" mnemonicParsing="false" onAction="#btnReminderOnClick" prefHeight="31.0" prefWidth="90.0" style="-fx-background-color: transparent;" text="Click here" textAlignment="JUSTIFY" textFill="#010056">
-         <font>
-            <Font name="Gadugi Bold" size="15.0" />
-         </font>
-      </Button>
+      <AnchorPane fx:id="paneSlider" layoutY="94.0" prefHeight="584.0" prefWidth="240.0" style="-fx-background-color: #00134d;">
+         <children>
+            <Button fx:id="btnPaid" layoutX="-1.0" layoutY="132.0" mnemonicParsing="false" onAction="#btnPaidOnClick" prefHeight="31.0" prefWidth="248.0" style="-fx-background-color: transparent;" text="To add a semester fee" textAlignment="JUSTIFY" textFill="#d9e9f2">
+               <font>
+                  <Font name="Gadugi Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnReminder" layoutX="1.0" layoutY="165.0" mnemonicParsing="false" onAction="#btnReminderOnClick" prefHeight="31.0" prefWidth="247.0" style="-fx-background-color: transparent;" text="To add a reminder" textAlignment="JUSTIFY" textFill="#d9e9f2">
+               <font>
+                  <Font name="Gadugi Bold" size="15.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
