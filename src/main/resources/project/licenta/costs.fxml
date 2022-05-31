@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.licenta.Costs">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="684.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.licenta.Costs">
    <children>
       <AnchorPane fx:id="paneMenu" prefHeight="78.0" prefWidth="900.0">
          <children>
@@ -64,16 +64,21 @@
                   </ImageView>
                </graphic>
             </Label>
+            <Button fx:id="btnGraphic" layoutX="440.0" layoutY="7.0" mnemonicParsing="false" onAction="#btnGraphicOnClick" style="-fx-background-color: transparent;" text="Graphic" textAlignment="CENTER" textFill="#d9e9f2">
+               <font>
+                  <Font name="Gadugi Bold" size="20.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="471.0" prefWidth="900.0">
+      <AnchorPane prefWidth="900.0">
          <children>
             <ImageView fitHeight="605.0" fitWidth="900.0" pickOnBounds="true">
                <image>
                   <Image url="@images/login_background.jpg" />
                </image>
             </ImageView>
-            <AnchorPane fx:id="paneReminder" layoutX="411.0" layoutY="37.0" prefHeight="255.0" prefWidth="466.0">
+            <AnchorPane fx:id="paneReminder" layoutX="411.0" layoutY="37.0" prefHeight="255.0" prefWidth="466.0" visible="false">
                <children>
                   <Label fx:id="lblErrorReminder" layoutX="14.0" layoutY="14.0" />
                   <AnchorPane layoutX="6.0" layoutY="61.0" prefHeight="38.0" prefWidth="430.0" style="-fx-background-color: #003d66;">
@@ -96,7 +101,7 @@
                         <ComboBox fx:id="cmbDays" layoutX="217.0" layoutY="5.0" prefHeight="26.0" prefWidth="210.0" />
                      </children>
                   </AnchorPane>
-                  <Button fx:id="btnNewReminder" layoutX="198.0" layoutY="209.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="70.0" style="-fx-background-radius: 10; -fx-background-color: #010056;" text="Add" textFill="#d9e9f2">
+                  <Button fx:id="btnNewReminder" layoutX="198.0" layoutY="209.0" mnemonicParsing="false" onAction="#btnNewReminderOnClick" prefHeight="31.0" prefWidth="70.0" style="-fx-background-radius: 10; -fx-background-color: #010056;" text="Add" textFill="#d9e9f2">
                      <font>
                         <Font name="Gadugi Bold" size="15.0" />
                      </font>
@@ -167,7 +172,7 @@
                   <Label fx:id="lblRentError" layoutX="14.0" layoutY="14.0" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="paneTax" layoutX="478.0" layoutY="305.0" prefHeight="255.0" prefWidth="332.0">
+            <AnchorPane fx:id="paneTax" layoutX="478.0" layoutY="305.0" prefHeight="255.0" prefWidth="332.0" visible="false">
                <children>
                   <AnchorPane layoutX="40.0" layoutY="42.0" prefHeight="35.0" prefWidth="256.0" style="-fx-background-color: #003d66;">
                      <children>
@@ -190,7 +195,7 @@
                               <Font name="Gabriola" size="20.0" />
                            </font>
                         </Label>
-                        <DatePicker fx:id="dtpTax" layoutX="119.0" layoutY="6.0" prefHeight="26.0" prefWidth="210.0" />
+                        <ComboBox fx:id="cmbTax" layoutX="119.0" layoutY="7.0" prefHeight="26.0" prefWidth="200.0" />
                      </children>
                   </AnchorPane>
                   <AnchorPane layoutX="38.0" layoutY="140.0" prefHeight="35.0" prefWidth="256.0" style="-fx-background-color: #003d66;">
@@ -207,7 +212,7 @@
                         </TextField>
                      </children>
                   </AnchorPane>
-                  <Button fx:id="btnNewTax" layoutX="131.0" layoutY="202.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="70.0" style="-fx-background-radius: 10; -fx-background-color: #010056;" text="Add" textFill="#d9e9f2">
+                  <Button fx:id="btnNewTax" layoutX="131.0" layoutY="202.0" mnemonicParsing="false" onAction="#btnNewTaxOnClick" prefHeight="31.0" prefWidth="70.0" style="-fx-background-radius: 10; -fx-background-color: #010056;" text="Add" textFill="#d9e9f2">
                      <font>
                         <Font name="Gadugi Bold" size="15.0" />
                      </font>
@@ -222,27 +227,22 @@
                         <Font name="Gadugi Bold" size="15.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnReminder" layoutX="8.0" layoutY="79.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="214.0" style="-fx-background-color: transparent;" text="To add a reminder" textAlignment="JUSTIFY" textFill="#d9e9f2">
+                  <Button fx:id="btnReminder" layoutX="8.0" layoutY="79.0" mnemonicParsing="false" onAction="#btnReminderOnClick" prefHeight="31.0" prefWidth="214.0" style="-fx-background-color: transparent;" text="To add a reminder" textAlignment="JUSTIFY" textFill="#d9e9f2">
                      <font>
                         <Font name="Gadugi Bold" size="15.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnTransport" layoutX="-2.0" layoutY="107.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="222.0" style="-fx-background-color: transparent;" text="To add a transport fee" textAlignment="JUSTIFY" textFill="#d9e9f2">
+                  <Button fx:id="btnTransport" layoutX="-2.0" layoutY="107.0" mnemonicParsing="false" onAction="#btnTransportOnClick" prefHeight="31.0" prefWidth="222.0" style="-fx-background-color: transparent;" text="To add a transport fee" textAlignment="JUSTIFY" textFill="#d9e9f2">
                      <font>
                         <Font name="Gadugi Bold" size="15.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnFood" layoutX="7.0" layoutY="136.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="214.0" style="-fx-background-color: transparent;" text="To add a food tax" textAlignment="JUSTIFY" textFill="#d9e9f2">
+                  <Button fx:id="btnFood" layoutX="7.0" layoutY="136.0" mnemonicParsing="false" onAction="#btnFoodOnClick" prefHeight="31.0" prefWidth="214.0" style="-fx-background-color: transparent;" text="To add a food tax" textAlignment="JUSTIFY" textFill="#d9e9f2">
                      <font>
                         <Font name="Gadugi Bold" size="15.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnFree" layoutX="3.0" layoutY="163.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="214.0" style="-fx-background-color: transparent;" text="To add a leisure fee" textAlignment="JUSTIFY" textFill="#d9e9f2">
-                     <font>
-                        <Font name="Gadugi Bold" size="15.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="btnGraphic" layoutX="2.0" layoutY="191.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="214.0" style="-fx-background-color: transparent;" text="Graphic" textAlignment="JUSTIFY" textFill="#d9e9f2">
+                  <Button fx:id="btnFree" layoutX="3.0" layoutY="163.0" mnemonicParsing="false" onAction="#btnFreeOnCLick" prefHeight="31.0" prefWidth="214.0" style="-fx-background-color: transparent;" text="To add a leisure fee" textAlignment="JUSTIFY" textFill="#d9e9f2">
                      <font>
                         <Font name="Gadugi Bold" size="15.0" />
                      </font>
