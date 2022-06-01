@@ -13,6 +13,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.apache.commons.io.FileUtils;
 import project.licenta.entity.User;
 import project.licenta.repository.UserRepository;
 import project.licenta.service.UserService;
@@ -20,6 +21,8 @@ import project.licenta.utils.GetInstance;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.awt.*;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +40,8 @@ public class Login {
     private Button btnRegister;
     @FXML
     private Label label;
+    @FXML
+    private CheckBox chkLogged;
 
     private UserService userService = GetInstance.of(UserService.class);
 
@@ -96,6 +101,11 @@ public class Login {
     {
         if(LoginValidation(txtUser.getText(),txtPass.getText()))
         {
+            File path = FileUtils.getUserDirectory().getAbsoluteFile();
+            File file = new File(path.getAbsolutePath()+File.separator+"user.txt");
+            FileWriter writer = new FileWriter(file.getAbsolutePath());
+            writer.write(txtUser.getText()+";"+String.valueOf(chkLogged.isSelected()));
+            writer.close();
             FXMLLoader loader= new FXMLLoader(getClass().getResource("menu.fxml"));
             Stage stage =(Stage) btnLogin.getScene().getWindow();
             stage.setScene(new Scene(loader.load()));

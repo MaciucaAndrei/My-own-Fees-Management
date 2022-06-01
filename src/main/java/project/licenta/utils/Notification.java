@@ -25,9 +25,11 @@ public class Notification {
             case "Day": c.set(c.get(Calendar.YEAR),c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH)+1);break;
             case "Week": c.set(c.get(Calendar.YEAR),c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH)+7);break;
             case "Month": c.set(c.get(Calendar.YEAR),c.get(Calendar.MONTH)+1,c.get(Calendar.DAY_OF_MONTH));break;
+            default: break;
         }
-        if(c.get(Calendar.YEAR)==deadline.get(Calendar.YEAR) && c.get(Calendar.MONTH)==deadline.get(Calendar.MONTH)
-        && c.get(Calendar.DAY_OF_MONTH)==deadline.get(Calendar.DAY_OF_MONTH))
+        /*if(c.get(Calendar.YEAR)==deadline.get(Calendar.YEAR) && c.get(Calendar.MONTH)==deadline.get(Calendar.MONTH)
+        && c.get(Calendar.DAY_OF_MONTH)==deadline.get(Calendar.DAY_OF_MONTH))*/
+        if(c.get(Calendar.MINUTE)==deadline.get(Calendar.MINUTE))
         {
             SystemTray tray = SystemTray.getSystemTray();
 
@@ -41,5 +43,15 @@ public class Notification {
 
         }
 
+    }
+
+    @Override
+    public String toString() {
+        return "Notification{" +
+                "title='" + title + '\'' +
+                ", message='" + message + '\'' +
+                ", deadline=" + deadline +
+                ", days='" + days + '\'' +
+                '}';
     }
 }
