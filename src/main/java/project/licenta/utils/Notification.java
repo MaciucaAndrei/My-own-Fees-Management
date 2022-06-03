@@ -27,9 +27,8 @@ public class Notification {
             case "Month": c.set(c.get(Calendar.YEAR),c.get(Calendar.MONTH)+1,c.get(Calendar.DAY_OF_MONTH));break;
             default: break;
         }
-        /*if(c.get(Calendar.YEAR)==deadline.get(Calendar.YEAR) && c.get(Calendar.MONTH)==deadline.get(Calendar.MONTH)
-        && c.get(Calendar.DAY_OF_MONTH)==deadline.get(Calendar.DAY_OF_MONTH))*/
-        if(c.get(Calendar.MINUTE)==deadline.get(Calendar.MINUTE))
+        if(c.get(Calendar.YEAR)==deadline.get(Calendar.YEAR) && c.get(Calendar.MONTH)==deadline.get(Calendar.MONTH)
+        && c.get(Calendar.DAY_OF_MONTH)==deadline.get(Calendar.DAY_OF_MONTH))
         {
             SystemTray tray = SystemTray.getSystemTray();
 

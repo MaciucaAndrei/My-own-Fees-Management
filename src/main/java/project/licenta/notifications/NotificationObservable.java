@@ -48,7 +48,8 @@ public class NotificationObservable extends Observable implements Runnable {
             }
             try {
                 Thread.sleep(1000);
-               if(today.get(Calendar.MINUTE)+1==Calendar.getInstance().get(Calendar.MINUTE))
+               if(today.get(Calendar.YEAR)==Calendar.getInstance().get(Calendar.YEAR)&&today.get(Calendar.MONTH)==Calendar.getInstance().get(Calendar.MONTH)
+               && today.get(Calendar.DAY_OF_MONTH)+1==Calendar.getInstance().get(Calendar.DAY_OF_MONTH))
                {
 
                    setChanged();

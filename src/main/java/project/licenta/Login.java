@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.apache.commons.io.FileUtils;
 import project.licenta.entity.User;
+import project.licenta.notifications.NotificationObservable;
+import project.licenta.notifications.NotificationObserver;
 import project.licenta.repository.UserRepository;
 import project.licenta.service.UserService;
 import project.licenta.utils.GetInstance;
@@ -25,6 +27,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 @ApplicationScoped
@@ -44,6 +47,8 @@ public class Login {
     private CheckBox chkLogged;
 
     private UserService userService = GetInstance.of(UserService.class);
+    private NotificationObservable notificationObservable = new NotificationObservable();
+    private NotificationObserver notificationObserver = new NotificationObserver();
 
     public boolean FieldsValidation(String user, String pass)
     {
@@ -106,6 +111,12 @@ public class Login {
             FileWriter writer = new FileWriter(file.getAbsolutePath());
             writer.write(txtUser.getText()+";"+String.valueOf(chkLogged.isSelected()));
             writer.close();
+            notificationObservable.addObserver(notificationObserver);
+            notificationObservable.setUser(txtUser.getText());
+            notificationObservable.setToday(Calendar.getInstance());
+            Thread th = new Thread(notificationObservable);
+            th.setDaemon(true);
+            th.start();
             FXMLLoader loader= new FXMLLoader(getClass().getResource("menu.fxml"));
             Stage stage =(Stage) btnLogin.getScene().getWindow();
             stage.setScene(new Scene(loader.load()));

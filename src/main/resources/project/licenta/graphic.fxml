@@ -46,7 +46,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="325.0" prefWidth="899.0">
+      <AnchorPane fx:id="paneContent" prefHeight="325.0" prefWidth="899.0">
          <children>
             <ImageView fitHeight="427.0" fitWidth="900.0" pickOnBounds="true">
                <image>
@@ -66,19 +66,19 @@
                         <ComboBox fx:id="cmbType" layoutX="40.0" layoutY="3.0" onAction="#cmbTypeOnChange" prefHeight="26.0" prefWidth="196.0" promptText="Graphic time" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="paneTime" layoutX="22.0" layoutY="103.0" prefHeight="35.0" prefWidth="243.0" style="-fx-background-color: #003d66;">
+                  <AnchorPane fx:id="paneTime" layoutX="22.0" layoutY="103.0" prefHeight="35.0" prefWidth="243.0" style="-fx-background-color: #003d66;" visible="false">
                      <children>
                         <ImageView fitHeight="38.0" fitWidth="40.0" layoutY="-1.0">
                            <image>
                               <Image url="@images/calendar_icon.png" />
                            </image>
                         </ImageView>
-                        <ComboBox fx:id="cmbTime" layoutX="40.0" layoutY="3.0" prefHeight="26.0" prefWidth="196.0" promptText="Graphic time" />
+                        <ComboBox fx:id="cmbTime" layoutX="40.0" layoutY="3.0" prefHeight="26.0" prefWidth="196.0" promptText="Graphic time" visible="false" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="paneStartDate" layoutX="21.0" layoutY="150.0" prefHeight="38.0" prefWidth="299.0" style="-fx-background-color: #003d66;">
+                  <AnchorPane fx:id="paneStartDate" layoutX="21.0" layoutY="150.0" prefHeight="38.0" prefWidth="299.0" style="-fx-background-color: #003d66;" visible="false">
                      <children>
-                        <DatePicker fx:id="dtpStartDate" layoutX="88.0" layoutY="6.0" prefHeight="26.0" prefWidth="210.0" />
+                        <DatePicker fx:id="dtpStartDate" layoutX="88.0" layoutY="6.0" prefHeight="26.0" prefWidth="210.0" visible="false" />
                         <Label layoutX="14.0" layoutY="6.0" text="Start date" textFill="#d9e9f2">
                            <font>
                               <Font name="Gabriola" size="20.0" />
@@ -86,9 +86,9 @@
                         </Label>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="paneEndDate" layoutX="21.0" layoutY="197.0" prefHeight="38.0" prefWidth="299.0" style="-fx-background-color: #003d66;">
+                  <AnchorPane fx:id="paneEndDate" layoutX="21.0" layoutY="197.0" prefHeight="38.0" prefWidth="299.0" style="-fx-background-color: #003d66;" visible="false">
                      <children>
-                        <DatePicker fx:id="dtpEndDate" layoutX="88.0" layoutY="6.0" prefHeight="26.0" prefWidth="210.0" />
+                        <DatePicker fx:id="dtpEndDate" layoutX="88.0" layoutY="6.0" prefHeight="26.0" prefWidth="210.0" visible="false" />
                         <Label layoutX="14.0" layoutY="6.0" text="End date" textFill="#d9e9f2">
                            <font>
                               <Font name="Gabriola" size="20.0" />
@@ -96,7 +96,7 @@
                         </Label>
                      </children>
                   </AnchorPane>
-                  <Button fx:id="btnShow" layoutX="126.0" layoutY="250.0" mnemonicParsing="false" onAction="#btnShowOnClick" prefHeight="31.0" prefWidth="70.0" style="-fx-background-radius: 10; -fx-background-color: #010056;" text="Show" textFill="#d9e9f2">
+                  <Button fx:id="btnShow" layoutX="274.0" layoutY="55.0" mnemonicParsing="false" onAction="#btnShowOnClick" prefHeight="31.0" prefWidth="70.0" style="-fx-background-radius: 10; -fx-background-color: #010056;" text="Show" textFill="#d9e9f2">
                      <font>
                         <Font name="Gadugi Bold" size="15.0" />
                      </font>
