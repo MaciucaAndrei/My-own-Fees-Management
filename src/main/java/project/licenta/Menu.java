@@ -12,11 +12,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import org.apache.commons.io.FileUtils;
 import project.licenta.entity.Semester;
 import project.licenta.service.SemesterService;
 import project.licenta.utils.GetInstance;
 
 import java.awt.*;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
@@ -284,6 +287,11 @@ public class Menu {
 
     public void btnLogoutOnClick(ActionEvent event) throws IOException
     {
+        File path = FileUtils.getUserDirectory().getAbsoluteFile();
+        File file = new File(path.getAbsolutePath()+File.separator+"user.txt");
+        FileWriter writer = new FileWriter(file.getAbsolutePath());
+        writer.write(user+";"+"false");
+        writer.close();
         Stage logout= (Stage) btnLogout.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("login.fxml"));
         Scene scene= new Scene(fxmlLoader.load());

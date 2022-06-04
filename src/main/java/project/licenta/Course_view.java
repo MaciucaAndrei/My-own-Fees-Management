@@ -11,6 +11,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.apache.commons.io.FileUtils;
 import project.licenta.entity.Reminder;
 import project.licenta.entity.Semester;
 import project.licenta.entity.Subjects;
@@ -20,6 +21,8 @@ import project.licenta.service.SubjectsService;
 import project.licenta.service.TaxesService;
 import project.licenta.utils.GetInstance;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Calendar;
@@ -322,6 +325,11 @@ public class Course_view {
     }
     public void btnLogoutOnClick(ActionEvent event) throws  IOException
     {
+        File path = FileUtils.getUserDirectory().getAbsoluteFile();
+        File file = new File(path.getAbsolutePath()+File.separator+"user.txt");
+        FileWriter writer = new FileWriter(file.getAbsolutePath());
+        writer.write(user+";"+"false");
+        writer.close();
         Stage login= (Stage) btnLogout.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("login.fxml"));
         Scene scene= new Scene(fxmlLoader.load());

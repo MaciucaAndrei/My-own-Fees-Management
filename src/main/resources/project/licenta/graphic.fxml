@@ -46,7 +46,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="paneContent" prefHeight="325.0" prefWidth="899.0">
+      <AnchorPane fx:id="paneContent" prefHeight="490.0" prefWidth="900.0">
          <children>
             <ImageView fitHeight="427.0" fitWidth="900.0" pickOnBounds="true">
                <image>
