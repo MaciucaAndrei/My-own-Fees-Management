@@ -4,12 +4,14 @@ import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Paint;
@@ -25,7 +27,6 @@ import project.licenta.utils.GetInstance;
 import project.licenta.utils.TableBooks;
 
 import java.awt.*;
-import java.awt.print.Book;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -78,13 +79,23 @@ public class Library {
     @FXML
     private Button btnCosts;
     @FXML
+    private Button btnGraphic;
+    @FXML
     private TableView<TableBooks> tblBooks;
     @FXML
     private Label lblMenu;
     @FXML
     private Label lblMenuClose;
     @FXML
+    private AnchorPane paneMenu;
+    @FXML
     private AnchorPane paneSlider;
+    @FXML
+    private ImageView image1;
+    @FXML
+    private ImageView image2;
+    @FXML
+    private ImageView image3;
 
     private String user;
     private BooksService booksService= GetInstance.of(BooksService.class);
@@ -145,13 +156,116 @@ public class Library {
                 lblMenuClose.setVisible(false);
             });
         });
+        for(Node node : paneMenu.getChildren())
+            if(node.getClass().equals(Button.class)) {
+                node.setOnMouseEntered(e -> {
+                    node.setStyle("-fx-background-color: transparent;-fx-text-fill:#000080;");
+                    node.setTranslateX(5);
+                });
+                node.setOnMouseExited(e -> {
+                    node.setStyle("-fx-background-color: transparent;-fx-text-fill: #d9e9f2;");
+                    node.setTranslateX(-5);
+                });
+            }
+        btnAdd.setOnMouseEntered(e -> {
+                btnAdd.setStyle("-fx-background-color: transparent;-fx-text-fill:#66b3ff; -fx-border-width: 3px;" +
+                        "-fx-border-color: #66b3ff;");
+                btnAdd.setTranslateX(5);
+                btnAdd.setTranslateY(-5);
+            javafx.scene.image.Image image = null;
+            try {
+                image = new javafx.scene.image.Image(Library.class.getResource("images/book_blue.png").openStream());
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            image1.setImage(image);
+            image1.setTranslateX(5);
+            image1.setTranslateY(-5);
+            });
+        btnAdd.setOnMouseExited(e -> {
+                btnAdd.setStyle("-fx-background-color: transparent;-fx-text-fill: #d9e9f2; -fx-border-width: 3px;" +
+                        "-fx-border-color:#d9e9f2;");
+                btnAdd.setTranslateX(-5);
+                btnAdd.setTranslateY(5);
+            javafx.scene.image.Image image = null;
+            try {
+                image = new javafx.scene.image.Image(Library.class.getResource("images/book_white.png").openStream());
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            image1.setImage(image);
+            image1.setTranslateX(-5);
+            image1.setTranslateY(5);
+            });
+        btnView.setOnMouseEntered(e -> {
+            btnView.setStyle("-fx-background-color: transparent;-fx-text-fill:#66b3ff; -fx-border-width: 3px;" +
+                    "-fx-border-color: #66b3ff;");
+            btnView.setTranslateX(5);
+            btnView.setTranslateY(-5);
+            javafx.scene.image.Image image = null;
+            try {
+                image = new javafx.scene.image.Image(Library.class.getResource("images/table_blue.png").openStream());
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            image2.setImage(image);
+            image2.setTranslateX(5);
+            image2.setTranslateY(-5);
+        });
+        btnView.setOnMouseExited(e -> {
+            btnView.setStyle("-fx-background-color: transparent;-fx-text-fill: #d9e9f2; -fx-border-width: 3px;" +
+                    "-fx-border-color:#d9e9f2;");
+            btnView.setTranslateX(-5);
+            btnView.setTranslateY(5);
+            javafx.scene.image.Image image = null;
+            try {
+                image = new javafx.scene.image.Image(Library.class.getResource("images/table_white.png").openStream());
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            image2.setImage(image);
+            image2.setTranslateX(-5);
+            image2.setTranslateY(5);
+        });
+        btnReminder.setOnMouseEntered(e -> {
+            btnReminder.setStyle("-fx-background-color: transparent;-fx-text-fill:#66b3ff; -fx-border-width: 3px;" +
+                    "-fx-border-color: #66b3ff;");
+            btnReminder.setTranslateX(5);
+            btnReminder.setTranslateY(-5);
+            javafx.scene.image.Image image = null;
+            try {
+                image = new javafx.scene.image.Image(Library.class.getResource("images/reminder_blue.png").openStream());
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            image3.setImage(image);
+            image3.setTranslateX(5);
+            image3.setTranslateY(-5);
+        });
+        btnReminder.setOnMouseExited(e -> {
+            btnReminder.setStyle("-fx-background-color: transparent;-fx-text-fill: #d9e9f2; -fx-border-width: 3px;" +
+                    "-fx-border-color:#d9e9f2;");
+            btnReminder.setTranslateX(-5);
+            btnReminder.setTranslateY(5);
+            javafx.scene.image.Image image = null;
+            try {
+                image = new javafx.scene.image.Image(Library.class.getResource("images/reminder_white.png").openStream());
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            image3.setImage(image);
+            image3.setTranslateX(-5);
+            image3.setTranslateY(5);
+        });
+
+
     }
 
     public boolean fieldsValidation(String name, String author, String house, String year, Calendar loan, Calendar date_of_return)
     {
         Calendar c= Calendar.getInstance();
         Calendar f= Calendar.getInstance();
-        f.set(c.get(Calendar.YEAR),c.get(Calendar.MONTH+1),c.get(Calendar.DAY_OF_MONTH));
+        f.set(c.get(Calendar.YEAR),c.get(Calendar.MONTH)+1,c.get(Calendar.DAY_OF_MONTH));
         List<Books> all = booksService.findAll();
         if(name.isBlank() || author.isBlank() || house.isBlank() || year.isBlank())
         {
@@ -171,6 +285,15 @@ public class Library {
             lblError.setFont(font);
             return false;
         }
+        if(Double.parseDouble(year)<1700 || Double.parseDouble(year)>Calendar.getInstance().get(Calendar.YEAR))
+        {
+            lblError.setText("Year of appearence must be between 1700 and present");
+            Paint paint = Paint.valueOf("red");
+            lblError.setTextFill(paint);
+            Font font = new Font("Gadugi", 10);
+            lblError.setFont(font);
+            return false;
+        }
         if(loan.getTimeInMillis()>c.getTimeInMillis())
         {
             lblError.setText("The loan date cannot be in the future");
@@ -180,9 +303,27 @@ public class Library {
             lblError.setFont(font);
             return false;
         }
+        if(date_of_return.getTimeInMillis()<c.getTimeInMillis())
+        {
+            lblError.setText("The return date cannot be in the past");
+            Paint paint = Paint.valueOf("red");
+            lblError.setTextFill(paint);
+            Font font = new Font("Gadugi", 10);
+            lblError.setFont(font);
+            return false;
+        }
         if(date_of_return.getTimeInMillis()>f.getTimeInMillis())
         {
             lblError.setText("The date of return cannot be more late than one month after loan date ");
+            Paint paint = Paint.valueOf("red");
+            lblError.setTextFill(paint);
+            Font font = new Font("Gadugi", 10);
+            lblError.setFont(font);
+            return false;
+        }
+        if(loan.getTimeInMillis()>date_of_return.getTimeInMillis())
+        {
+            lblError.setText("The return date cannot be earlier than the loan date ");
             Paint paint = Paint.valueOf("red");
             lblError.setTextFill(paint);
             Font font = new Font("Gadugi", 10);
@@ -217,6 +358,16 @@ public class Library {
         LocalDate l = LocalDate.now();
         dtpLoan.setValue(l);
         dtpReturn.setValue(l);
+    }
+
+    public void btnGraphicOnClick(ActionEvent event) throws IOException
+    {
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("graphic.fxml"));
+        Stage stage =(Stage) btnGraphic.getScene().getWindow();
+        stage.setScene(new Scene(loader.load()));
+        Graphic menu = loader.getController();
+        menu.start(user);
+        stage.show();
     }
     public void btnCostsOnClick(ActionEvent e) throws IOException
     {
@@ -271,6 +422,10 @@ public class Library {
                         , book.getYear(), l, day));
 
             }
+            if(paneReminder.isVisible())
+            {
+                cmbBookName.getItems().add(book.getBook_name());
+            }
             Alert a = new Alert(Alert.AlertType.CONFIRMATION);
             a.setHeaderText("The book has been successfully registered");
             a.show();
@@ -293,17 +448,27 @@ public class Library {
         List<Books> all = booksService.findAll();
         for(Books book : all)
         {
+            String loan=book.getLoan_date().get(Calendar.DAY_OF_MONTH)+"."+(book.getLoan_date().get(Calendar.MONTH)+1)
+                    +"."+book.getLoan_date().get(Calendar.YEAR);
+            String day=book.getDate_of_return().get(Calendar.DAY_OF_MONTH)+"."+(book.getDate_of_return().get(Calendar.MONTH)+1)
+                    +"."+book.getDate_of_return().get(Calendar.YEAR);
+            TableBooks duplicate = new TableBooks(book.getBook_name(), book.getBook_author(), book.getPublishing_house()
+                    , book.getYear(), loan, day);
             if(book.getUser().equals(user))
             {
-                String loan=book.getLoan_date().get(Calendar.DAY_OF_MONTH)+"."+(book.getLoan_date().get(Calendar.MONTH)+1)
-                        +"."+book.getLoan_date().get(Calendar.YEAR);
-                String day=book.getDate_of_return().get(Calendar.DAY_OF_MONTH)+"."+(book.getDate_of_return().get(Calendar.MONTH)+1)
-                        +"."+book.getDate_of_return().get(Calendar.YEAR);
-                tblBooks.getItems().add(new TableBooks(book.getBook_name(), book.getBook_author(), book.getPublishing_house()
-                        , book.getYear(), loan, day));
+                if(tblBooks.getItems().isEmpty())
+                {
+                    tblBooks.getItems().add(duplicate);
+                }else {
+                    for (TableBooks row : tblBooks.getItems()) {
+                        if (!(row.getName().equals(duplicate.getName()) && row.getAuthor().equals(duplicate.getAuthor()) &&
+                                row.getPublish_house().equals(duplicate.getPublish_house()))) {
+                            tblBooks.getItems().add(duplicate);
+                        }
+                    }
+                }
             }
         }
-        tblBooks.setPrefWidth(Region.USE_COMPUTED_SIZE);
     }
 
     public void btnReminderOnClick(ActionEvent event)
@@ -314,12 +479,24 @@ public class Library {
         {
             if(book.getUser().equals(user) && book.getDate_of_return().getTimeInMillis()>c.getTimeInMillis())
             {
-                cmbBookName.getItems().add(book.getBook_name());
+                if(cmbBookName.getItems().isEmpty())
+                {
+                    cmbBookName.getItems().add(book.getBook_name());
+                }else {
+                    for (String name : cmbBookName.getItems()) {
+                        if (!name.equals(book.getBook_name())) {
+                            cmbBookName.getItems().add(book.getBook_name());
+                        }
+                    }
+                }
+
             }
         }
         LocalDate l = LocalDate.now();
         dtpDeadline.setValue(l);
-        cmbDays.getItems().addAll("Day","Week","Month");
+        if(cmbDays.getItems().isEmpty()) {
+            cmbDays.getItems().addAll("Day", "Week", "Month");
+        }
         paneReminder.setVisible(true);
     }
 

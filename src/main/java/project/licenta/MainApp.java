@@ -36,16 +36,7 @@ public class MainApp extends Application {
     }
     @Override
     public void start(Stage stage) throws IOException, AWTException {
-
-
         initCdiContainer();
-
-        //impl check if logged in
-        //if logged -> addObserver, start observeable thread and pass user
-        //else -> goto login page
-        //login page -> same process after recieving user entitiy
-
-
         File path = FileUtils.getUserDirectory().getAbsoluteFile();
         File file = new File(path.getAbsolutePath()+File.separator+"user.txt");
         if(file.createNewFile())

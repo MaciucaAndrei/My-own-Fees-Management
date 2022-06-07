@@ -5,19 +5,17 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import org.apache.commons.io.FileUtils;
 import project.licenta.entity.User;
 import project.licenta.notifications.NotificationObservable;
 import project.licenta.notifications.NotificationObserver;
-import project.licenta.repository.UserRepository;
 import project.licenta.service.UserService;
 import project.licenta.utils.GetInstance;
 
@@ -26,7 +24,6 @@ import java.awt.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 

@@ -5,10 +5,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
@@ -399,22 +399,22 @@ public class Costs {
 
     public boolean taxFieldsValidation(String type,String date,String amount)
     {
-        if((date.isBlank() || amount.isBlank()))
+        if((date ==null  || amount==null))
         {
             lblTaxError.setText("Fill in all  the fields");
             Paint paint = Paint.valueOf("red");
             lblTaxError.setTextFill(paint);
             Font font = new Font("Gadugi", 10);
-            lblRentError.setFont(font);
+            lblTaxError.setFont(font);
             return false;
         }
         if(amount.matches("[a-zA-Z]+"))
         {
-            lblRentError.setText("Please enter just  numbers without letters");
+            lblTaxError.setText("Please enter just  numbers without letters");
             Paint paint = Paint.valueOf("red");
-            lblRentError.setTextFill(paint);
+            lblTaxError.setTextFill(paint);
             Font font = new Font("Gadugi", 10);
-            lblRentError.setFont(font);
+            lblTaxError.setFont(font);
             return false;
         }
         List<Taxes> all = taxesService.findAll();
@@ -437,7 +437,7 @@ public class Costs {
     public void btnNewRentFeeOnClick(ActionEvent event)
     {
         Calendar c= Calendar.getInstance();
-        String text="";
+        String text;
         if(cmbRentType.getValue().equals("Rent"))
         {
             text=cmbUtilities.getValue();

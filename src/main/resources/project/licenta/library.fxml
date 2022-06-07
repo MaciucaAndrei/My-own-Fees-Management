@@ -11,10 +11,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefWidth="908.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.licenta.Library">
    <children>
-      <ImageView fitHeight="600.0" fitWidth="919.0" layoutX="-5.0" pickOnBounds="true">
+      <ImageView fitHeight="602.0" fitWidth="919.0" layoutX="-5.0" pickOnBounds="true">
          <image>
             <Image url="@images/login_background.jpg" />
          </image>
@@ -70,6 +69,11 @@
                   </ImageView>
                </graphic>
             </Label>
+            <Button fx:id="btnGraphic" layoutX="459.0" layoutY="7.0" mnemonicParsing="false" onAction="#btnGraphicOnClick" style="-fx-background-color: transparent;" text="Graphic" textAlignment="CENTER" textFill="#d9e9f2">
+               <font>
+                  <Font name="Gadugi Bold" size="20.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="paneAdd" layoutX="461.0" layoutY="102.0" prefHeight="454.0" prefWidth="365.0" visible="false">
@@ -142,7 +146,7 @@
                         <Font name="Gabriola" size="20.0" />
                      </font>
                   </Label>
-                  <DatePicker fx:id="dtpLoan" layoutX="90.0" layoutY="6.0" />
+                  <DatePicker fx:id="dtpLoan" editable="false" layoutX="90.0" layoutY="6.0" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="132.0" layoutY="311.0" prefHeight="38.0" prefWidth="290.0" style="-fx-background-color: #003d66;">
@@ -152,13 +156,13 @@
                         <Font name="Gabriola" size="20.0" />
                      </font>
                   </Label>
-                  <DatePicker fx:id="dtpReturn" layoutX="114.0" layoutY="6.0" />
+                  <DatePicker fx:id="dtpReturn" editable="false" layoutX="114.0" layoutY="6.0" />
                </children>
             </AnchorPane>
             <Label fx:id="lblError" layoutX="104.0" layoutY="14.0" />
          </children>
       </AnchorPane>
-      <TableView fx:id="tblBooks" layoutX="14.0" layoutY="387.0" prefHeight="151.0" prefWidth="365.0" style="-fx-background-color: transparent;" visible="false" />
+      <TableView fx:id="tblBooks" layoutX="14.0" layoutY="387.0" prefHeight="202.0" style="-fx-background: d9e9f2; -fx-background-color: d9e9f2; -fx-text-fill: #00134d;" visible="false" />
       <AnchorPane fx:id="paneReminder" layoutX="14.0" layoutY="93.0" prefHeight="271.0" prefWidth="478.0" visible="false">
          <children>
             <AnchorPane layoutX="14.0" layoutY="66.0" prefHeight="35.0" prefWidth="256.0" style="-fx-background-color: #003d66;">
@@ -179,12 +183,12 @@
                         <Font name="Gabriola" size="20.0" />
                      </font>
                   </Label>
-                  <DatePicker fx:id="dtpDeadline" editable="false" layoutX="140.0" layoutY="6.0" />
+                  <DatePicker fx:id="dtpDeadline" disable="true" editable="false" layoutX="140.0" layoutY="6.0" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="14.0" layoutY="161.0" prefHeight="35.0" prefWidth="434.0" style="-fx-background-color: #003d66;">
                <children>
-                  <Label layoutX="42.0" layoutY="1.0" text="How many days before" textFill="#d9e9f2">
+                  <Label layoutX="42.0" layoutY="1.0" text="How much time before" textFill="#d9e9f2">
                      <font>
                         <Font name="Gabriola" size="20.0" />
                      </font>
@@ -199,23 +203,38 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="paneSlider" layoutY="93.0" prefHeight="490.0" prefWidth="230.0" style="-fx-background-color: #00134d;">
+      <AnchorPane fx:id="paneSlider" layoutY="87.0" prefHeight="514.0" prefWidth="230.0" style="-fx-background-color: #00134d;">
          <children>
-            <Button fx:id="btnAdd" layoutX="8.0" layoutY="42.0" mnemonicParsing="false" onAction="#btnAddOnClick" prefHeight="31.0" prefWidth="214.0" style="-fx-background-color: transparent;" text="Add a book" textAlignment="JUSTIFY" textFill="#d9e9f2">
+            <Button fx:id="btnAdd" layoutX="16.0" layoutY="42.0" mnemonicParsing="false" onAction="#btnAddOnClick" prefHeight="31.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-border-width: 3px; -fx-border-color: d9e9f2;" text="Add a book" textAlignment="JUSTIFY" textFill="#d9e9f2">
                <font>
                   <Font name="Gadugi Bold" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="btnView" layoutX="-1.0" layoutY="73.0" mnemonicParsing="false" onAction="#btnViewOnClick" prefHeight="31.0" prefWidth="232.0" style="-fx-background-color: transparent;" text="Show all the books" textAlignment="JUSTIFY" textFill="#d9e9f2">
+            <Button fx:id="btnView" layoutX="16.0" layoutY="115.0" mnemonicParsing="false" onAction="#btnViewOnClick" prefHeight="31.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-border-width: 3px; -fx-border-color: d9e9f2;" text="    Show all the books" textAlignment="JUSTIFY" textFill="#d9e9f2">
                <font>
                   <Font name="Gadugi Bold" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="btnReminder" layoutX="-1.0" layoutY="112.0" mnemonicParsing="false" onAction="#btnReminderOnClick" prefHeight="31.0" prefWidth="232.0" style="-fx-background-color: transparent;" text="Add a reminder" textAlignment="JUSTIFY" textFill="#d9e9f2">
+            <Button fx:id="btnReminder" layoutX="8.0" layoutY="188.0" mnemonicParsing="false" onAction="#btnReminderOnClick" prefHeight="31.0" prefWidth="214.0" style="-fx-background-color: transparent; -fx-border-width: 3px; -fx-border-color: d9e9f2;" text="   Add a reminder" textAlignment="JUSTIFY" textFill="#d9e9f2">
                <font>
                   <Font name="Gadugi Bold" size="15.0" />
                </font>
             </Button>
+            <ImageView fx:id="image1" fitHeight="22.0" fitWidth="66.0" layoutX="42.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/book_white.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="image3" fitHeight="22.0" fitWidth="66.0" layoutX="31.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/reminder_white.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="image2" fitHeight="22.0" fitWidth="66.0" layoutX="31.0" layoutY="123.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/table_white.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </children>

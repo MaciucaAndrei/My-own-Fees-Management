@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -10,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.licenta.Menu">
+<AnchorPane fx:id="paneContent" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.licenta.Menu">
    <children>
       <ImageView fitHeight="616.0" fitWidth="861.0" pickOnBounds="true">
          <image>
@@ -44,7 +45,12 @@
                   <Font name="Gadugi Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="btnCosts" layoutX="401.0" layoutY="7.0" mnemonicParsing="false" onAction="#btnCostsOnClick" style="-fx-background-color: transparent;" text="Costs" textAlignment="CENTER" textFill="#d9e9f2">
+            <Button fx:id="btnCosts" layoutX="419.0" layoutY="7.0" mnemonicParsing="false" onAction="#btnCostsOnClick" style="-fx-background-color: transparent;" text="Costs" textAlignment="CENTER" textFill="#d9e9f2">
+               <font>
+                  <Font name="Gadugi Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnGraphic" layoutX="319.0" layoutY="7.0" mnemonicParsing="false" onAction="#btnGraphicOnClick" style="-fx-background-color: transparent;" text="Graphic" textAlignment="CENTER" textFill="#d9e9f2">
                <font>
                   <Font name="Gadugi Bold" size="20.0" />
                </font>
@@ -146,6 +152,10 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="paneButtons" layoutX="34.0" layoutY="117.0" prefHeight="428.0" prefWidth="200.0" />
+      <ScrollPane fx:id="scpaneButtons" hbarPolicy="NEVER" layoutY="117.0" style="-fx-background-color: transparent; -fx-background: transparent;" vbarPolicy="NEVER">
+         <content>
+            <AnchorPane fx:id="paneButtons" prefHeight="494.0" prefWidth="374.0" />
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

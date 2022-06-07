@@ -3,11 +3,13 @@ package project.licenta;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
@@ -58,6 +60,9 @@ public class Menu {
     private Button btnCosts;
 
     @FXML
+    private Button btnGraphic;
+
+    @FXML
     private Button btnAdd;
 
     @FXML
@@ -71,11 +76,13 @@ public class Menu {
 
     @FXML
     private AnchorPane paneMenu;
+    @FXML
+    private ScrollPane scpaneButtons;
 
     @FXML
     private Label label;
 
-    private SemesterService semesterService= GetInstance.of(SemesterService .class);
+    private final SemesterService semesterService= GetInstance.of(SemesterService .class);
 
 
     public String buttonText(Semester semester)
@@ -93,7 +100,7 @@ public class Menu {
             }else {
                 for (String shortcut : shortcuts) {
                     if(shortcut.length()>3) {
-                        text = text + shortcut.substring(0, 1);
+                        text = text + shortcut.charAt(0);
                     }
                 }
             }
@@ -113,7 +120,7 @@ public class Menu {
             }else {
                 for (String shortcut : shortcuts) {
                     if(shortcut.length()>3) {
-                        text = text + shortcut.substring(0, 1);
+                        text = text + shortcut.charAt(0);
                     }
                 }
             }
@@ -132,7 +139,7 @@ public class Menu {
             }else {
                 for (String shortcut : shortcuts) {
                     if(shortcut.length()>3) {
-                        text = text + shortcut.substring(0, 1);
+                        text = text + shortcut.charAt(0);
                     }
                 }
             }
@@ -149,17 +156,29 @@ public class Menu {
         double y=50;
         for(Semester semester : semesters)
         {
-            if(user.equals(semester.getUser().toString())) {
+            if(user.equals(semester.getUser())) {
                 Button button = new Button();
                 button.setLayoutX(x);
                 button.setLayoutY(y);
                 button.setText(buttonText(semester));
-                y = y + 45;
+                y = y + 85;
                 Font font= new Font("Gadugi",15);
                 button.setFont(font);
                 Paint paint = Paint.valueOf("#d9e9f2");
                 button.setTextFill(paint);
-                button.setStyle("-fx-background-color: transparent");
+                button.setStyle("-fx-background-color: transparent; -fx-border-width: 3px; -fx-border-color: #d9e9f2;");
+                button.setOnMouseEntered(e->{
+                    button.setStyle("-fx-background-color: transparent;-fx-text-fill:#000080; -fx-border-width: 3px;" +
+                            "-fx-border-color: #000080;");
+                    button.setTranslateX(5);
+                    button.setTranslateY(-10);
+                });
+                button.setOnMouseExited(e->{
+                    button.setStyle("-fx-background-color: transparent;-fx-text-fill: #d9e9f2; -fx-border-width: 3px;" +
+                            "-fx-border-color:#d9e9f2;");
+                    button.setTranslateX(-5);
+                    button.setTranslateY(10);
+                });
                 button.setOnAction(e-> {
                     try {
                         Semesters_view(button.getText(),semester);
@@ -169,6 +188,11 @@ public class Menu {
                 });
                 paneButtons.getChildren().add(button);
             }
+        }
+        if(y>paneButtons.getPrefHeight())
+        {
+
+            scpaneButtons.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         }
     }
 
@@ -191,6 +215,17 @@ public class Menu {
         SpinnerValueFactory<Integer> semFactory =new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 2, 1);
         spnSem.setValueFactory(semFactory);
         showButtons(user);
+        for(Node node : paneMenu.getChildren())
+            if(node.getClass().equals(Button.class)) {
+               node.setOnMouseEntered(e -> {
+                    node.setStyle("-fx-background-color: transparent;-fx-text-fill:#000080;");
+                    node.setTranslateX(5);
+                });
+                node.setOnMouseExited(e -> {
+                    node.setStyle("-fx-background-color: transparent;-fx-text-fill: #d9e9f2;");
+                    node.setTranslateX(-5);
+                });
+            }
     }
 
     public boolean FieldsValidation(String u,String c, String d, String y)
@@ -214,7 +249,7 @@ public class Menu {
         for(Semester semester : semesters)
         {
            String semester_shortcuts = buttonText(semester);
-           if(duplicate_shortcuts.equals(semester_shortcuts))
+           if(semester.getUser().equals(user) && duplicate_shortcuts.equals(semester_shortcuts))
            {
                label.setText("This semester was already added");
                Paint paint = Paint.valueOf("red");
@@ -223,9 +258,9 @@ public class Menu {
                label.setFont(font);
                return false;
            }
-           if(semester.getUniversity().toLowerCase().equals(duplicate.getUniversity().toLowerCase()) &&
-                   semester.getCollege().toLowerCase().equals(duplicate.getCollege().toLowerCase()) &&
-                   semester.getDepartment().toLowerCase().equals(duplicate.getDepartment().toLowerCase()) &&
+           if(semester.getUniversity().equalsIgnoreCase(duplicate.getUniversity()) &&
+                   semester.getCollege().equalsIgnoreCase(duplicate.getCollege()) &&
+                   semester.getDepartment().equalsIgnoreCase(duplicate.getDepartment()) &&
                    semester.getUniversity_year().equals(duplicate.getUniversity_year()) &&
                    semester.getYear()==duplicate.getYear() && semester.getSemester()==duplicate.getSemester())
            {
@@ -284,6 +319,15 @@ public class Menu {
     }
 
 
+    public void btnGraphicOnClick(ActionEvent event ) throws IOException
+    {
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("graphic.fxml"));
+        Stage stage =(Stage) btnGraphic.getScene().getWindow();
+        stage.setScene(new Scene(loader.load()));
+        Graphic menu = loader.getController();
+        menu.start(user);
+        stage.show();
+    }
 
     public void btnLogoutOnClick(ActionEvent event) throws IOException
     {
@@ -314,16 +358,17 @@ public class Menu {
     }
     public void btnAddOnClick(ActionEvent event)
     {
-        if(FieldsValidation(txtUniv.getText().toString(),txtColl.getText().toString(),txtDep.getText().toString()
-                ,txtUniv_year.getText().toString())&&Univ_yearValidation(txtUniv_year.getText().toString()))
+        if(FieldsValidation(txtUniv.getText(), txtColl.getText(), txtDep.getText()
+                , txtUniv_year.getText())&&Univ_yearValidation(txtUniv_year.getText()))
         {
-            Semester semester= new Semester(user,txtUniv.getText().toString(),txtColl.getText().toString()
-                    ,txtDep.getText().toString(),txtUniv_year.getText().toString(),spnYear.getValue(),spnSem.getValue(),chbTaxes.isSelected());
+            Semester semester= new Semester(user, txtUniv.getText(), txtColl.getText()
+                    , txtDep.getText(), txtUniv_year.getText(),spnYear.getValue(),spnSem.getValue(),chbTaxes.isSelected());
             if(SemesterValidation(semester)) {
                 Semester save = semesterService.save(semester);
                 Alert a = new Alert(Alert.AlertType.CONFIRMATION);
                 a.setHeaderText("The semester has been successfully added");
                 a.show();
+                label.setText("");
                 paneSemesterAdd.setVisible(false);
                 txtUniv.clear();
                 txtColl.clear();
