@@ -1,7 +1,6 @@
 package project.licenta;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -43,70 +42,61 @@ public class Login {
     @FXML
     private CheckBox chkLogged;
 
-    private UserService userService = GetInstance.of(UserService.class);
-    private NotificationObservable notificationObservable = new NotificationObservable();
-    private NotificationObserver notificationObserver = new NotificationObserver();
+    private final UserService userService = GetInstance.of(UserService.class);
+    private final NotificationObservable notificationObservable = new NotificationObservable();
+    private final NotificationObserver notificationObserver = new NotificationObserver();
 
-    public boolean FieldsValidation(String user, String pass)
-    {
-        if(!user.isBlank()  && !pass.isBlank()) {
+    public boolean FieldsValidation(String user, String pass) {
+        if (!user.isBlank() && !pass.isBlank()) {
             return true;
-        }else
-        {
+        } else {
             label.setText("Fill in all the fields");
             Paint paint = Paint.valueOf("red");
             label.setTextFill(paint);
-            Font font = new Font("Gadugi",15);
+            Font font = new Font("Gadugi", 15);
             label.setFont(font);
             return false;
         }
     }
 
-    public boolean LoginValidation(String user,String pass)
-    {
-        if(FieldsValidation(user,pass)) {
+    public boolean LoginValidation(String user, String pass) {
+        if (FieldsValidation(user, pass)) {
             List<User> users = userService.findAll();
-            int flag = 0;
             for (User all : users) {
                 if (all.getUsername().equals(user)) {
-                    flag = 1;
                     BCrypt.Result result = BCrypt.verifyer().verify(pass.toCharArray(), all.getPassword());
                     if (result.verified) {
                         Alert a = new Alert(Alert.AlertType.CONFIRMATION);
-                        a.setHeaderText("Autentificare cu succes!");
+                        a.setHeaderText("Login successful!");
                         a.show();
                         return true;
                     } else {
                         label.setText("The password entered is incorrect");
                         Paint paint = Paint.valueOf("red");
                         label.setTextFill(paint);
-                        Font font = new Font("Gadugi",15);
+                        Font font = new Font("Gadugi", 15);
                         label.setFont(font);
                         return false;
                     }
                 }
 
             }
-            if (flag == 0) {
                 label.setText("The username doesn't exist");
                 Paint paint = Paint.valueOf("red");
                 label.setTextFill(paint);
-                Font font = new Font("Gadugi",15);
+                Font font = new Font("Gadugi", 15);
                 label.setFont(font);
                 return false;
-            }
         }
         return false;
     }
 
-    public void btnLoginOnClick(ActionEvent event) throws IOException, AWTException
-    {
-        if(LoginValidation(txtUser.getText(),txtPass.getText()))
-        {
+    public void btnLoginOnClick() throws IOException, AWTException {
+        if (LoginValidation(txtUser.getText(), txtPass.getText())) {
             File path = FileUtils.getUserDirectory().getAbsoluteFile();
-            File file = new File(path.getAbsolutePath()+File.separator+"user.txt");
+            File file = new File(path.getAbsolutePath() + File.separator + "user.txt");
             FileWriter writer = new FileWriter(file.getAbsolutePath());
-            writer.write(txtUser.getText()+";"+String.valueOf(chkLogged.isSelected()));
+            writer.write(txtUser.getText() + ";" + chkLogged.isSelected());
             writer.close();
             notificationObservable.addObserver(notificationObserver);
             notificationObservable.setUser(txtUser.getText());
@@ -114,27 +104,27 @@ public class Login {
             Thread th = new Thread(notificationObservable);
             th.setDaemon(true);
             th.start();
-            FXMLLoader loader= new FXMLLoader(getClass().getResource("menu.fxml"));
-            Stage stage =(Stage) btnLogin.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
+            Stage stage = (Stage) btnLogin.getScene().getWindow();
             stage.setScene(new Scene(loader.load()));
             Menu menu = loader.getController();
-            menu.start(txtUser.getText().toString());
+            menu.start(txtUser.getText());
             stage.show();
 
         }
 
 
     }
-    public void btnRegisterOnClick(ActionEvent event) throws IOException {
-        Stage login= (Stage) btnRegister.getScene().getWindow();
+
+    public void btnRegisterOnClick() throws IOException {
+        Stage login = (Stage) btnRegister.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("register.fxml"));
-        Scene scene= new Scene(fxmlLoader.load());
+        Scene scene = new Scene(fxmlLoader.load());
         login.setScene(scene);
 
     }
 
-    public void start(String user)
-    {
+    public void start(String user) {
         txtUser.setText(user);
     }
 }

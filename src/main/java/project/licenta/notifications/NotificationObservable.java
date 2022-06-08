@@ -41,7 +41,7 @@ public class NotificationObservable extends Observable implements Runnable {
     }
     public void trigger() {
 
-        while (true) { // check if a day has passed check LocalDate || Calendar
+        while (true) {
             if (!initialPass) {
                 checkDatabase();
                 this.initialPass = true;

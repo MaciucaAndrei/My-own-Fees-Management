@@ -8,70 +8,11 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="684.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.licenta.Costs">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="683.6" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.licenta.Costs">
    <children>
-      <AnchorPane fx:id="paneMenu" prefHeight="78.0" prefWidth="900.0">
-         <children>
-            <ImageView fitHeight="104.0" fitWidth="900.0" layoutX="-1.0" layoutY="-26.0" pickOnBounds="true">
-               <image>
-                  <Image url="@images/menu_background.jpg" />
-               </image>
-            </ImageView>
-            <Button fx:id="btnLogout" layoutX="783.0" layoutY="7.0" mnemonicParsing="false" onAction="#btnLogoutOnClick" style="-fx-background-color: transparent;" text="Log out" textFill="#d9e9f2">
-               <font>
-                  <Font name="Gadugi Bold" size="20.0" />
-               </font>
-            </Button>
-            <Button fx:id="btnBack" layoutX="651.0" layoutY="7.0" mnemonicParsing="false" onAction="#btnBackOnClick" style="-fx-background-color: transparent;" text="Semesters" textAlignment="CENTER" textFill="#d9e9f2">
-               <font>
-                  <Font name="Gadugi Bold" size="20.0" />
-               </font>
-            </Button>
-            <ImageView fitHeight="63.0" fitWidth="195.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/icon.png" />
-               </image>
-            </ImageView>
-            <Button fx:id="btnLibrary" layoutX="540.0" layoutY="7.0" mnemonicParsing="false" onAction="#btnLibraryOnClick" style="-fx-background-color: transparent;" text="Library" textAlignment="CENTER" textFill="#d9e9f2">
-               <font>
-                  <Font name="Gadugi Bold" size="20.0" />
-               </font>
-            </Button>
-            <Label fx:id="lblMenu" layoutX="188.0" layoutY="26.0" textFill="#ece3e3">
-               <font>
-                  <Font name="Gadugi" size="16.0" />
-               </font>
-               <graphic>
-                  <ImageView fitHeight="26.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/menu.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Label>
-            <Label fx:id="lblMenuClose" layoutX="188.0" layoutY="26.0" textFill="#ece3e3">
-               <font>
-                  <Font name="Gadugi" size="16.0" />
-               </font>
-               <graphic>
-                  <ImageView fitHeight="26.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/menu.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Label>
-            <Button fx:id="btnGraphic" layoutX="440.0" layoutY="7.0" mnemonicParsing="false" onAction="#btnGraphicOnClick" style="-fx-background-color: transparent;" text="Graphic" textAlignment="CENTER" textFill="#d9e9f2">
-               <font>
-                  <Font name="Gadugi Bold" size="20.0" />
-               </font>
-            </Button>
-         </children>
-      </AnchorPane>
-      <AnchorPane prefWidth="900.0">
+      <AnchorPane layoutY="78.0" prefWidth="900.0">
          <children>
             <ImageView fitHeight="605.0" fitWidth="900.0" pickOnBounds="true">
                <image>
@@ -93,7 +34,7 @@
                   </AnchorPane>
                   <AnchorPane layoutX="5.0" layoutY="119.0" prefHeight="35.0" prefWidth="434.0" style="-fx-background-color: #003d66;">
                      <children>
-                        <Label layoutX="42.0" layoutY="1.0" text="How many days before" textFill="#d9e9f2">
+                        <Label layoutX="42.0" layoutY="1.0" text="How much time before" textFill="#d9e9f2">
                            <font>
                               <Font name="Gabriola" size="20.0" />
                            </font>
@@ -220,35 +161,129 @@
                   <Label fx:id="lblTaxError" layoutX="14.0" layoutY="14.0" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="paneSlider" layoutY="6.0" prefHeight="598.0" prefWidth="222.0" style="-fx-background-color: #00134d;">
+            <AnchorPane fx:id="paneSlider" layoutY="-1.0" prefHeight="606.0" prefWidth="243.0" style="-fx-background-color: #00134d;">
                <children>
-                  <Button fx:id="btnRent" layoutX="4.0" layoutY="52.0" mnemonicParsing="false" onAction="#btnRentOnClick" prefHeight="31.0" prefWidth="214.0" style="-fx-background-color: transparent;" text="To add a rent fee" textAlignment="JUSTIFY" textFill="#d9e9f2">
+                  <Button fx:id="btnReminder" layoutX="14.0" layoutY="109.0" mnemonicParsing="false" onAction="#btnReminderOnClick" prefHeight="31.0" prefWidth="214.0" style="-fx-background-color: transparent; -fx-border-width: 3px; -fx-border-color: d9e9f2;" text="   Add a reminder" textAlignment="JUSTIFY" textFill="#d9e9f2">
                      <font>
                         <Font name="Gadugi Bold" size="15.0" />
                      </font>
+                     <graphic>
+                        <ImageView fx:id="image2" fitHeight="22.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/reminder_white.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
-                  <Button fx:id="btnReminder" layoutX="8.0" layoutY="79.0" mnemonicParsing="false" onAction="#btnReminderOnClick" prefHeight="31.0" prefWidth="214.0" style="-fx-background-color: transparent;" text="To add a reminder" textAlignment="JUSTIFY" textFill="#d9e9f2">
+                  <Button fx:id="btnRent" layoutX="14.0" layoutY="40.0" mnemonicParsing="false" onAction="#btnRentOnClick" prefHeight="31.0" prefWidth="214.0" style="-fx-background-color: transparent; -fx-border-width: 3px; -fx-border-color: d9e9f2;" text="Add a rent fee" textAlignment="JUSTIFY" textFill="#d9e9f2">
                      <font>
                         <Font name="Gadugi Bold" size="15.0" />
                      </font>
+                     <graphic>
+                        <ImageView fx:id="image1" fitHeight="22.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/house_white.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
-                  <Button fx:id="btnTransport" layoutX="-2.0" layoutY="107.0" mnemonicParsing="false" onAction="#btnTransportOnClick" prefHeight="31.0" prefWidth="222.0" style="-fx-background-color: transparent;" text="To add a transport fee" textAlignment="JUSTIFY" textFill="#d9e9f2">
+                  <Button fx:id="btnTransport" layoutX="14.0" layoutY="172.0" mnemonicParsing="false" onAction="#btnTransportOnClick" prefHeight="31.0" prefWidth="214.0" style="-fx-background-color: transparent; -fx-border-width: 3px; -fx-border-color: d9e9f2;" text="   Add a transport fee" textAlignment="JUSTIFY" textFill="#d9e9f2">
                      <font>
                         <Font name="Gadugi Bold" size="15.0" />
                      </font>
+                     <graphic>
+                        <ImageView fx:id="image3" fitHeight="22.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/car_white.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
-                  <Button fx:id="btnFood" layoutX="7.0" layoutY="136.0" mnemonicParsing="false" onAction="#btnFoodOnClick" prefHeight="31.0" prefWidth="214.0" style="-fx-background-color: transparent;" text="To add a food tax" textAlignment="JUSTIFY" textFill="#d9e9f2">
+                  <Button fx:id="btnFood" layoutX="14.0" layoutY="243.0" mnemonicParsing="false" onAction="#btnFoodOnClick" prefHeight="31.0" prefWidth="214.0" style="-fx-background-color: transparent; -fx-border-width: 3px; -fx-border-color: d9e9f2;" text="   Add a food tax" textAlignment="JUSTIFY" textFill="#d9e9f2">
                      <font>
                         <Font name="Gadugi Bold" size="15.0" />
                      </font>
+                     <graphic>
+                        <ImageView fx:id="image4" fitHeight="22.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/food_white.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
-                  <Button fx:id="btnFree" layoutX="3.0" layoutY="163.0" mnemonicParsing="false" onAction="#btnFreeOnCLick" prefHeight="31.0" prefWidth="214.0" style="-fx-background-color: transparent;" text="To add a leisure fee" textAlignment="JUSTIFY" textFill="#d9e9f2">
+                  <Button fx:id="btnFree" layoutX="14.0" layoutY="317.0" mnemonicParsing="false" onAction="#btnFreeOnCLick" prefHeight="31.0" prefWidth="214.0" style="-fx-background-color: transparent; -fx-border-width: 3px; -fx-border-color: d9e9f2;" text="   Add a leisure fee" textAlignment="JUSTIFY" textFill="#d9e9f2">
                      <font>
                         <Font name="Gadugi Bold" size="15.0" />
                      </font>
+                     <graphic>
+                        <ImageView fx:id="image5" fitHeight="22.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/bar_white.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
-               </children></AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="paneMenu" prefHeight="78.0" prefWidth="900.0">
+         <children>
+            <ImageView fitHeight="109.0" fitWidth="900.0" layoutX="-1.0" layoutY="-26.0" pickOnBounds="true">
+               <image>
+                  <Image url="@images/menu_background.jpg" />
+               </image>
+            </ImageView>
+            <Button fx:id="btnLogout" layoutX="783.0" layoutY="7.0" mnemonicParsing="false" onAction="#btnLogoutOnClick" style="-fx-background-color: transparent;" text="Log out" textFill="#d9e9f2">
+               <font>
+                  <Font name="Gadugi Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnBack" layoutX="651.0" layoutY="7.0" mnemonicParsing="false" onAction="#btnBackOnClick" style="-fx-background-color: transparent;" text="Semesters" textAlignment="CENTER" textFill="#d9e9f2">
+               <font>
+                  <Font name="Gadugi Bold" size="20.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="63.0" fitWidth="195.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/icon.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="btnLibrary" layoutX="540.0" layoutY="7.0" mnemonicParsing="false" onAction="#btnLibraryOnClick" style="-fx-background-color: transparent;" text="Library" textAlignment="CENTER" textFill="#d9e9f2">
+               <font>
+                  <Font name="Gadugi Bold" size="20.0" />
+               </font>
+            </Button>
+            <Label fx:id="lblMenu" layoutX="188.0" layoutY="26.0" textFill="#ece3e3">
+               <font>
+                  <Font name="Gadugi" size="16.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/menu.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <Label fx:id="lblMenuClose" layoutX="188.0" layoutY="26.0" textFill="#ece3e3">
+               <font>
+                  <Font name="Gadugi" size="16.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/menu.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <Button fx:id="btnGraphic" layoutX="440.0" layoutY="7.0" mnemonicParsing="false" onAction="#btnGraphicOnClick" style="-fx-background-color: transparent;" text="Graphic" textAlignment="CENTER" textFill="#d9e9f2">
+               <font>
+                  <Font name="Gadugi Bold" size="20.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </children>
-</VBox>
+</AnchorPane>

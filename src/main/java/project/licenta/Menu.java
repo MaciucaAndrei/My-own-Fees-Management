@@ -1,6 +1,5 @@
 package project.licenta;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -51,9 +50,6 @@ public class Menu {
     private CheckBox chbTaxes;
 
     @FXML
-    private Button btnAddSemester;
-
-    @FXML
     private Button btnLibrary;
 
     @FXML
@@ -87,66 +83,66 @@ public class Menu {
 
     public String buttonText(Semester semester)
     {
-        String text="";
+        StringBuilder text= new StringBuilder();
         if(semester.getUniversity().length()<5)
         {
-            text=semester.getUniversity()+" ";
+            text = new StringBuilder(semester.getUniversity() + " ");
         }else
         {
             String[] shortcuts=semester.getUniversity().split(" ");
             if(shortcuts.length==1)
             {
-                text=shortcuts[0].substring(0,4);
+                text = new StringBuilder(shortcuts[0].substring(0, 4));
             }else {
                 for (String shortcut : shortcuts) {
                     if(shortcut.length()>3) {
-                        text = text + shortcut.charAt(0);
+                        text.append(shortcut.charAt(0));
                     }
                 }
             }
-            text=text+" ";
+            text.append(" ");
 
         }
 
         if(semester.getCollege().length()<5)
         {
-            text=text+semester.getCollege()+" ";
+            text.append(semester.getCollege()).append(" ");
         }else
         {
             String[] shortcuts=semester.getCollege().split(" ");
             if(shortcuts.length==1)
             {
-                text=text+shortcuts[0].substring(0,4);
+                text.append(shortcuts[0], 0, 4);
             }else {
                 for (String shortcut : shortcuts) {
                     if(shortcut.length()>3) {
-                        text = text + shortcut.charAt(0);
+                        text.append(shortcut.charAt(0));
                     }
                 }
             }
-            text=text+" ";
+            text.append(" ");
         }
 
         if(semester.getDepartment().length()<5)
         {
-            text=text+semester.getDepartment()+" ";
+            text.append(semester.getDepartment()).append(" ");
         }else
         {
             String[] shortcuts=semester.getDepartment().split(" ");
             if(shortcuts.length==1)
             {
-                text=text+shortcuts[0].substring(0,4);
+                text.append(shortcuts[0], 0, 4);
             }else {
                 for (String shortcut : shortcuts) {
                     if(shortcut.length()>3) {
-                        text = text + shortcut.charAt(0);
+                        text.append(shortcut.charAt(0));
                     }
                 }
             }
-            text=text+" ";
+            text.append(" ");
         }
-        text=text+"\n"+"An universitar: "+semester.getUniversity_year()+" An: "+semester.getYear()+" Semestru: "+semester.getSemester();
-        return text;
+        text.append("\n").append("An universitar: ").append(semester.getUniversity_year()).append(" An: ").append(semester.getYear()).append(" Semestru: ").append(semester.getSemester());
+        return text.toString();
     }
 
     public void showButtons(String user)
@@ -319,7 +315,7 @@ public class Menu {
     }
 
 
-    public void btnGraphicOnClick(ActionEvent event ) throws IOException
+    public void btnGraphicOnClick() throws IOException
     {
         FXMLLoader loader= new FXMLLoader(getClass().getResource("graphic.fxml"));
         Stage stage =(Stage) btnGraphic.getScene().getWindow();
@@ -329,7 +325,7 @@ public class Menu {
         stage.show();
     }
 
-    public void btnLogoutOnClick(ActionEvent event) throws IOException
+    public void btnLogoutOnClick() throws IOException
     {
         File path = FileUtils.getUserDirectory().getAbsoluteFile();
         File file = new File(path.getAbsolutePath()+File.separator+"user.txt");
@@ -341,7 +337,7 @@ public class Menu {
         Scene scene= new Scene(fxmlLoader.load());
         logout.setScene(scene);
     }
-    public void btnAddSemesterOnClick(ActionEvent event)
+    public void btnAddSemesterOnClick()
     {
         paneSemesterAdd.setVisible(true);
         List<Semester> all = semesterService.findAll();
@@ -356,7 +352,7 @@ public class Menu {
             }
         }
     }
-    public void btnAddOnClick(ActionEvent event)
+    public void btnAddOnClick()
     {
         if(FieldsValidation(txtUniv.getText(), txtColl.getText(), txtDep.getText()
                 , txtUniv_year.getText())&&Univ_yearValidation(txtUniv_year.getText()))
@@ -382,20 +378,20 @@ public class Menu {
         }
     }
 
-    public void btnLibraryOnClick(ActionEvent e) throws IOException
+    public void btnLibraryOnClick() throws IOException
     {
         FXMLLoader loader= new FXMLLoader(getClass().getResource("library.fxml"));
-        Stage stage =(Stage) btnAdd.getScene().getWindow();
+        Stage stage =(Stage) btnLibrary.getScene().getWindow();
         stage.setScene(new Scene(loader.load()));
         Library menu = loader.getController();
         menu.start(user);
         stage.show();
     }
 
-    public void btnCostsOnClick(ActionEvent event) throws IOException
+    public void btnCostsOnClick() throws IOException
     {
         FXMLLoader loader= new FXMLLoader(getClass().getResource("costs.fxml"));
-        Stage stage =(Stage) btnAdd.getScene().getWindow();
+        Stage stage =(Stage) btnCosts.getScene().getWindow();
         stage.setScene(new Scene(loader.load()));
         Costs menu = loader.getController();
         menu.start(user);

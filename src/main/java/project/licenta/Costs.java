@@ -4,11 +4,13 @@ import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
@@ -131,24 +133,38 @@ public class Costs {
     @FXML
     private TextField txtTaxType;
 
+    @FXML
+    private ImageView image1;
+
+    @FXML
+    private ImageView image2;
+
+    @FXML
+    private ImageView image3;
+
+    @FXML
+    private ImageView image4;
+
+    @FXML
+    private ImageView image5;
+
     private String user;
-    private ReminderService reminderService = GetInstance.of(ReminderService.class);
-    private TaxesService taxesService = GetInstance.of(TaxesService.class);
+    private final ReminderService reminderService = GetInstance.of(ReminderService.class);
+    private final TaxesService taxesService = GetInstance.of(TaxesService.class);
 
 
-    public void btnGraphicOnClick(ActionEvent event) throws IOException
-    {
-        FXMLLoader loader= new FXMLLoader(getClass().getResource("graphic.fxml"));
-        Stage stage =(Stage) btnGraphic.getScene().getWindow();
+    public void btnGraphicOnClick() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("graphic.fxml"));
+        Stage stage = (Stage) btnGraphic.getScene().getWindow();
         stage.setScene(new Scene(loader.load()));
         Graphic menu = loader.getController();
         menu.start(user);
         stage.show();
     }
 
-    public void btnBackOnClick(ActionEvent event) throws IOException, AWTException {
-        FXMLLoader loader= new FXMLLoader(getClass().getResource("menu.fxml"));
-        Stage stage =(Stage) btnBack.getScene().getWindow();
+    public void btnBackOnClick() throws IOException, AWTException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
+        Stage stage = (Stage) btnBack.getScene().getWindow();
         stage.setScene(new Scene(loader.load()));
         Menu menu = loader.getController();
         menu.start(user);
@@ -156,33 +172,32 @@ public class Costs {
     }
 
 
-     public void btnLibraryOnClick(ActionEvent event) throws IOException {
-         FXMLLoader loader= new FXMLLoader(getClass().getResource("library.fxml"));
-         Stage stage =(Stage) btnBack.getScene().getWindow();
-         stage.setScene(new Scene(loader.load()));
-         Library menu = loader.getController();
-         menu.start(user);
-         stage.show();
+    public void btnLibraryOnClick() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("library.fxml"));
+        Stage stage = (Stage) btnLibrary.getScene().getWindow();
+        stage.setScene(new Scene(loader.load()));
+        Library menu = loader.getController();
+        menu.start(user);
+        stage.show();
     }
 
 
-    public void btnLogoutOnClick(ActionEvent event) throws IOException {
+    public void btnLogoutOnClick() throws IOException {
         File path = FileUtils.getUserDirectory().getAbsoluteFile();
-        File file = new File(path.getAbsolutePath()+File.separator+"user.txt");
+        File file = new File(path.getAbsolutePath() + File.separator + "user.txt");
         FileWriter writer = new FileWriter(file.getAbsolutePath());
-        writer.write(user+";"+"false");
+        writer.write(user + ";" + "false");
         writer.close();
-        Stage logout= (Stage) btnLogout.getScene().getWindow();
+        Stage logout = (Stage) btnLogout.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("login.fxml"));
-        Scene scene= new Scene(fxmlLoader.load());
+        Scene scene = new Scene(fxmlLoader.load());
         logout.setScene(scene);
     }
 
 
-    public void start(String user)
-    {
-        this.user= user;
-        paneSlider.setTranslateX(-222);
+    public void start(String user) {
+        this.user = user;
+        paneSlider.setTranslateX(-243);
         lblMenu.setOnMouseClicked(event -> {
             TranslateTransition slide = new TranslateTransition();
             slide.setDuration(Duration.seconds(0.4));
@@ -191,9 +206,9 @@ public class Costs {
             slide.setToX(0);
             slide.play();
 
-            paneSlider.setTranslateX(-222);
+            paneSlider.setTranslateX(-243);
 
-            slide.setOnFinished((ActionEvent e)-> {
+            slide.setOnFinished((ActionEvent e) -> {
                 lblMenu.setVisible(false);
                 lblMenuClose.setVisible(true);
             });
@@ -204,31 +219,173 @@ public class Costs {
             slide.setDuration(Duration.seconds(0.4));
             slide.setNode(paneSlider);
 
-            slide.setToX(-222);
+            slide.setToX(-243);
             slide.play();
 
             paneSlider.setTranslateX(0);
 
-            slide.setOnFinished((ActionEvent e)-> {
+            slide.setOnFinished((ActionEvent e) -> {
                 lblMenu.setVisible(true);
                 lblMenuClose.setVisible(false);
             });
         });
+        for (Node node : paneMenu.getChildren())
+        {
+            if (node.getClass().equals(Button.class)) {
+                node.setOnMouseEntered(e -> {
+                    node.setStyle("-fx-background-color: transparent;-fx-text-fill:#000080;");
+                    node.setTranslateX(5);
+                });
+                node.setOnMouseExited(e -> {
+                    node.setStyle("-fx-background-color: transparent;-fx-text-fill: #d9e9f2;");
+                    node.setTranslateX(-5);
+                });
+            }
+        }
+        btnRent.setOnMouseEntered(e -> {
+            btnRent.setStyle("-fx-background-color: transparent;-fx-text-fill:#66b3ff; -fx-border-width: 3px;" +
+                    "-fx-border-color: #66b3ff;");
+            btnRent.setTranslateX(5);
+            btnRent.setTranslateY(-5);
+            javafx.scene.image.Image image = null;
+            try {
+                image = new javafx.scene.image.Image(Library.class.getResource("images/house_blue.png").openStream());
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            image1.setImage(image);
+        });
+        btnRent.setOnMouseExited(e -> {
+            btnRent.setStyle("-fx-background-color: transparent;-fx-text-fill: #d9e9f2; -fx-border-width: 3px;" +
+                    "-fx-border-color:#d9e9f2;");
+            btnRent.setTranslateX(-5);
+            btnRent.setTranslateY(5);
+            javafx.scene.image.Image image = null;
+            try {
+                image = new javafx.scene.image.Image(Library.class.getResource("images/house_white.png").openStream());
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            image1.setImage(image);
+        });
+        btnReminder.setOnMouseEntered(e -> {
+            btnReminder.setStyle("-fx-background-color: transparent;-fx-text-fill:#66b3ff; -fx-border-width: 3px;" +
+                    "-fx-border-color: #66b3ff;");
+            btnReminder.setTranslateX(5);
+            btnReminder.setTranslateY(-5);
+            javafx.scene.image.Image image = null;
+            try {
+                image = new javafx.scene.image.Image(Library.class.getResource("images/reminder_blue.png").openStream());
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            image2.setImage(image);
+        });
+        btnReminder.setOnMouseExited(e -> {
+            btnReminder.setStyle("-fx-background-color: transparent;-fx-text-fill: #d9e9f2; -fx-border-width: 3px;" +
+                    "-fx-border-color:#d9e9f2;");
+            btnReminder.setTranslateX(-5);
+            btnReminder.setTranslateY(5);
+            javafx.scene.image.Image image = null;
+            try {
+                image = new javafx.scene.image.Image(Library.class.getResource("images/reminder_white.png").openStream());
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            image2.setImage(image);
+        });
+        btnTransport.setOnMouseEntered(e -> {
+            btnTransport.setStyle("-fx-background-color: transparent;-fx-text-fill:#66b3ff; -fx-border-width: 3px;" +
+                    "-fx-border-color: #66b3ff;");
+            btnTransport.setTranslateX(5);
+            btnTransport.setTranslateY(-5);
+            javafx.scene.image.Image image = null;
+            try {
+                image = new javafx.scene.image.Image(Library.class.getResource("images/car_blue.png").openStream());
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            image3.setImage(image);
+        });
+        btnTransport.setOnMouseExited(e -> {
+            btnTransport.setStyle("-fx-background-color: transparent;-fx-text-fill: #d9e9f2; -fx-border-width: 3px;" +
+                    "-fx-border-color:#d9e9f2;");
+            btnTransport.setTranslateX(-5);
+            btnTransport.setTranslateY(5);
+            javafx.scene.image.Image image = null;
+            try {
+                image = new javafx.scene.image.Image(Library.class.getResource("images/car_white.png").openStream());
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            image3.setImage(image);
+        });
+        btnFood.setOnMouseEntered(e -> {
+            btnFood.setStyle("-fx-background-color: transparent;-fx-text-fill:#66b3ff; -fx-border-width: 3px;" +
+                    "-fx-border-color: #66b3ff;");
+            btnFood.setTranslateX(5);
+            btnFood.setTranslateY(-5);
+            javafx.scene.image.Image image = null;
+            try {
+                image = new javafx.scene.image.Image(Library.class.getResource("images/food_blue.png").openStream());
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            image4.setImage(image);
+        });
+        btnFood.setOnMouseExited(e -> {
+            btnFood.setStyle("-fx-background-color: transparent;-fx-text-fill: #d9e9f2; -fx-border-width: 3px;" +
+                    "-fx-border-color:#d9e9f2;");
+            btnFood.setTranslateX(-5);
+            btnFood.setTranslateY(5);
+            javafx.scene.image.Image image = null;
+            try {
+                image = new javafx.scene.image.Image(Library.class.getResource("images/food_white.png").openStream());
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            image4.setImage(image);
+        });
+        btnFree.setOnMouseEntered(e -> {
+            btnFree.setStyle("-fx-background-color: transparent;-fx-text-fill:#66b3ff; -fx-border-width: 3px;" +
+                    "-fx-border-color: #66b3ff;");
+            btnFree.setTranslateX(5);
+            btnFree.setTranslateY(-5);
+            javafx.scene.image.Image image = null;
+            try {
+                image = new javafx.scene.image.Image(Library.class.getResource("images/bar_blue.png").openStream());
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            image5.setImage(image);
+        });
+        btnFree.setOnMouseExited(e -> {
+            btnFree.setStyle("-fx-background-color: transparent;-fx-text-fill: #d9e9f2; -fx-border-width: 3px;" +
+                    "-fx-border-color:#d9e9f2;");
+            btnFree.setTranslateX(-5);
+            btnFree.setTranslateY(5);
+            javafx.scene.image.Image image = null;
+            try {
+                image = new javafx.scene.image.Image(Library.class.getResource("images/bar_white.png").openStream());
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            image5.setImage(image);
+        });
 
     }
 
-    public void btnRentOnClick(ActionEvent event)
-    {
+    public void btnRentOnClick() {
         paneRent.setVisible(true);
-        cmbRentType.getItems().addAll("Rent","Student residence");
+        cmbRentType.getItems().addAll("Rent", "Student residence");
         LocalDate l = LocalDate.now();
         dtpRent.setValue(l);
         List<Taxes> all = taxesService.findAll();
-        if(all!=null) {
+        if (all != null) {
             for (Taxes tax : all) {
                 if (tax.getUser().equals(user) && tax.getPayment_type().contains("Rent")) {
                     cmbRentType.setValue("Rent");
-                    cmbRentTypeOnChange(event);
+                    cmbRentTypeOnChange();
 
                 } else if (tax.getUser().equals(user) && tax.getPayment_type().contains("Student residence")) {
                     cmbRentType.setValue("Student residence");
@@ -239,87 +396,78 @@ public class Costs {
 
 
     }
-    public void btnReminderOnClick(ActionEvent event)
-    {
+
+    public void btnReminderOnClick() {
         LocalDate l = LocalDate.now();
         dtpReminder.setValue(l);
-        cmbDays.getItems().addAll("Day","Week","Month");
+        cmbDays.getItems().addAll("Day", "Week", "Month");
         paneReminder.setVisible(true);
         List<Taxes> all = taxesService.findAll();
-        int flag=0;
-        for(Taxes tax : all)
-        {
-            if(tax.getUser().equals(user) && tax.getPayment_type().contains("Rent"))
-            {
-                flag=1;
+        int flag = 0;
+        for (Taxes tax : all) {
+            if (tax.getUser().equals(user) && tax.getPayment_type().contains("Rent")) {
+                flag = 1;
                 cmbReminderType.getItems().addAll("Rent fee", "Maintenance bill", "Current bill", "Water bill", "Gas bill", "cable+internet bill");
                 break;
-            }else if(tax.getUser().equals(user) && tax.getPayment_type().contains("Student residence"))
-            {
-                flag=1;
+            } else if (tax.getUser().equals(user) && tax.getPayment_type().contains("Student residence")) {
+                flag = 1;
                 cmbReminderType.getItems().add("Student residence fee");
                 break;
             }
         }
-        if(flag==0)
-        {
-            cmbReminderType.getItems().addAll("Student residence fee","Rent fee", "Maintenance bill", "Current bill", "Water bill", "Gas bill", "cable+internet bill");
+        if (flag == 0) {
+            cmbReminderType.getItems().addAll("Student residence fee", "Rent fee", "Maintenance bill", "Current bill", "Water bill", "Gas bill", "cable+internet bill");
 
         }
     }
 
-    public void btnTransportOnClick(ActionEvent event)
-    {
+    public void btnTransportOnClick() {
         paneTax.setVisible(true);
         txtTaxType.setText("Transport fee");
-        if(cmbTax.getItems().isEmpty())
-        {
-            cmbTax.getItems().addAll("Today","This week","This month");
+        if (cmbTax.getItems().isEmpty()) {
+            cmbTax.getItems().addAll("Today", "This week", "This month");
         }
     }
 
-    public void btnFoodOnClick(ActionEvent event)
-    {
+    public void btnFoodOnClick() {
         paneTax.setVisible(true);
         txtTaxType.setText("Food tax");
-        if(cmbTax.getItems().isEmpty())
-        {
-            cmbTax.getItems().addAll("Today","This week","This month");
+        if (cmbTax.getItems().isEmpty()) {
+            cmbTax.getItems().addAll("Today", "This week", "This month");
         }
     }
 
-    public void btnFreeOnCLick(ActionEvent event)
-    {
+    public void btnFreeOnCLick() {
         paneTax.setVisible(true);
         txtTaxType.setText("Leisure fee");
-        if(cmbTax.getItems().isEmpty())
-        {
-            cmbTax.getItems().addAll("Today","This week","This month");
+        if (cmbTax.getItems().isEmpty()) {
+            cmbTax.getItems().addAll("Today", "This week", "This month");
         }
     }
 
-    public void cmbRentTypeOnChange(ActionEvent event)
-    {
-        if(StringUtils.isNotEmpty(cmbRentType.getValue())) {
+    public void cmbRentTypeOnChange() {
+        if (StringUtils.isNotEmpty(cmbRentType.getValue())) {
             if (cmbRentType.getValue().equals("Rent")) {
                 paneUtilities.setVisible(true);
-                if(cmbUtilities.getItems().isEmpty()) {
+                if (cmbUtilities.getItems().isEmpty()) {
                     cmbUtilities.getItems().addAll("Rent fee", "Maintenance bill", "Current bill", "Water bill", "Gas bill", "cable+internet bill");
                 }
-                }else if(cmbRentType.getValue().equals("Student residence"))
-            {
+            } else if (cmbRentType.getValue().equals("Student residence")) {
                 paneUtilities.setVisible(false);
             }
         }
 
     }
 
-    public boolean rentFieldsValidation(String type,String text, Calendar date, String amount)
-    {
+    public boolean rentFieldsValidation(String type, boolean value, Calendar date, String amount) {
         Calendar c = Calendar.getInstance();
-
-        if((type.isBlank() || amount.isBlank()))
-        {
+        String text;
+        if (value) {
+            text = cmbUtilities.getValue();
+        } else {
+            text = "Student residence fee";
+        }
+        if (type == null || amount == null || text == null) {
             lblRentError.setText("Fill in all  the fields");
             Paint paint = Paint.valueOf("red");
             lblRentError.setTextFill(paint);
@@ -327,8 +475,7 @@ public class Costs {
             lblRentError.setFont(font);
             return false;
         }
-        if(date.getTimeInMillis()> c.getTimeInMillis())
-        {
+        if (date.getTimeInMillis() > c.getTimeInMillis()) {
             lblRentError.setText("The payment date cannot be in the future");
             javafx.scene.paint.Paint paint = Paint.valueOf("red");
             lblRentError.setTextFill(paint);
@@ -336,8 +483,7 @@ public class Costs {
             lblRentError.setFont(font);
             return false;
         }
-        if(amount.matches("[a-zA-Z]+"))
-        {
+        if (amount.matches("[a-zA-Z]+")) {
             lblRentError.setText("Please enter just  numbers without letters");
             Paint paint = Paint.valueOf("red");
             lblRentError.setTextFill(paint);
@@ -345,12 +491,11 @@ public class Costs {
             lblRentError.setFont(font);
             return false;
         }
-        List<Taxes>all = taxesService.findAll();
-        for(Taxes t : all)
-        {
-            if(t.getUser().equals(user) && t.getPayment_type().equals(text) && date.get(Calendar.MONTH)==t.getPayment_date().get(Calendar.MONTH)
-            && date.get(Calendar.YEAR)==t.getPayment_date().get(Calendar.YEAR) && t.getPayment_amount()==Double.parseDouble(amount)) {
-                lblRentError.setText(text+"has been already added");
+        List<Taxes> all = taxesService.findAll();
+        for (Taxes t : all) {
+            if (t.getUser().equals(user) && t.getPayment_type().equals(text) && date.get(Calendar.MONTH) == t.getPayment_date().get(Calendar.MONTH)
+                    && date.get(Calendar.YEAR) == t.getPayment_date().get(Calendar.YEAR)) {
+                lblRentError.setText(text + " has been already added");
                 Paint paint = Paint.valueOf("red");
                 lblRentError.setTextFill(paint);
                 Font font = new Font("Gadugi", 10);
@@ -361,7 +506,7 @@ public class Costs {
         return true;
     }
 
-    public boolean reminderFieldsValidation(String type,String days, Calendar date) {
+    public boolean reminderFieldsValidation(String type, String days, Calendar date) {
         Calendar c = Calendar.getInstance();
         if (date.getTimeInMillis() < c.getTimeInMillis()) {
             lblErrorReminder.setText("The payment deadline cannot be from the past");
@@ -371,7 +516,7 @@ public class Costs {
             lblErrorReminder.setFont(font);
             return false;
         }
-        if (days.isBlank() || type.isBlank()) {
+        if (days == null || type == null) {
             lblErrorReminder.setText("Fill in  the field");
             Paint paint = Paint.valueOf("red");
             lblErrorReminder.setTextFill(paint);
@@ -380,11 +525,10 @@ public class Costs {
             return false;
         }
         List<Reminder> all = reminderService.findAll();
-        for (Reminder reminder : all)
-        {
-            if(reminder.getUsername().equals(user) && reminder.getMessage().equals(type) && reminder.getDays().equals(days)
-                    && reminder.getDeadline().get(Calendar.YEAR)==date.get(Calendar.YEAR) && reminder.getDeadline().get(Calendar.MONTH)==date.get(Calendar.MONTH)
-                    && reminder.getDeadline().get(Calendar.DAY_OF_MONTH)==date.get(Calendar.DAY_OF_MONTH)) {
+        for (Reminder reminder : all) {
+            if (reminder.getUsername().equals(user) && reminder.getMessage().equals(type) && reminder.getDays().equals(days)
+                    && reminder.getDeadline().get(Calendar.YEAR) == date.get(Calendar.YEAR) && reminder.getDeadline().get(Calendar.MONTH) == date.get(Calendar.MONTH)
+                    && reminder.getDeadline().get(Calendar.DAY_OF_MONTH) == date.get(Calendar.DAY_OF_MONTH)) {
                 lblErrorReminder.setText("The reminder has been already added");
                 Paint paint = Paint.valueOf("red");
                 lblErrorReminder.setTextFill(paint);
@@ -394,13 +538,11 @@ public class Costs {
             }
 
         }
-            return true;
+        return true;
     }
 
-    public boolean taxFieldsValidation(String type,String date,String amount)
-    {
-        if((date ==null  || amount==null))
-        {
+    public boolean taxFieldsValidation(String type, String date, String amount) {
+        if (date == null || amount.isBlank()) {
             lblTaxError.setText("Fill in all  the fields");
             Paint paint = Paint.valueOf("red");
             lblTaxError.setTextFill(paint);
@@ -408,8 +550,7 @@ public class Costs {
             lblTaxError.setFont(font);
             return false;
         }
-        if(amount.matches("[a-zA-Z]+"))
-        {
+        if (amount.matches("[a-zA-Z]+")) {
             lblTaxError.setText("Please enter just  numbers without letters");
             Paint paint = Paint.valueOf("red");
             lblTaxError.setTextFill(paint);
@@ -419,39 +560,34 @@ public class Costs {
         }
         List<Taxes> all = taxesService.findAll();
         Calendar c = Calendar.getInstance();
-                for(Taxes tax : all)
-                {
-                     if(tax.getUser().equals(user) && tax.getPayment_type().equals(type) && c.get(Calendar.MONTH)==tax.getPayment_date().get(Calendar.MONTH)
-                        && c.get(Calendar.YEAR)==tax.getPayment_date().get(Calendar.YEAR) && tax.getPayment_amount()==Double.parseDouble(amount)) {
-                         lblTaxError.setText(type+"has been already added");
-                         Paint paint = Paint.valueOf("red");
-                         lblTaxError.setTextFill(paint);
-                         Font font = new Font("Gadugi", 10);
-                         lblTaxError.setFont(font);
-                         return false;
-                     }
-                }
-                return true;
+        for (Taxes tax : all) {
+            if (tax.getUser().equals(user) && tax.getPayment_type().equals(type) && c.get(Calendar.DAY_OF_MONTH) == tax.getPayment_date().get(Calendar.DAY_OF_MONTH)
+                    && c.get(Calendar.MONTH) == tax.getPayment_date().get(Calendar.MONTH) && c.get(Calendar.YEAR) == tax.getPayment_date().get(Calendar.YEAR)) {
+                lblTaxError.setText(type + " has been already added");
+                Paint paint = Paint.valueOf("red");
+                lblTaxError.setTextFill(paint);
+                Font font = new Font("Gadugi", 10);
+                lblTaxError.setFont(font);
+                return false;
+            }
+        }
+        return true;
     }
 
-    public void btnNewRentFeeOnClick(ActionEvent event)
-    {
-        Calendar c= Calendar.getInstance();
+    public void btnNewRentFeeOnClick() {
+        Calendar c = Calendar.getInstance();
         String text;
-        if(cmbRentType.getValue().equals("Rent"))
-        {
-            text=cmbUtilities.getValue();
-        }else
-        {
-            text="Student residence fee";
-        }
-        c.set(dtpRent.getValue().getYear(),dtpRent.getValue().getMonthValue()-1,dtpRent.getValue().getDayOfMonth());
-        if(rentFieldsValidation(cmbRentType.getValue(),text,c,txtAmount.getText()))
-        {
-            Taxes taxes = new Taxes(user,text,c,Double.parseDouble(txtAmount.getText()));
+        c.set(dtpRent.getValue().getYear(), dtpRent.getValue().getMonthValue() - 1, dtpRent.getValue().getDayOfMonth());
+        if (rentFieldsValidation(cmbRentType.getValue(), paneUtilities.isVisible(), c, txtAmount.getText())) {
+            if (cmbRentType.getValue().equals("Rent")) {
+                text = cmbUtilities.getValue();
+            } else {
+                text = "Student residence fee";
+            }
+            Taxes taxes = new Taxes(user, text, c, Double.parseDouble(txtAmount.getText()));
             Taxes save = taxesService.save(taxes);
             Alert a = new Alert(Alert.AlertType.CONFIRMATION);
-            a.setHeaderText( text +" has been successfully registered");
+            a.setHeaderText(text + " has been successfully registered");
             a.show();
             paneRent.setVisible(false);
             cmbRentType.getItems().clear();
@@ -462,15 +598,13 @@ public class Costs {
         }
     }
 
-    public void btnNewReminderOnClick(ActionEvent event)
-    {
-        Calendar c= Calendar.getInstance();
-        c.set(dtpReminder.getValue().getYear(), dtpReminder.getValue().getMonthValue()-1,dtpReminder.getValue().getDayOfMonth());
-        if(reminderFieldsValidation(cmbReminderType.getValue(),cmbDays.getValue(),c))
-        {
-            String title ="Reminder you need to pay:";
-            Reminder reminder = new Reminder(user,title,cmbReminderType.getValue(),c,cmbDays.getValue());
-            Reminder save= reminderService.save(reminder);
+    public void btnNewReminderOnClick() {
+        Calendar c = Calendar.getInstance();
+        c.set(dtpReminder.getValue().getYear(), dtpReminder.getValue().getMonthValue() - 1, dtpReminder.getValue().getDayOfMonth());
+        if (reminderFieldsValidation(cmbReminderType.getValue(), cmbDays.getValue(), c)) {
+            String title = "Reminder you need to pay:";
+            Reminder reminder = new Reminder(user, title, cmbReminderType.getValue(), c, cmbDays.getValue());
+            Reminder save = reminderService.save(reminder);
             Alert a = new Alert(Alert.AlertType.CONFIRMATION);
             a.setHeaderText("The reminder has been successfully registered");
             a.show();
@@ -482,75 +616,67 @@ public class Costs {
         }
     }
 
-    public void btnNewTaxOnClick(ActionEvent event)
-    {
-        if(taxFieldsValidation(txtTaxType.getText(),cmbTax.getValue(),txtTaxAmount.getText()))
-        {
-            switch(cmbTax.getValue())
-            {
-                case "Today":
-                {
+    public void btnNewTaxOnClick() {
+        if (taxFieldsValidation(txtTaxType.getText(), cmbTax.getValue(), txtTaxAmount.getText())) {
+            switch (cmbTax.getValue()) {
+                case "Today": {
                     Calendar c = Calendar.getInstance();
-                    Taxes taxes = new Taxes(user,txtTaxType.getText(),c,Double.parseDouble(txtTaxAmount.getText()));
+                    Taxes taxes = new Taxes(user, txtTaxType.getText(), c, Double.parseDouble(txtTaxAmount.getText()));
                     Taxes save = taxesService.save(taxes);
                     Alert a = new Alert(Alert.AlertType.CONFIRMATION);
-                    a.setHeaderText( txtTaxType.getText() +" has been successfully registered");
+                    a.setHeaderText(txtTaxType.getText() + " has been successfully registered");
                     a.show();
-                    paneRent.setVisible(false);
+                    paneTax.setVisible(false);
                     cmbRentType.getItems().clear();
                     cmbUtilities.getItems().clear();
-                    lblRentError.setText("");
+                    lblTaxError.setText("");
                     txtAmount.clear();
-                    dtpRent.getEditor().clear();
+                    dtpReminder.getEditor().clear();
                     break;
                 }
-                case "This week":
-                {
+                case "This week": {
                     Calendar c = Calendar.getInstance();
-                    c.setWeekDate(c.getWeekYear(),c.get(Calendar.WEEK_OF_YEAR),Calendar.MONDAY);
-                    for(int i=0;i<7;i++)
-                    {
-                        c.set(c.get(Calendar.YEAR),c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH)+1);
-                        Taxes taxes = new Taxes(user,txtTaxType.getText(),c,Double.parseDouble(txtTaxAmount.getText())/7);
+                    c.setWeekDate(c.getWeekYear(), c.get(Calendar.WEEK_OF_YEAR), Calendar.MONDAY);
+                    for (int i = 0; i < 7; i++) {
+                        c.set(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH) + 1);
+                        Taxes taxes = new Taxes(user, txtTaxType.getText(), c, Double.parseDouble(txtTaxAmount.getText()) / 7);
                         Taxes save = taxesService.save(taxes);
                     }
                     Alert a = new Alert(Alert.AlertType.CONFIRMATION);
-                    a.setHeaderText( txtTaxType.getText() +" has been successfully registered");
+                    a.setHeaderText(txtTaxType.getText() + " has been successfully registered");
                     a.show();
-                    paneRent.setVisible(false);
+                    paneTax.setVisible(false);
                     cmbRentType.getItems().clear();
                     cmbUtilities.getItems().clear();
-                    lblRentError.setText("");
+                    lblTaxError.setText("");
                     txtAmount.clear();
-                    dtpRent.getEditor().clear();
+                    dtpReminder.getEditor().clear();
                     break;
                 }
-                case "This month":
-                {
+                case "This month": {
                     Calendar c = Calendar.getInstance();
                     int month = c.get(Calendar.MONTH);
-                    int numberOfDays=0;
-                    while(c.get(Calendar.MONTH)==month)
-                    {
+                    int numberOfDays = 0;
+                    while (c.get(Calendar.MONTH) == month) {
                         numberOfDays++;
                         c.set(c.get(Calendar.YEAR), c.get(Calendar.MONTH), numberOfDays);
                     }
                     numberOfDays--;
-                    c.set(c.get(Calendar.YEAR),month,1);
-                  for(int i=1;i<=numberOfDays;i++)
-                  {
-                      c.set(c.get(Calendar.YEAR), c.get(Calendar.MONTH),i);
-                      Taxes taxes = new Taxes(user, txtTaxType.getText(), c, Double.parseDouble(txtTaxAmount.getText()) / numberOfDays);
-                      Taxes save = taxesService.save(taxes);
-                  }
+                    c.set(c.get(Calendar.YEAR), month, 1);
+                    for (int i = 1; i <= numberOfDays; i++) {
+                        c.set(c.get(Calendar.YEAR), c.get(Calendar.MONTH), i);
+                        Taxes taxes = new Taxes(user, txtTaxType.getText(), c, Double.parseDouble(txtTaxAmount.getText()) / numberOfDays);
+                        Taxes save = taxesService.save(taxes);
+                    }
                     Alert a = new Alert(Alert.AlertType.CONFIRMATION);
-                    a.setHeaderText( txtTaxType.getText() +" has been successfully registered");
+                    a.setHeaderText(txtTaxType.getText() + " has been successfully registered");
                     a.show();
                     paneTax.setVisible(false);
-                    txtTaxType.clear();
+                    cmbRentType.getItems().clear();
+                    cmbUtilities.getItems().clear();
                     lblTaxError.setText("");
-                    txtTaxAmount.clear();
-                    cmbTax.getItems().clear();
+                    txtAmount.clear();
+                    dtpReminder.getEditor().clear();
                     break;
 
 

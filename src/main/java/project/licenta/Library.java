@@ -13,7 +13,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -43,11 +42,7 @@ public class Library {
     @FXML
     private Button btnAdd;
     @FXML
-    private Button btnNewBook;
-    @FXML
     private Button btnReminder;
-    @FXML
-    private Button btnNewReminder;
     @FXML
     private AnchorPane paneAdd;
     @FXML
@@ -98,8 +93,8 @@ public class Library {
     private ImageView image3;
 
     private String user;
-    private BooksService booksService= GetInstance.of(BooksService.class);
-    private ReminderService reminderService= GetInstance.of(ReminderService.class);
+    private final BooksService booksService= GetInstance.of(BooksService.class);
+    private final ReminderService reminderService= GetInstance.of(ReminderService.class);
 
 
 
@@ -157,7 +152,8 @@ public class Library {
             });
         });
         for(Node node : paneMenu.getChildren())
-            if(node.getClass().equals(Button.class)) {
+        {
+            if (node.getClass().equals(Button.class)) {
                 node.setOnMouseEntered(e -> {
                     node.setStyle("-fx-background-color: transparent;-fx-text-fill:#000080;");
                     node.setTranslateX(5);
@@ -167,6 +163,7 @@ public class Library {
                     node.setTranslateX(-5);
                 });
             }
+        }
         btnAdd.setOnMouseEntered(e -> {
                 btnAdd.setStyle("-fx-background-color: transparent;-fx-text-fill:#66b3ff; -fx-border-width: 3px;" +
                         "-fx-border-color: #66b3ff;");
@@ -179,8 +176,6 @@ public class Library {
                 ex.printStackTrace();
             }
             image1.setImage(image);
-            image1.setTranslateX(5);
-            image1.setTranslateY(-5);
             });
         btnAdd.setOnMouseExited(e -> {
                 btnAdd.setStyle("-fx-background-color: transparent;-fx-text-fill: #d9e9f2; -fx-border-width: 3px;" +
@@ -194,8 +189,6 @@ public class Library {
                 ex.printStackTrace();
             }
             image1.setImage(image);
-            image1.setTranslateX(-5);
-            image1.setTranslateY(5);
             });
         btnView.setOnMouseEntered(e -> {
             btnView.setStyle("-fx-background-color: transparent;-fx-text-fill:#66b3ff; -fx-border-width: 3px;" +
@@ -209,8 +202,6 @@ public class Library {
                 ex.printStackTrace();
             }
             image2.setImage(image);
-            image2.setTranslateX(5);
-            image2.setTranslateY(-5);
         });
         btnView.setOnMouseExited(e -> {
             btnView.setStyle("-fx-background-color: transparent;-fx-text-fill: #d9e9f2; -fx-border-width: 3px;" +
@@ -224,8 +215,6 @@ public class Library {
                 ex.printStackTrace();
             }
             image2.setImage(image);
-            image2.setTranslateX(-5);
-            image2.setTranslateY(5);
         });
         btnReminder.setOnMouseEntered(e -> {
             btnReminder.setStyle("-fx-background-color: transparent;-fx-text-fill:#66b3ff; -fx-border-width: 3px;" +
@@ -239,8 +228,6 @@ public class Library {
                 ex.printStackTrace();
             }
             image3.setImage(image);
-            image3.setTranslateX(5);
-            image3.setTranslateY(-5);
         });
         btnReminder.setOnMouseExited(e -> {
             btnReminder.setStyle("-fx-background-color: transparent;-fx-text-fill: #d9e9f2; -fx-border-width: 3px;" +
@@ -254,8 +241,6 @@ public class Library {
                 ex.printStackTrace();
             }
             image3.setImage(image);
-            image3.setTranslateX(-5);
-            image3.setTranslateY(5);
         });
 
 
@@ -278,7 +263,7 @@ public class Library {
         }
         if(year.matches("[a-zA-Z]+"))
         {
-            lblError.setText("Year of appearence must contains just numbers without letters");
+            lblError.setText("Year of appearance must contains just numbers without letters");
             Paint paint = Paint.valueOf("red");
             lblError.setTextFill(paint);
             Font font = new Font("Gadugi", 10);
@@ -287,7 +272,7 @@ public class Library {
         }
         if(Double.parseDouble(year)<1700 || Double.parseDouble(year)>Calendar.getInstance().get(Calendar.YEAR))
         {
-            lblError.setText("Year of appearence must be between 1700 and present");
+            lblError.setText("Year of appearance must be between 1700 and present");
             Paint paint = Paint.valueOf("red");
             lblError.setTextFill(paint);
             Font font = new Font("Gadugi", 10);
@@ -353,14 +338,14 @@ public class Library {
        }
        return true;
     }
-    public void btnAddOnClick(ActionEvent e) {
+    public void btnAddOnClick() {
         paneAdd.setVisible(true);
         LocalDate l = LocalDate.now();
         dtpLoan.setValue(l);
         dtpReturn.setValue(l);
     }
 
-    public void btnGraphicOnClick(ActionEvent event) throws IOException
+    public void btnGraphicOnClick() throws IOException
     {
         FXMLLoader loader= new FXMLLoader(getClass().getResource("graphic.fxml"));
         Stage stage =(Stage) btnGraphic.getScene().getWindow();
@@ -369,16 +354,16 @@ public class Library {
         menu.start(user);
         stage.show();
     }
-    public void btnCostsOnClick(ActionEvent e) throws IOException
+    public void btnCostsOnClick() throws IOException
     {
         FXMLLoader loader= new FXMLLoader(getClass().getResource("costs.fxml"));
-        Stage stage =(Stage) btnBack.getScene().getWindow();
+        Stage stage =(Stage) btnCosts.getScene().getWindow();
         stage.setScene(new Scene(loader.load()));
         Costs menu = loader.getController();
         menu.start(user);
         stage.show();
     }
-    public void btnBackOnClick(ActionEvent e) throws IOException, AWTException
+    public void btnBackOnClick() throws IOException, AWTException
     {
         FXMLLoader loader= new FXMLLoader(getClass().getResource("menu.fxml"));
         Stage stage =(Stage) btnBack.getScene().getWindow();
@@ -387,7 +372,7 @@ public class Library {
         menu.start(user);
         stage.show();
     }
-    public void btnLogoutOnClick(ActionEvent event) throws IOException
+    public void btnLogoutOnClick() throws IOException
     {
         File path = FileUtils.getUserDirectory().getAbsoluteFile();
         File file = new File(path.getAbsolutePath()+File.separator+"user.txt");
@@ -400,7 +385,7 @@ public class Library {
         logout.setScene(scene);
     }
 
-    public void btnNewBookOnClick(ActionEvent e)
+    public void btnNewBookOnClick()
     {
         Calendar loan = Calendar.getInstance();
         loan.set(dtpLoan.getValue().getYear(),dtpLoan.getValue().getMonthValue()-1,dtpLoan.getValue().getDayOfMonth());
@@ -442,7 +427,7 @@ public class Library {
 
     }
 
-    public void btnViewOnClick(ActionEvent e)
+    public void btnViewOnClick()
     {
         tblBooks.setVisible(true);
         List<Books> all = booksService.findAll();
@@ -471,7 +456,7 @@ public class Library {
         }
     }
 
-    public void btnReminderOnClick(ActionEvent event)
+    public void btnReminderOnClick()
     {
         List<Books> all = booksService.findAll();
         Calendar c= Calendar.getInstance();
@@ -500,10 +485,9 @@ public class Library {
         paneReminder.setVisible(true);
     }
 
-    public void cmbBookNameOnChange(ActionEvent event)
+    public void cmbBookNameOnChange()
     {
         List<Books> all = booksService.findAll();
-        Calendar c= Calendar.getInstance();
         for(Books book : all)
         {
             if(book.getUser().equals(user) && book.getBook_name().equals(cmbBookName.getValue()))
@@ -528,10 +512,9 @@ public class Library {
         }
         List<Reminder> all =  reminderService.findAll();
         String title= "Reminder you need to return: ";
-        String message= book;
         for(Reminder reminder : all)
         {
-            if(reminder.getUsername().equals(user) && reminder.getMessage().equals(message) && reminder.getDays().equals(days))
+            if(reminder.getUsername().equals(user) &&reminder.getTitle().equals(title)&& reminder.getMessage().equals(book) && reminder.getDays().equals(days))
             {
                 lblErrorReminder.setText("The reminder was been already added");
                 Paint paint = Paint.valueOf("red");
@@ -544,7 +527,7 @@ public class Library {
         return true;
     }
 
-    public void btnNewReminderOnClick(ActionEvent event)
+    public void btnNewReminderOnClick()
     {
         if(reminderFieldsValidation(cmbBookName.getValue(),cmbDays.getValue()))
         {

@@ -79,12 +79,12 @@
             <Image url="@images/icon.png" />
          </image>
       </ImageView>
-      <Label layoutX="434.0" layoutY="129.0" text="Univerisity situation management" textFill="#d9e9f2">
+      <Label layoutX="456.0" layoutY="129.0" text="Univerisity fees management" textFill="#d9e9f2">
          <font>
             <Font name="Gadugi Bold" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="418.0" layoutY="190.0" text="start using a management system for your university &#10;situation, but also for other student activities&#10;&#10;" textFill="#d9e9f2">
+      <Label layoutX="418.0" layoutY="190.0" text="start using a management system for your university fees &#10;situation, but also for other fees for students.&#10;" textFill="#d9e9f2">
          <font>
             <Font name="Gadugi" size="15.0" />
          </font>
