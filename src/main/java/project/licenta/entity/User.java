@@ -1,7 +1,6 @@
 package project.licenta.entity;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Entity
 @Table(name = "user_entity")
@@ -18,7 +17,7 @@ public class User {
     private String email;
 
     @Column
-    private String  password;
+    private String password;
 
     public User() {
     }

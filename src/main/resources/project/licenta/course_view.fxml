@@ -1,177 +1,218 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
-
-<AnchorPane prefHeight="578.0" prefWidth="905.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.licenta.Course_view">
-   <children>
-      <ImageView fitHeight="612.0" fitWidth="912.0" layoutX="-7.0" pickOnBounds="true">
-         <image>
-            <Image url="@images/login_background.jpg" />
-         </image>
-      </ImageView>
-      <AnchorPane fx:id="paneMenu" layoutX="10.0" layoutY="14.0" prefHeight="56.0" prefWidth="838.0">
-         <children>
-            <ImageView fitHeight="92.0" fitWidth="905.0" layoutX="-13.0" layoutY="-26.0" pickOnBounds="true">
-               <image>
-                  <Image url="@images/menu_background.jpg" />
-               </image>
-            </ImageView>
-            <Button fx:id="btnLogout" layoutX="764.0" layoutY="1.0" mnemonicParsing="false" onAction="#btnLogoutOnClick" style="-fx-background-color: transparent;" text="Log out" textFill="#d9e9f2">
-               <font>
-                  <Font name="Gadugi Bold" size="20.0" />
-               </font>
-            </Button>
-            <Button fx:id="btnBack" layoutX="632.0" layoutY="1.0" mnemonicParsing="false" onAction="#btnBackOnClick" style="-fx-background-color: transparent;" text="Semester" textAlignment="CENTER" textFill="#d9e9f2">
-               <font>
-                  <Font name="Gadugi Bold" size="20.0" />
-               </font>
-            </Button>
-            <ImageView fitHeight="63.0" fitWidth="195.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/icon.png" />
-               </image>
-            </ImageView>
-            <Label fx:id="lblMenu" layoutX="173.0" layoutY="9.0" textFill="#ece3e3">
-               <font>
-                  <Font name="Gadugi" size="16.0" />
-               </font>
-               <graphic>
-                  <ImageView fitHeight="26.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/menu.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Label>
-            <Label fx:id="lblMenuClose" layoutX="173.0" layoutY="9.0" textFill="#ece3e3">
-               <font>
-                  <Font name="Gadugi" size="16.0" />
-               </font>
-               <graphic>
-                  <ImageView fitHeight="26.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/menu.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Label>
-         </children>
-      </AnchorPane>
-      <Label fx:id="lblSemester" layoutX="45.0" layoutY="110.0" text="sem" textFill="#d9e9f2">
-         <font>
-            <Font name="Gadugi Bold" size="16.0" />
-         </font>
-      </Label>
-      <Label fx:id="lblCourse" layoutX="45.0" layoutY="165.0" text="course" textFill="#d9e9f2">
-         <font>
-            <Font name="Gadugi Bold" size="25.0" />
-         </font>
-      </Label>
-      <AnchorPane fx:id="panePaid" layoutX="28.0" layoutY="196.0" prefHeight="340.0" prefWidth="406.0" visible="false">
-         <children>
-            <Label fx:id="lblError" layoutX="14.0" layoutY="14.0" />
-            <AnchorPane layoutX="6.0" layoutY="61.0" prefHeight="38.0" prefWidth="388.0" style="-fx-background-color: #003d66;">
-               <children>
-                  <Label layoutX="14.0" prefHeight="38.0" prefWidth="210.0" text="Payment date of  tax" textFill="#d9e9f2">
-                     <font>
-                        <Font name="Gabriola" size="20.0" />
-                     </font>
-                  </Label>
-                  <DatePicker fx:id="dtpPaid" layoutX="173.0" layoutY="6.0" prefHeight="26.0" prefWidth="210.0" />
-               </children>
-            </AnchorPane>
-            <AnchorPane layoutX="105.0" layoutY="191.0" prefHeight="35.0" prefWidth="256.0" style="-fx-background-color: #003d66;">
-               <children>
-                  <ImageView fitHeight="43.0" fitWidth="44.0" layoutY="-1.0">
-                     <image>
-                        <Image url="@images/payment_icon.png" />
-                     </image>
-                  </ImageView>
-                  <TextField fx:id="txtAmount" layoutX="54.0" layoutY="5.0" prefHeight="26.0" prefWidth="196.0" promptText="Payment amount in RON" style="-fx-background-color: transparent; -fx-text-inner-color: d9e9f2;">
-                     <font>
-                        <Font name="Gadugi Bold" size="12.0" />
-                     </font>
-                  </TextField>
-               </children>
-            </AnchorPane>
-            <Button fx:id="btnNewTaxes" layoutX="198.0" layoutY="248.0" mnemonicParsing="false" onAction="#btnNewTaxesOnClick" prefHeight="31.0" prefWidth="70.0" style="-fx-background-radius: 10; -fx-background-color: #010056;" text="Add" textFill="#d9e9f2">
-               <font>
-                  <Font name="Gadugi Bold" size="15.0" />
-               </font>
-            </Button>
-            <AnchorPane layoutX="106.0" layoutY="125.0" prefHeight="35.0" prefWidth="243.0" style="-fx-background-color: #003d66;">
-               <children>
-                  <ImageView fitHeight="35.0" fitWidth="40.0" layoutY="-1.0">
-                     <image>
-                        <Image url="@images/tax_icon.png" />
-                     </image>
-                  </ImageView>
-                  <ComboBox fx:id="cmbTaxType" layoutX="40.0" layoutY="3.0" prefHeight="26.0" prefWidth="196.0" promptText="Tax type" />
-               </children>
-            </AnchorPane>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="paneReminder" layoutX="434.0" layoutY="195.0" prefHeight="278.0" prefWidth="467.0" visible="false">
-         <children>
-            <Label fx:id="lblErrorReminder" layoutX="14.0" layoutY="14.0" />
-            <AnchorPane layoutX="6.0" layoutY="61.0" prefHeight="38.0" prefWidth="430.0" style="-fx-background-color: #003d66;">
-               <children>
-                  <Label layoutX="50.0" prefHeight="38.0" prefWidth="138.0" text=" Payment deadline" textFill="#d9e9f2">
-                     <font>
-                        <Font name="Gabriola" size="20.0" />
-                     </font>
-                  </Label>
-                  <DatePicker fx:id="dtpReminder" layoutX="223.0" layoutY="6.0" prefHeight="26.0" prefWidth="210.0" />
-               </children>
-            </AnchorPane>
-            <AnchorPane layoutX="5.0" layoutY="119.0" prefHeight="35.0" prefWidth="434.0" style="-fx-background-color: #003d66;">
-               <children>
-                  <Label layoutX="42.0" layoutY="1.0" text="How many days before" textFill="#d9e9f2">
-                     <font>
-                        <Font name="Gabriola" size="20.0" />
-                     </font>
-                  </Label>
-                  <ComboBox fx:id="cmbDays" layoutX="217.0" layoutY="5.0" prefHeight="26.0" prefWidth="210.0" />
-               </children>
-            </AnchorPane>
-            <Button fx:id="btnNewReminder" layoutX="198.0" layoutY="226.0" mnemonicParsing="false" onAction="#btnNewReminderOnClick" prefHeight="31.0" prefWidth="70.0" style="-fx-background-radius: 10; -fx-background-color: #010056;" text="Add" textFill="#d9e9f2">
-               <font>
-                  <Font name="Gadugi Bold" size="15.0" />
-               </font>
-            </Button>
-            <AnchorPane layoutX="112.0" layoutY="175.0" prefHeight="35.0" prefWidth="243.0" style="-fx-background-color: #003d66;">
-               <children>
-                  <ImageView fitHeight="38.0" fitWidth="40.0" layoutY="-1.0">
-                     <image>
-                        <Image url="@images/reminder_icon.png" />
-                     </image>
-                  </ImageView>
-                  <ComboBox fx:id="cmbReminderType" layoutX="40.0" layoutY="3.0" prefHeight="26.0" prefWidth="196.0" promptText="Reminder type" />
-               </children>
-            </AnchorPane>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="paneSlider" layoutY="80.0" prefHeight="530.0" prefWidth="250.0" style="-fx-background-color: #00134d;">
-         <children>
-            <Button fx:id="btnReminder" layoutX="19.0" layoutY="140.0" mnemonicParsing="false" onAction="#btnReminderOnClick" prefHeight="31.0" prefWidth="219.0" style="-fx-background-color: transparent;" text="To add a reminder" textAlignment="JUSTIFY" textFill="#d9e9f2">
-               <font>
-                  <Font name="Gadugi Bold" size="15.0" />
-               </font>
-            </Button>
-            <Button fx:id="btnPaid" layoutX="57.0" layoutY="105.0" mnemonicParsing="false" onAction="#btnPaidOnClick" prefHeight="31.0" prefWidth="138.0" style="-fx-background-color: transparent;" text="To add a tax" textAlignment="JUSTIFY" textFill="#d9e9f2">
-               <font>
-                  <Font name="Gadugi Bold" size="15.0" />
-               </font>
-            </Button>
-         </children>
-      </AnchorPane>
-   </children>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane prefHeight="578.0" prefWidth="905.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="project.licenta.Course_view">
+    <children>
+        <ImageView fitHeight="612.0" fitWidth="912.0" layoutX="-7.0" pickOnBounds="true">
+            <image>
+                <Image url="@images/login_background.jpg"/>
+            </image>
+        </ImageView>
+        <AnchorPane fx:id="paneMenu" layoutX="10.0" layoutY="14.0" prefHeight="56.0" prefWidth="838.0">
+            <children>
+                <ImageView fitHeight="92.0" fitWidth="905.0" layoutX="-13.0" layoutY="-26.0" pickOnBounds="true">
+                    <image>
+                        <Image url="@images/menu_background.jpg"/>
+                    </image>
+                </ImageView>
+                <Button fx:id="btnLogout" layoutX="764.0" layoutY="1.0" mnemonicParsing="false"
+                        onAction="#btnLogoutOnClick" style="-fx-background-color: transparent;" text="Log out"
+                        textFill="#d9e9f2">
+                    <font>
+                        <Font name="Gadugi Bold" size="20.0"/>
+                    </font>
+                </Button>
+                <Button fx:id="btnBack" layoutX="632.0" layoutY="1.0" mnemonicParsing="false" onAction="#btnBackOnClick"
+                        style="-fx-background-color: transparent;" text="Semester" textAlignment="CENTER"
+                        textFill="#d9e9f2">
+                    <font>
+                        <Font name="Gadugi Bold" size="20.0"/>
+                    </font>
+                </Button>
+                <ImageView fitHeight="63.0" fitWidth="195.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@images/icon.png"/>
+                    </image>
+                </ImageView>
+                <Label fx:id="lblMenu" layoutX="173.0" layoutY="9.0" textFill="#ece3e3">
+                    <font>
+                        <Font name="Gadugi" size="16.0"/>
+                    </font>
+                    <graphic>
+                        <ImageView fitHeight="26.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@images/menu.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Label>
+                <Label fx:id="lblMenuClose" layoutX="173.0" layoutY="9.0" textFill="#ece3e3">
+                    <font>
+                        <Font name="Gadugi" size="16.0"/>
+                    </font>
+                    <graphic>
+                        <ImageView fitHeight="26.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@images/menu.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Label>
+            </children>
+        </AnchorPane>
+        <Label fx:id="lblSemester" layoutX="45.0" layoutY="110.0" text="sem" textFill="#d9e9f2">
+            <font>
+                <Font name="Gadugi Bold" size="16.0"/>
+            </font>
+        </Label>
+        <Label fx:id="lblCourse" layoutX="45.0" layoutY="165.0" text="course" textFill="#d9e9f2">
+            <font>
+                <Font name="Gadugi Bold" size="25.0"/>
+            </font>
+        </Label>
+        <AnchorPane fx:id="panePaid" layoutX="28.0" layoutY="196.0" prefHeight="340.0" prefWidth="406.0"
+                    visible="false">
+            <children>
+                <Label fx:id="lblError" layoutX="14.0" layoutY="14.0"/>
+                <AnchorPane layoutX="6.0" layoutY="61.0" prefHeight="38.0" prefWidth="388.0"
+                            style="-fx-background-color: #003d66;">
+                    <children>
+                        <Label layoutX="14.0" prefHeight="38.0" prefWidth="210.0" text="Payment date of  tax"
+                               textFill="#d9e9f2">
+                            <font>
+                                <Font name="Gabriola" size="20.0"/>
+                            </font>
+                        </Label>
+                        <DatePicker fx:id="dtpPaid" layoutX="173.0" layoutY="6.0" prefHeight="26.0" prefWidth="210.0"/>
+                    </children>
+                </AnchorPane>
+                <AnchorPane layoutX="105.0" layoutY="191.0" prefHeight="35.0" prefWidth="256.0"
+                            style="-fx-background-color: #003d66;">
+                    <children>
+                        <ImageView fitHeight="43.0" fitWidth="44.0" layoutY="-1.0">
+                            <image>
+                                <Image url="@images/payment_icon.png"/>
+                            </image>
+                        </ImageView>
+                        <TextField fx:id="txtAmount" layoutX="54.0" layoutY="5.0" prefHeight="26.0" prefWidth="196.0"
+                                   promptText="Payment amount in RON"
+                                   style="-fx-background-color: transparent; -fx-text-inner-color: d9e9f2;">
+                            <font>
+                                <Font name="Gadugi Bold" size="12.0"/>
+                            </font>
+                        </TextField>
+                    </children>
+                </AnchorPane>
+                <Button fx:id="btnNewTaxes" layoutX="198.0" layoutY="248.0" mnemonicParsing="false"
+                        onAction="#btnNewTaxesOnClick" prefHeight="31.0" prefWidth="70.0"
+                        style="-fx-background-radius: 10; -fx-background-color: #010056;" text="Add" textFill="#d9e9f2">
+                    <font>
+                        <Font name="Gadugi Bold" size="15.0"/>
+                    </font>
+                </Button>
+                <AnchorPane layoutX="106.0" layoutY="125.0" prefHeight="35.0" prefWidth="243.0"
+                            style="-fx-background-color: #003d66;">
+                    <children>
+                        <ImageView fitHeight="35.0" fitWidth="40.0" layoutY="-1.0">
+                            <image>
+                                <Image url="@images/tax_icon.png"/>
+                            </image>
+                        </ImageView>
+                        <ComboBox fx:id="cmbTaxType" layoutX="40.0" layoutY="3.0" prefHeight="26.0" prefWidth="196.0"
+                                  promptText="Tax type"/>
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="paneReminder" layoutX="434.0" layoutY="195.0" prefHeight="278.0" prefWidth="467.0"
+                    visible="false">
+            <children>
+                <Label fx:id="lblErrorReminder" layoutX="14.0" layoutY="14.0"/>
+                <AnchorPane layoutX="6.0" layoutY="61.0" prefHeight="38.0" prefWidth="430.0"
+                            style="-fx-background-color: #003d66;">
+                    <children>
+                        <Label layoutX="50.0" prefHeight="38.0" prefWidth="138.0" text=" Payment deadline"
+                               textFill="#d9e9f2">
+                            <font>
+                                <Font name="Gabriola" size="20.0"/>
+                            </font>
+                        </Label>
+                        <DatePicker fx:id="dtpReminder" layoutX="223.0" layoutY="6.0" prefHeight="26.0"
+                                    prefWidth="210.0"/>
+                    </children>
+                </AnchorPane>
+                <AnchorPane layoutX="5.0" layoutY="119.0" prefHeight="35.0" prefWidth="434.0"
+                            style="-fx-background-color: #003d66;">
+                    <children>
+                        <Label layoutX="42.0" layoutY="1.0" text="How many days before" textFill="#d9e9f2">
+                            <font>
+                                <Font name="Gabriola" size="20.0"/>
+                            </font>
+                        </Label>
+                        <ComboBox fx:id="cmbDays" layoutX="217.0" layoutY="5.0" prefHeight="26.0" prefWidth="210.0"/>
+                    </children>
+                </AnchorPane>
+                <Button fx:id="btnNewReminder" layoutX="198.0" layoutY="226.0" mnemonicParsing="false"
+                        onAction="#btnNewReminderOnClick" prefHeight="31.0" prefWidth="70.0"
+                        style="-fx-background-radius: 10; -fx-background-color: #010056;" text="Add" textFill="#d9e9f2">
+                    <font>
+                        <Font name="Gadugi Bold" size="15.0"/>
+                    </font>
+                </Button>
+                <AnchorPane layoutX="112.0" layoutY="175.0" prefHeight="35.0" prefWidth="243.0"
+                            style="-fx-background-color: #003d66;">
+                    <children>
+                        <ImageView fitHeight="38.0" fitWidth="40.0" layoutY="-1.0">
+                            <image>
+                                <Image url="@images/reminder_icon.png"/>
+                            </image>
+                        </ImageView>
+                        <ComboBox fx:id="cmbReminderType" layoutX="40.0" layoutY="3.0" prefHeight="26.0"
+                                  prefWidth="196.0" promptText="Reminder type"/>
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="paneSlider" layoutY="80.0" prefHeight="530.0" prefWidth="250.0"
+                    style="-fx-background-color: #00134d;">
+            <children>
+                <Button fx:id="btnPaid" layoutX="18.0" layoutY="82.0" mnemonicParsing="false" onAction="#btnPaidOnClick"
+                        prefHeight="31.0" prefWidth="214.0"
+                        style="-fx-background-color: transparent; -fx-border-width: 3px; -fx-border-color: d9e9f2;"
+                        text="Add a tax" textAlignment="JUSTIFY" textFill="#d9e9f2">
+                    <font>
+                        <Font name="Gadugi Bold" size="15.0"/>
+                    </font>
+                    <graphic>
+                        <ImageView fx:id="image1" fitHeight="22.0" fitWidth="66.0" pickOnBounds="true"
+                                   preserveRatio="true">
+                            <image>
+                                <Image url="@images/money_white.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="btnReminder" layoutX="18.0" layoutY="162.0" mnemonicParsing="false"
+                        onAction="#btnReminderOnClick" prefHeight="31.0" prefWidth="214.0"
+                        style="-fx-background-color: transparent; -fx-border-width: 3px; -fx-border-color: d9e9f2;"
+                        text="   Add a reminder" textAlignment="JUSTIFY" textFill="#d9e9f2">
+                    <font>
+                        <Font name="Gadugi Bold" size="15.0"/>
+                    </font>
+                    <graphic>
+                        <ImageView fx:id="image2" fitHeight="22.0" fitWidth="66.0" pickOnBounds="true"
+                                   preserveRatio="true">
+                            <image>
+                                <Image url="@images/reminder_white.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </children>
+        </AnchorPane>
+    </children>
 </AnchorPane>

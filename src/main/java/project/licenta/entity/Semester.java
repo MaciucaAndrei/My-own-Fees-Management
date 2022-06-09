@@ -1,7 +1,6 @@
 package project.licenta.entity;
 
 import javax.persistence.*;
-import java.util.HashMap;
 
 @Entity
 @Table(name = "semester_entity")
@@ -36,22 +35,21 @@ public class Semester {
     private boolean taxes;
 
 
-    public Semester()
-    {
+    public Semester() {
 
     }
 
-    public Semester(String user,String university, String college, String department, String university_year, int year, int semester,boolean taxes)
-    {
-        this.user=user;
-        this.university=university;
-        this.college=college;
-        this.department=department;
-        this.university_year=university_year;
-        this.year=year;
-        this.semester=semester;
-        this.taxes=taxes;
+    public Semester(String user, String university, String college, String department, String university_year, int year, int semester, boolean taxes) {
+        this.user = user;
+        this.university = university;
+        this.college = college;
+        this.department = department;
+        this.university_year = university_year;
+        this.year = year;
+        this.semester = semester;
+        this.taxes = taxes;
     }
+
     public Long getId() {
         return id;
     }
@@ -116,9 +114,13 @@ public class Semester {
         this.semester = semester;
     }
 
-    public boolean getTaxes(){return taxes;}
+    public boolean getTaxes() {
+        return taxes;
+    }
 
-    public void setTaxes(boolean taxes){this.taxes=taxes;}
+    public void setTaxes(boolean taxes) {
+        this.taxes = taxes;
+    }
 
     @Override
     public String toString() {

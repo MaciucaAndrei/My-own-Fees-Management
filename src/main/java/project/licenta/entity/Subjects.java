@@ -2,7 +2,6 @@ package project.licenta.entity;
 
 
 import javax.persistence.*;
-import java.util.HashMap;
 
 @Entity
 @Table(name = "subjects_entity")
@@ -22,46 +21,42 @@ public class Subjects {
     private String subject_name;
 
 
-    public Subjects()
-    {
+    public Subjects() {
 
     }
 
-    public Subjects(String user,String semester,String subject_name)
-    {
-        this.user=user;
-        this.semester=semester;
-        this.subject_name=subject_name;
+    public Subjects(String user, String semester, String subject_name) {
+        this.user = user;
+        this.semester = semester;
+        this.subject_name = subject_name;
     }
-    public String getUser()
-    {
+
+    public String getUser() {
         return user;
     }
-    public void setUser(String user)
-    {
-        this.user=user;
+
+    public void setUser(String user) {
+        this.user = user;
     }
 
-    public String getSemester()
-    {
+    public String getSemester() {
         return semester;
     }
-    public void setSemester(String semester)
-    {
-        this.semester=semester;
+
+    public void setSemester(String semester) {
+        this.semester = semester;
     }
-    public String getSubject_name()
-    {
+
+    public String getSubject_name() {
         return subject_name;
     }
-    public void setSubject_name(String subject_name)
-    {
-        this.subject_name=subject_name;
+
+    public void setSubject_name(String subject_name) {
+        this.subject_name = subject_name;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "Subjects{" +
                 "id=" + id +
                 ", user='" + user + '\'' +

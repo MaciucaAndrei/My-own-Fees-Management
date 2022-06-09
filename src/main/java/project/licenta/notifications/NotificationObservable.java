@@ -2,7 +2,6 @@ package project.licenta.notifications;
 
 
 import project.licenta.entity.Reminder;
-import project.licenta.entity.User;
 import project.licenta.service.ReminderService;
 import project.licenta.utils.GetInstance;
 import project.licenta.utils.Notification;
@@ -21,9 +20,18 @@ public class NotificationObservable extends Observable implements Runnable {
     public String getUser() {
         return user;
     }
-    public void setUser(String user) {this.user = user;}
-    public Calendar getToday(){return today;}
-    public void setToday(Calendar today){this.today = today;}
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public Calendar getToday() {
+        return today;
+    }
+
+    public void setToday(Calendar today) {
+        this.today = today;
+    }
 
     public void checkDatabase() {
         ReminderService reminderService = GetInstance.of(ReminderService.class);
@@ -39,6 +47,7 @@ public class NotificationObservable extends Observable implements Runnable {
             }
         }
     }
+
     public void trigger() {
 
         while (true) {
@@ -48,14 +57,13 @@ public class NotificationObservable extends Observable implements Runnable {
             }
             try {
                 Thread.sleep(1000);
-               if(today.get(Calendar.YEAR)==Calendar.getInstance().get(Calendar.YEAR)&&today.get(Calendar.MONTH)==Calendar.getInstance().get(Calendar.MONTH)
-               && today.get(Calendar.DAY_OF_MONTH)+1==Calendar.getInstance().get(Calendar.DAY_OF_MONTH))
-               {
+                if (today.get(Calendar.YEAR) == Calendar.getInstance().get(Calendar.YEAR) && today.get(Calendar.MONTH) == Calendar.getInstance().get(Calendar.MONTH)
+                        && today.get(Calendar.DAY_OF_MONTH) + 1 == Calendar.getInstance().get(Calendar.DAY_OF_MONTH)) {
 
-                   setChanged();
-                   notifyObservers(user);
-                   setToday(Calendar.getInstance());
-               }
+                    setChanged();
+                    notifyObservers(user);
+                    setToday(Calendar.getInstance());
+                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

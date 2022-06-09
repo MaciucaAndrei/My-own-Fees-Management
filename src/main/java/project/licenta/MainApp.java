@@ -20,9 +20,9 @@ public class MainApp extends Application {
 
     private CdiContainer cdiContainer;
 
-    private NotificationObservable notificationObservable = new NotificationObservable();
+    private final NotificationObservable notificationObservable = new NotificationObservable();
 
-    private NotificationObserver notificationObserver = new NotificationObserver();
+    private final NotificationObserver notificationObserver = new NotificationObserver();
 
     public static void main(String[] args) {
         launch();
@@ -34,19 +34,19 @@ public class MainApp extends Application {
         cdiContainer.boot();
         cdiContainer.getContextControl().startContexts();
     }
+
     @Override
     public void start(Stage stage) throws IOException, AWTException {
         initCdiContainer();
         File path = FileUtils.getUserDirectory().getAbsoluteFile();
-        File file = new File(path.getAbsolutePath()+File.separator+"user.txt");
-        if(file.createNewFile())
-        {
+        File file = new File(path.getAbsolutePath() + File.separator + "user.txt");
+        if (file.createNewFile()) {
             FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("login.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 807, 469);
             stage.setTitle("myUniSit");
             stage.setScene(scene);
             stage.show();
-        }else {
+        } else {
 
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
@@ -75,6 +75,4 @@ public class MainApp extends Application {
             }
         }
     }
-
-
 }

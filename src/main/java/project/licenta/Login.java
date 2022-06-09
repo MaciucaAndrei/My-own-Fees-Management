@@ -81,12 +81,12 @@ public class Login {
                 }
 
             }
-                label.setText("The username doesn't exist");
-                Paint paint = Paint.valueOf("red");
-                label.setTextFill(paint);
-                Font font = new Font("Gadugi", 15);
-                label.setFont(font);
-                return false;
+            label.setText("The username doesn't exist");
+            Paint paint = Paint.valueOf("red");
+            label.setTextFill(paint);
+            Font font = new Font("Gadugi", 15);
+            label.setFont(font);
+            return false;
         }
         return false;
     }
