@@ -38,7 +38,7 @@ public class Menu {
     private TextField txtDep;
 
     @FXML
-    private  TextField txtUniv_year;
+    private TextField txtUniv_year;
 
     @FXML
     private Spinner<Integer> spnYear;
@@ -78,24 +78,20 @@ public class Menu {
     @FXML
     private Label label;
 
-    private final SemesterService semesterService= GetInstance.of(SemesterService .class);
+    private final SemesterService semesterService = GetInstance.of(SemesterService.class);
 
 
-    public String buttonText(Semester semester)
-    {
-        StringBuilder text= new StringBuilder();
-        if(semester.getUniversity().length()<5)
-        {
+    public String buttonText(Semester semester) {
+        StringBuilder text = new StringBuilder();
+        if (semester.getUniversity().length() < 5) {
             text = new StringBuilder(semester.getUniversity() + " ");
-        }else
-        {
-            String[] shortcuts=semester.getUniversity().split(" ");
-            if(shortcuts.length==1)
-            {
+        } else {
+            String[] shortcuts = semester.getUniversity().split(" ");
+            if (shortcuts.length == 1) {
                 text = new StringBuilder(shortcuts[0].substring(0, 4));
-            }else {
+            } else {
                 for (String shortcut : shortcuts) {
-                    if(shortcut.length()>3) {
+                    if (shortcut.length() > 3) {
                         text.append(shortcut.charAt(0));
                     }
                 }
@@ -104,18 +100,15 @@ public class Menu {
 
         }
 
-        if(semester.getCollege().length()<5)
-        {
+        if (semester.getCollege().length() < 5) {
             text.append(semester.getCollege()).append(" ");
-        }else
-        {
-            String[] shortcuts=semester.getCollege().split(" ");
-            if(shortcuts.length==1)
-            {
+        } else {
+            String[] shortcuts = semester.getCollege().split(" ");
+            if (shortcuts.length == 1) {
                 text.append(shortcuts[0], 0, 4);
-            }else {
+            } else {
                 for (String shortcut : shortcuts) {
-                    if(shortcut.length()>3) {
+                    if (shortcut.length() > 3) {
                         text.append(shortcut.charAt(0));
                     }
                 }
@@ -123,18 +116,15 @@ public class Menu {
             text.append(" ");
         }
 
-        if(semester.getDepartment().length()<5)
-        {
+        if (semester.getDepartment().length() < 5) {
             text.append(semester.getDepartment()).append(" ");
-        }else
-        {
-            String[] shortcuts=semester.getDepartment().split(" ");
-            if(shortcuts.length==1)
-            {
+        } else {
+            String[] shortcuts = semester.getDepartment().split(" ");
+            if (shortcuts.length == 1) {
                 text.append(shortcuts[0], 0, 4);
-            }else {
+            } else {
                 for (String shortcut : shortcuts) {
-                    if(shortcut.length()>3) {
+                    if (shortcut.length() > 3) {
                         text.append(shortcut.charAt(0));
                     }
                 }
@@ -145,39 +135,37 @@ public class Menu {
         return text.toString();
     }
 
-    public void showButtons(String user)
-    {
+    public void showButtons(String user) {
         List<Semester> semesters = semesterService.findAll();
-        double x=20;
-        double y=50;
-        for(Semester semester : semesters)
-        {
-            if(user.equals(semester.getUser())) {
+        double x = 20;
+        double y = 50;
+        for (Semester semester : semesters) {
+            if (user.equals(semester.getUser())) {
                 Button button = new Button();
                 button.setLayoutX(x);
                 button.setLayoutY(y);
                 button.setText(buttonText(semester));
                 y = y + 85;
-                Font font= new Font("Gadugi",15);
+                Font font = new Font("Gadugi", 15);
                 button.setFont(font);
                 Paint paint = Paint.valueOf("#d9e9f2");
                 button.setTextFill(paint);
                 button.setStyle("-fx-background-color: transparent; -fx-border-width: 3px; -fx-border-color: #d9e9f2;");
-                button.setOnMouseEntered(e->{
+                button.setOnMouseEntered(e -> {
                     button.setStyle("-fx-background-color: transparent;-fx-text-fill:#000080; -fx-border-width: 3px;" +
                             "-fx-border-color: #000080;");
                     button.setTranslateX(5);
                     button.setTranslateY(-10);
                 });
-                button.setOnMouseExited(e->{
+                button.setOnMouseExited(e -> {
                     button.setStyle("-fx-background-color: transparent;-fx-text-fill: #d9e9f2; -fx-border-width: 3px;" +
                             "-fx-border-color:#d9e9f2;");
                     button.setTranslateX(-5);
                     button.setTranslateY(10);
                 });
-                button.setOnAction(e-> {
+                button.setOnAction(e -> {
                     try {
-                        Semesters_view(button.getText(),semester);
+                        Semesters_view(button.getText(), semester);
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
@@ -185,35 +173,32 @@ public class Menu {
                 paneButtons.getChildren().add(button);
             }
         }
-        if(y>paneButtons.getPrefHeight())
-        {
+        if (y > paneButtons.getPrefHeight()) {
 
             scpaneButtons.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         }
     }
 
-    public void Semesters_view(String semester,Semester s) throws IOException
-    {
-        FXMLLoader loader= new FXMLLoader(getClass().getResource("subjects_view.fxml"));
-        Stage stage =(Stage) btnAdd.getScene().getWindow();
+    public void Semesters_view(String semester, Semester s) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("subjects_view.fxml"));
+        Stage stage = (Stage) btnAdd.getScene().getWindow();
         stage.setScene(new Scene(loader.load()));
         Subjects_view menu = loader.getController();
-        menu.start(user,semester,s);
+        menu.start(user, semester, s);
         stage.show();
     }
 
 
-    public void start(String user) throws AWTException
-    {
-        this.user= user;
-        SpinnerValueFactory<Integer> yearFactory =new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 4, 1);
+    public void start(String user) throws AWTException {
+        this.user = user;
+        SpinnerValueFactory<Integer> yearFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 4, 1);
         spnYear.setValueFactory(yearFactory);
-        SpinnerValueFactory<Integer> semFactory =new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 2, 1);
+        SpinnerValueFactory<Integer> semFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 2, 1);
         spnSem.setValueFactory(semFactory);
         showButtons(user);
-        for(Node node : paneMenu.getChildren())
-            if(node.getClass().equals(Button.class)) {
-               node.setOnMouseEntered(e -> {
+        for (Node node : paneMenu.getChildren()) {
+            if (node.getClass().equals(Button.class)) {
+                node.setOnMouseEntered(e -> {
                     node.setStyle("-fx-background-color: transparent;-fx-text-fill:#000080;");
                     node.setTranslateX(5);
                 });
@@ -222,129 +207,114 @@ public class Menu {
                     node.setTranslateX(-5);
                 });
             }
+        }
     }
 
-    public boolean FieldsValidation(String u,String c, String d, String y)
-    {
-        if(!u.isBlank() && !c.isBlank() && !d.isBlank() && !y.isBlank()) {
+    public boolean FieldsValidation(String u, String c, String d, String y) {
+        if (!u.isBlank() && !c.isBlank() && !d.isBlank() && !y.isBlank()) {
             return true;
-        }else
-        {
+        } else {
             label.setText("Fill in all the fields");
             Paint paint = Paint.valueOf("red");
             label.setTextFill(paint);
-            Font font = new Font("Gadugi",15);
+            Font font = new Font("Gadugi", 15);
             label.setFont(font);
             return false;
         }
     }
-    public boolean SemesterValidation(Semester duplicate)
-    {
+
+    public boolean SemesterValidation(Semester duplicate) {
         List<Semester> semesters = semesterService.findAll();
-        String duplicate_shortcuts= buttonText(duplicate);
-        for(Semester semester : semesters)
-        {
-           String semester_shortcuts = buttonText(semester);
-           if(semester.getUser().equals(user) && duplicate_shortcuts.equals(semester_shortcuts))
-           {
-               label.setText("This semester was already added");
-               Paint paint = Paint.valueOf("red");
-               label.setTextFill(paint);
-               Font font = new Font("Gadugi",15);
-               label.setFont(font);
-               return false;
-           }
-           if(semester.getUniversity().equalsIgnoreCase(duplicate.getUniversity()) &&
-                   semester.getCollege().equalsIgnoreCase(duplicate.getCollege()) &&
-                   semester.getDepartment().equalsIgnoreCase(duplicate.getDepartment()) &&
-                   semester.getUniversity_year().equals(duplicate.getUniversity_year()) &&
-                   semester.getYear()==duplicate.getYear() && semester.getSemester()==duplicate.getSemester())
-           {
-               label.setText("This semester was already added");
-               Paint paint = Paint.valueOf("red");
-               label.setTextFill(paint);
-               Font font = new Font("Gadugi",15);
-               label.setFont(font);
-               return false;
-           }
+        String duplicate_shortcuts = buttonText(duplicate);
+        for (Semester semester : semesters) {
+            String semester_shortcuts = buttonText(semester);
+            if (semester.getUser().equals(user) && duplicate_shortcuts.equals(semester_shortcuts)) {
+                label.setText("This semester was already added");
+                Paint paint = Paint.valueOf("red");
+                label.setTextFill(paint);
+                Font font = new Font("Gadugi", 15);
+                label.setFont(font);
+                return false;
+            }
+            if (semester.getUniversity().equalsIgnoreCase(duplicate.getUniversity()) &&
+                    semester.getCollege().equalsIgnoreCase(duplicate.getCollege()) &&
+                    semester.getDepartment().equalsIgnoreCase(duplicate.getDepartment()) &&
+                    semester.getUniversity_year().equals(duplicate.getUniversity_year()) &&
+                    semester.getYear() == duplicate.getYear() && semester.getSemester() == duplicate.getSemester()) {
+                label.setText("This semester was already added");
+                Paint paint = Paint.valueOf("red");
+                label.setTextFill(paint);
+                Font font = new Font("Gadugi", 15);
+                label.setFont(font);
+                return false;
+            }
         }
         return true;
     }
 
-    public boolean Univ_yearValidation(String year)
-    {
-        if(year.contains("-"))
-        {
-            String[] years= year.split("-");
-            int year1= Integer.parseInt(years[0]);
-            int year2= Integer.parseInt(years[1]);
-            Calendar c= Calendar.getInstance();
-            if(year1<year2)
-            {
-                if(year1<=c.get(Calendar.YEAR)&&year2<=(c.get(Calendar.YEAR)+1))
-                {
+    public boolean Univ_yearValidation(String year) {
+        if (year.contains("-")) {
+            String[] years = year.split("-");
+            int year1 = Integer.parseInt(years[0]);
+            int year2 = Integer.parseInt(years[1]);
+            Calendar c = Calendar.getInstance();
+            if (year1 < year2) {
+                if (year1 <= c.get(Calendar.YEAR) && year2 <= (c.get(Calendar.YEAR) + 1)) {
                     return true;
-                }else
-                {
+                } else {
                     label.setText("The university year cannot be from the future");
                     Paint paint = Paint.valueOf("red");
                     label.setTextFill(paint);
-                    Font font = new Font("Gadugi",15);
+                    Font font = new Font("Gadugi", 15);
                     label.setFont(font);
                     return false;
                 }
 
-            }else
-            {
+            } else {
                 label.setText("The university year must respect the chronological order");
                 Paint paint = Paint.valueOf("red");
                 label.setTextFill(paint);
-                Font font = new Font("Gadugi",15);
+                Font font = new Font("Gadugi", 15);
                 label.setFont(font);
                 return false;
             }
-        }else
-        {
+        } else {
             label.setText("The university year must be in the form: 2000-2001");
             Paint paint = Paint.valueOf("red");
             label.setTextFill(paint);
-            Font font = new Font("Gadugi",15);
+            Font font = new Font("Gadugi", 15);
             label.setFont(font);
             return false;
         }
     }
 
 
-    public void btnGraphicOnClick() throws IOException
-    {
-        FXMLLoader loader= new FXMLLoader(getClass().getResource("graphic.fxml"));
-        Stage stage =(Stage) btnGraphic.getScene().getWindow();
+    public void btnGraphicOnClick() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("graphic.fxml"));
+        Stage stage = (Stage) btnGraphic.getScene().getWindow();
         stage.setScene(new Scene(loader.load()));
         Graphic menu = loader.getController();
         menu.start(user);
         stage.show();
     }
 
-    public void btnLogoutOnClick() throws IOException
-    {
+    public void btnLogoutOnClick() throws IOException {
         File path = FileUtils.getUserDirectory().getAbsoluteFile();
-        File file = new File(path.getAbsolutePath()+File.separator+"user.txt");
+        File file = new File(path.getAbsolutePath() + File.separator + "user.txt");
         FileWriter writer = new FileWriter(file.getAbsolutePath());
-        writer.write(user+";"+"false");
+        writer.write(user + ";" + "false");
         writer.close();
-        Stage logout= (Stage) btnLogout.getScene().getWindow();
+        Stage logout = (Stage) btnLogout.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("login.fxml"));
-        Scene scene= new Scene(fxmlLoader.load());
+        Scene scene = new Scene(fxmlLoader.load());
         logout.setScene(scene);
     }
-    public void btnAddSemesterOnClick()
-    {
+
+    public void btnAddSemesterOnClick() {
         paneSemesterAdd.setVisible(true);
         List<Semester> all = semesterService.findAll();
-        for(Semester semester : all)
-        {
-            if(semester.getUser().equals(this.user))
-            {
+        for (Semester semester : all) {
+            if (semester.getUser().equals(this.user)) {
                 txtUniv.setText(semester.getUniversity());
                 txtColl.setText(semester.getCollege());
                 txtDep.setText(semester.getDepartment());
@@ -352,14 +322,13 @@ public class Menu {
             }
         }
     }
-    public void btnAddOnClick()
-    {
-        if(FieldsValidation(txtUniv.getText(), txtColl.getText(), txtDep.getText()
-                , txtUniv_year.getText())&&Univ_yearValidation(txtUniv_year.getText()))
-        {
-            Semester semester= new Semester(user, txtUniv.getText(), txtColl.getText()
-                    , txtDep.getText(), txtUniv_year.getText(),spnYear.getValue(),spnSem.getValue(),chbTaxes.isSelected());
-            if(SemesterValidation(semester)) {
+
+    public void btnAddOnClick() {
+        if (FieldsValidation(txtUniv.getText(), txtColl.getText(), txtDep.getText()
+                , txtUniv_year.getText()) && Univ_yearValidation(txtUniv_year.getText())) {
+            Semester semester = new Semester(user, txtUniv.getText(), txtColl.getText()
+                    , txtDep.getText(), txtUniv_year.getText(), spnYear.getValue(), spnSem.getValue(), chbTaxes.isSelected());
+            if (SemesterValidation(semester)) {
                 Semester save = semesterService.save(semester);
                 Alert a = new Alert(Alert.AlertType.CONFIRMATION);
                 a.setHeaderText("The semester has been successfully added");
@@ -378,20 +347,18 @@ public class Menu {
         }
     }
 
-    public void btnLibraryOnClick() throws IOException
-    {
-        FXMLLoader loader= new FXMLLoader(getClass().getResource("library.fxml"));
-        Stage stage =(Stage) btnLibrary.getScene().getWindow();
+    public void btnLibraryOnClick() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("library.fxml"));
+        Stage stage = (Stage) btnLibrary.getScene().getWindow();
         stage.setScene(new Scene(loader.load()));
         Library menu = loader.getController();
         menu.start(user);
         stage.show();
     }
 
-    public void btnCostsOnClick() throws IOException
-    {
-        FXMLLoader loader= new FXMLLoader(getClass().getResource("costs.fxml"));
-        Stage stage =(Stage) btnCosts.getScene().getWindow();
+    public void btnCostsOnClick() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("costs.fxml"));
+        Stage stage = (Stage) btnCosts.getScene().getWindow();
         stage.setScene(new Scene(loader.load()));
         Costs menu = loader.getController();
         menu.start(user);

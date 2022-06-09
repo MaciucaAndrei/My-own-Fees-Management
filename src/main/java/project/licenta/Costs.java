@@ -229,8 +229,7 @@ public class Costs {
                 lblMenuClose.setVisible(false);
             });
         });
-        for (Node node : paneMenu.getChildren())
-        {
+        for (Node node : paneMenu.getChildren()) {
             if (node.getClass().equals(Button.class)) {
                 node.setOnMouseEntered(e -> {
                     node.setStyle("-fx-background-color: transparent;-fx-text-fill:#000080;");

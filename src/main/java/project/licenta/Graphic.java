@@ -24,7 +24,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.Calendar;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 
 public class Graphic {
@@ -214,7 +216,7 @@ public class Graphic {
     }
 
     public boolean fieldsValidation(String type, ComboBox<String> time, DatePicker start, DatePicker end) {
-        if (type==null) {
+        if (type == null) {
             lblError.setText("Fill in all  the fields");
             javafx.scene.paint.Paint paint = Paint.valueOf("red");
             lblError.setTextFill(paint);
@@ -257,8 +259,7 @@ public class Graphic {
                 lblError.setFont(font);
                 return false;
             }
-            if(s.getTimeInMillis()>e.getTimeInMillis())
-            {
+            if (s.getTimeInMillis() > e.getTimeInMillis()) {
                 lblError.setText("The end date cannot be earlier than the start date ");
                 Paint paint = Paint.valueOf("red");
                 lblError.setTextFill(paint);
@@ -266,8 +267,7 @@ public class Graphic {
                 lblError.setFont(font);
                 return false;
             }
-            if(s.getTimeInMillis()==e.getTimeInMillis())
-            {
+            if (s.getTimeInMillis() == e.getTimeInMillis()) {
                 lblError.setText("The end date cannot be the same as the start date ");
                 Paint paint = Paint.valueOf("red");
                 lblError.setTextFill(paint);
@@ -342,7 +342,6 @@ public class Graphic {
     }
 
 
-
     public PieChart createPieChart(DatePicker start) {
         PieChart pie = new PieChart();
         pie.setLayoutX(393);
@@ -397,10 +396,9 @@ public class Graphic {
                 for (Taxes tax : all) {
                     if (tax.getUser().equals(user) && tax.getPayment_date().get(Calendar.MONTH) + 1 == MonthValue(time)
                             && tax.getPayment_date().get(Calendar.YEAR) == Calendar.getInstance().get(Calendar.YEAR)) {
-                        String text =tax.getPayment_date().get(Calendar.DAY_OF_MONTH) + " " + MonthName(tax.getPayment_date().get(Calendar.MONTH) + 1);
-                       if(values.containsKey(text))
-                        {
-                            values.replace(text,values.get(text)+tax.getPayment_amount());
+                        String text = tax.getPayment_date().get(Calendar.DAY_OF_MONTH) + " " + MonthName(tax.getPayment_date().get(Calendar.MONTH) + 1);
+                        if (values.containsKey(text)) {
+                            values.replace(text, values.get(text) + tax.getPayment_amount());
 
                         } else {
                             values.put(text, tax.getPayment_amount());
@@ -420,13 +418,13 @@ public class Graphic {
                     for (String key : values.keySet()) {
                         series.getData().add(new XYChart.Data<>(key, values.get(key)));
                     }
-                    series.getData().sort(new Comparator(){
+                    series.getData().sort(new Comparator() {
 
                         @Override
                         public int compare(Object o1, Object o2) {
-                            String[] date1= ((XYChart.Data<String,Double>) o1).getXValue().split(" ");
-                            String[] date2= ((XYChart.Data<String,Double>) o2).getXValue().split(" ");
-                            return Integer.compare(Integer.parseInt(date1[0]),Integer.parseInt(date2[0]));
+                            String[] date1 = ((XYChart.Data<String, Double>) o1).getXValue().split(" ");
+                            String[] date2 = ((XYChart.Data<String, Double>) o2).getXValue().split(" ");
+                            return Integer.compare(Integer.parseInt(date1[0]), Integer.parseInt(date2[0]));
                         }
                     });
                     bar.getData().add(series);
@@ -459,7 +457,7 @@ public class Graphic {
                     for (String key : values.keySet()) {
                         series.getData().add(new XYChart.Data<>(key, values.get(key)));
                     }
-                    series.getData().sort((Comparator) (o1, o2) -> Integer.compare(MonthValue(((XYChart.Data<String, Double>) o1).getXValue()),MonthValue(((XYChart.Data<String, Double>) o2).getXValue())));
+                    series.getData().sort((Comparator) (o1, o2) -> Integer.compare(MonthValue(((XYChart.Data<String, Double>) o1).getXValue()), MonthValue(((XYChart.Data<String, Double>) o2).getXValue())));
                     bar.getData().add(series);
                     paneContent.getChildren().add(bar);
                 }
@@ -496,7 +494,7 @@ public class Graphic {
                     for (String key : values.keySet()) {
                         series.getData().add(new XYChart.Data<>(key, values.get(key)));
                     }
-                    series.getData().sort((Comparator) (o1, o2) -> Integer.compare(MonthValue(((XYChart.Data<String, Double>) o1).getXValue()),MonthValue(((XYChart.Data<String, Double>) o2).getXValue())));
+                    series.getData().sort((Comparator) (o1, o2) -> Integer.compare(MonthValue(((XYChart.Data<String, Double>) o1).getXValue()), MonthValue(((XYChart.Data<String, Double>) o2).getXValue())));
                     bar.getData().add(series);
                     paneContent.getChildren().add(bar);
                 }
