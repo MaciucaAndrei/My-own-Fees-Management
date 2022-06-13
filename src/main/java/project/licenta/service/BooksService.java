@@ -14,5 +14,4 @@ public class BooksService {
 
     public List<Books> findAll() {return  booksRepository.findAll();}
 
-    public List<Books>  findBy(Books book) { return  booksRepository.findBy(book);}
 }

@@ -19,5 +19,4 @@ public class TaxesService {
         return taxesRepository.findAll();
     }
 
-    public List<Taxes>  findBy(Taxes taxes) { return taxesRepository.findBy(taxes);}
 }

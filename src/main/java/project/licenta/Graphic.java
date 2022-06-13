@@ -29,6 +29,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
+@SuppressWarnings({"rawtypes", "unchecked"})
 public class Graphic {
 
 
@@ -43,9 +44,6 @@ public class Graphic {
 
     @FXML
     private Button btnLogout;
-
-    @FXML
-    private Button btnShow;
 
     @FXML
     private ComboBox<String> cmbTime;
@@ -379,6 +377,7 @@ public class Graphic {
         return pie;
     }
 
+    @SuppressWarnings("rawtypes")
     public BarChart<String, Number> createBarChart(String type, String time, DatePicker start, DatePicker end) {
         CategoryAxis xAxis = new CategoryAxis();
         NumberAxis yAxis = new NumberAxis();
@@ -494,7 +493,7 @@ public class Graphic {
                     for (String key : values.keySet()) {
                         series.getData().add(new XYChart.Data<>(key, values.get(key)));
                     }
-                    series.getData().sort((Comparator) (o1, o2) -> Integer.compare(MonthValue(((XYChart.Data<String, Double>) o1).getXValue()), MonthValue(((XYChart.Data<String, Double>) o2).getXValue())));
+                    series.getData().sort((Comparator) Comparator.comparingInt(o -> MonthValue(((XYChart.Data<String, Double>) o).getXValue())));
                     bar.getData().add(series);
                     paneContent.getChildren().add(bar);
                 }
@@ -506,7 +505,7 @@ public class Graphic {
 
     }
 
-    public void btnShowOnClick(ActionEvent event) {
+    public void btnShowOnClick() {
         lblError.setText("");
         if (pieChart != null) {
             paneContent.getChildren().remove(pieChart);

@@ -14,5 +14,4 @@ public class ReminderService {
 
     public List<Reminder> findAll() {return  reminderRepository.findAll();}
 
-    public List<Reminder>  findBy(Reminder reminder) { return  reminderRepository.findBy(reminder);}
 }

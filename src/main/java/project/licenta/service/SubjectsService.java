@@ -16,5 +16,4 @@ public class SubjectsService {
 
     public List<Subjects> findAll() {return  subjectsRepository.findAll();}
 
-    public List<Subjects>  findBy(Subjects subjects) { return  subjectsRepository.findBy(subjects);}
 }

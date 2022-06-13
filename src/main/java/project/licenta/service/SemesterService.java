@@ -14,6 +14,5 @@ public class SemesterService {
 
         public List<Semester> findAll() {return  semesterRepository.findAll();}
 
-        public List<Semester>  findBy(Semester semester) { return  semesterRepository.findBy(semester);}
 
 }
