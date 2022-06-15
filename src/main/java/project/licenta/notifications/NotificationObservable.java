@@ -1,9 +1,11 @@
 package project.licenta.notifications;
 
+import org.apache.deltaspike.cdise.api.CdiContainer;
+import org.apache.deltaspike.cdise.api.CdiContainerLoader;
+import project.licenta.MainApp;
 import project.licenta.entity.Reminder;
 import project.licenta.service.ReminderService;
 import project.licenta.utils.GetInstance;
-import project.licenta.utils.Notification;
 
 import java.awt.*;
 import java.util.Calendar;
@@ -14,7 +16,7 @@ public class NotificationObservable extends Observable implements Runnable {
     private String user;
     private boolean initialPass = false;
     private Calendar today;
-
+    private CdiContainer cdiContainer;
 
     public String getUser() {
         return user;
@@ -58,7 +60,13 @@ public class NotificationObservable extends Observable implements Runnable {
                 Thread.sleep(1000);
                 if (today.get(Calendar.YEAR) == Calendar.getInstance().get(Calendar.YEAR) && today.get(Calendar.MONTH) == Calendar.getInstance().get(Calendar.MONTH)
                         && today.get(Calendar.DAY_OF_MONTH) + 1 == Calendar.getInstance().get(Calendar.DAY_OF_MONTH)) {
-
+                    MainApp app = new MainApp();
+                    if(!app.isOpen())
+                    {
+                        cdiContainer = CdiContainerLoader.getCdiContainer();
+                        cdiContainer.boot();
+                        cdiContainer.getContextControl().startContexts();
+                    }
                     setChanged();
                     notifyObservers(user);
                     setToday(Calendar.getInstance());

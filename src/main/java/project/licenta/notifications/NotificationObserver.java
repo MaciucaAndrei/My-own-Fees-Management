@@ -4,7 +4,6 @@ package project.licenta.notifications;
 import project.licenta.entity.Reminder;
 import project.licenta.service.ReminderService;
 import project.licenta.utils.GetInstance;
-import project.licenta.utils.Notification;
 
 import java.awt.*;
 import java.util.List;
