@@ -4,7 +4,7 @@ package project.licenta.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "subjects_entity")
+@Table(name = "Subjects")
 public class Subjects {
 
     @Id

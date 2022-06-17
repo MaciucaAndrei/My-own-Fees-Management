@@ -206,8 +206,6 @@ public class Costs {
             slide.setToX(0);
             slide.play();
 
-            paneSlider.setTranslateX(-243);
-
             slide.setOnFinished((ActionEvent e) -> {
                 lblMenu.setVisible(false);
                 lblMenuClose.setVisible(true);
@@ -221,8 +219,6 @@ public class Costs {
 
             slide.setToX(-243);
             slide.play();
-
-            paneSlider.setTranslateX(0);
 
             slide.setOnFinished((ActionEvent e) -> {
                 lblMenu.setVisible(true);

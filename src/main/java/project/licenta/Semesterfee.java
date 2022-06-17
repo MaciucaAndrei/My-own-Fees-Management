@@ -99,8 +99,6 @@ public class Semesterfee {
             slide.setToX(0);
             slide.play();
 
-            paneSlider.setTranslateX(-240);
-
             slide.setOnFinished((ActionEvent e) -> {
                 lblMenu.setVisible(false);
                 lblMenuClose.setVisible(true);
@@ -114,8 +112,6 @@ public class Semesterfee {
 
             slide.setToX(-240);
             slide.play();
-
-            paneSlider.setTranslateX(0);
 
             slide.setOnFinished((ActionEvent e) -> {
                 lblMenu.setVisible(true);
@@ -323,11 +319,11 @@ public class Semesterfee {
     }
 
     public void btnBackOnClick(ActionEvent event) throws IOException, AWTException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("subject_view.fxml"));
         Stage stage = (Stage) btnBack.getScene().getWindow();
         stage.setScene(new Scene(loader.load()));
-        Menu menu = loader.getController();
-        menu.start(user);
+       Subjects_view menu = loader.getController();
+        menu.start(user,lblSemester.getText(),semester);
         stage.show();
     }
 

@@ -3,7 +3,7 @@ package project.licenta.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "semester_entity")
+@Table(name = "Semester")
 public class Semester {
 
     @Id

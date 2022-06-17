@@ -4,7 +4,7 @@ package project.licenta.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "allsubjects_entity")
+@Table(name = "AllSubjects")
 public class AllSubjects {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

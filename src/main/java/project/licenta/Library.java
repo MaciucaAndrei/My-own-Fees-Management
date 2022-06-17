@@ -126,8 +126,6 @@ public class Library {
             slide.setToX(0);
             slide.play();
 
-            paneSlider.setTranslateX(-230);
-
             slide.setOnFinished((ActionEvent e) -> {
                 lblMenu.setVisible(false);
                 lblMenuClose.setVisible(true);
@@ -141,8 +139,6 @@ public class Library {
 
             slide.setToX(-230);
             slide.play();
-
-            paneSlider.setTranslateX(0);
 
             slide.setOnFinished((ActionEvent e) -> {
                 lblMenu.setVisible(true);

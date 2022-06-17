@@ -40,7 +40,7 @@ public class Register {
     private final UserService userService = GetInstance.of(UserService.class);
 
 
-    public boolean EmailValidation(String e) {
+    public boolean emailValidation(String e) {
         String emailRegex = "[a-zA-Z0-9_+&*-.]+@[a-zA-Z0-9_+&*-.]+[.][a-zA-Z0-9_+&*-]+";
         Pattern pat = Pattern.compile(emailRegex);
         if (pat.matcher(e).matches()) {
@@ -57,7 +57,7 @@ public class Register {
         }
     }
 
-    public boolean PassValidation(String p1, String p2) {
+    public boolean passValidation(String p1, String p2) {
         if (p1.equals(p2)) {
             return true;
         } else {
@@ -72,7 +72,7 @@ public class Register {
         }
     }
 
-    public boolean FieldsValidation(String u, String e, String p1, String p2) {
+    public boolean fieldsValidation(String u, String e, String p1, String p2) {
         if (!u.isBlank() && !e.isBlank() && !p1.isBlank() && !p2.isBlank()) {
             return true;
         } else {
@@ -87,9 +87,9 @@ public class Register {
         }
     }
 
-    public boolean RegisterValidation(String u, String e) {
-        if (FieldsValidation(txtUser.getText(), txtEmail.getText(), txtPass.getText(), txtPassNew.getText()) &&
-                EmailValidation(txtEmail.getText()) && PassValidation(txtPass.getText(), txtPassNew.getText())) {
+    public boolean registerValidation(String u, String e) {
+        if (fieldsValidation(txtUser.getText(), txtEmail.getText(), txtPass.getText(), txtPassNew.getText()) &&
+                emailValidation(txtEmail.getText()) && passValidation(txtPass.getText(), txtPassNew.getText())) {
             List<User> all = userService.findAll();
             for (User user : all) {
                 if (user.getUsername().equals(u)) {
@@ -114,16 +114,16 @@ public class Register {
                 }
 
             }
-            String cryptPass = BCrypt.withDefaults().hashToString(12, txtPass.getText().toCharArray());
-            User user = new User(txtUser.getText(), txtEmail.getText(), cryptPass);
-            User save = userService.save(user);
             return true;
         }
         return false;
     }
 
     public void btnRegisterOnClick() throws IOException {
-        if (RegisterValidation(txtUser.getText(), txtEmail.getText())) {
+        if (registerValidation(txtUser.getText(), txtEmail.getText())) {
+            String cryptPass = BCrypt.withDefaults().hashToString(12, txtPass.getText().toCharArray());
+            User user = new User(txtUser.getText(), txtEmail.getText(), cryptPass);
+            User save = userService.save(user);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
             Stage stage = (Stage) btnRegister.getScene().getWindow();
             stage.setScene(new Scene(loader.load()));

@@ -97,8 +97,6 @@ public class Course_view {
             slide.setToX(0);
             slide.play();
 
-            paneSlider.setTranslateX(-250);
-
             slide.setOnFinished((ActionEvent e) -> {
                 lblMenu.setVisible(false);
                 lblMenuClose.setVisible(true);
@@ -112,8 +110,6 @@ public class Course_view {
 
             slide.setToX(-250);
             slide.play();
-
-            paneSlider.setTranslateX(0);
 
             slide.setOnFinished((ActionEvent e) -> {
                 lblMenu.setVisible(true);

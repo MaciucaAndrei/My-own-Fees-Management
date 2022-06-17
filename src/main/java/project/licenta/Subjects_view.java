@@ -179,8 +179,6 @@ public class Subjects_view {
             slide.setToX(0);
             slide.play();
 
-            paneSlider.setTranslateX(-257);
-
             slide.setOnFinished((ActionEvent e) -> {
                 lblMenu.setVisible(false);
                 lblMenuClose.setVisible(true);
@@ -194,8 +192,6 @@ public class Subjects_view {
 
             slide.setToX(-257);
             slide.play();
-
-            paneSlider.setTranslateX(0);
 
             slide.setOnFinished((ActionEvent e) -> {
                 lblMenu.setVisible(true);

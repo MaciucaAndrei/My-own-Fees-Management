@@ -24,16 +24,11 @@ public class MainApp extends Application {
 
     private final NotificationObserver notificationObserver = new NotificationObserver();
 
-    private boolean opened=true;
-
     public static void main(String[] args) {
         launch();
     }
 
-    public Boolean isOpen()
-    {
-        return opened;
-    }
+
     private void initCdiContainer() {
         cdiContainer = CdiContainerLoader.getCdiContainer();
         cdiContainer.boot();
@@ -79,12 +74,5 @@ public class MainApp extends Application {
                 }
             }
         }
-    }
-
-    @Override
-    public void stop() throws Exception {
-        super.stop();
-        opened=false;
-        cdiContainer.shutdown();
     }
 }

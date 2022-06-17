@@ -3,7 +3,7 @@ package project.licenta.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user_entity")
+@Table(name = "User")
 public class User {
 
     @Id

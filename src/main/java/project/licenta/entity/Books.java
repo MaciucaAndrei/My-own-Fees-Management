@@ -5,7 +5,7 @@ import javax.persistence.*;
 import java.util.Calendar;
 
 @Entity
-@Table(name = "books_entity")
+@Table(name = "Books")
 public class Books {
 
     @Id
