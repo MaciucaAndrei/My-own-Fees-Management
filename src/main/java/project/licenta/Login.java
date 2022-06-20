@@ -46,7 +46,7 @@ public class Login {
     private final NotificationObservable notificationObservable = new NotificationObservable();
     private final NotificationObserver notificationObserver = new NotificationObserver();
 
-    public boolean FieldsValidation(String user, String pass) {
+    public boolean fieldsValidation(String user, String pass) {
         if (!user.isBlank() && !pass.isBlank()) {
             return true;
         } else {
@@ -59,8 +59,8 @@ public class Login {
         }
     }
 
-    public boolean LoginValidation(String user, String pass) {
-        if (FieldsValidation(user, pass)) {
+    public boolean loginValidation(String user, String pass) {
+        if (fieldsValidation(user, pass)) {
             List<User> users = userService.findAll();
             for (User all : users) {
                 if (all.getUsername().equals(user)) {
@@ -92,7 +92,7 @@ public class Login {
     }
 
     public void btnLoginOnClick() throws IOException, AWTException {
-        if (LoginValidation(txtUser.getText(), txtPass.getText())) {
+        if (loginValidation(txtUser.getText(), txtPass.getText())) {
             File path = FileUtils.getUserDirectory().getAbsoluteFile();
             File file = new File(path.getAbsolutePath() + File.separator + "user.txt");
             FileWriter writer = new FileWriter(file.getAbsolutePath());

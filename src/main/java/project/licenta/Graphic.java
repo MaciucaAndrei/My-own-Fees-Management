@@ -353,7 +353,8 @@ public class Graphic {
         date.set(start.getValue().getYear(), start.getValue().getMonthValue() - 1, start.getValue().getDayOfMonth());
         for (Taxes tax : all) {
             if (tax.getUser().equals(user) && tax.getPayment_date().get(Calendar.YEAR) == date.get(Calendar.YEAR)
-                    && tax.getPayment_date().get(Calendar.MONTH) == date.get(Calendar.MONTH) && tax.getPayment_date().get(Calendar.DAY_OF_MONTH) == date.get(Calendar.DAY_OF_MONTH)) {
+                    && tax.getPayment_date().get(Calendar.MONTH) == date.get(Calendar.MONTH) &&
+                    tax.getPayment_date().get(Calendar.DAY_OF_MONTH) == date.get(Calendar.DAY_OF_MONTH)) {
                 PieChart.Data data = new PieChart.Data(tax.getPayment_type(), tax.getPayment_amount());
                 pie.getData().add(data);
             }
@@ -395,7 +396,8 @@ public class Graphic {
                 for (Taxes tax : all) {
                     if (tax.getUser().equals(user) && tax.getPayment_date().get(Calendar.MONTH) + 1 == MonthValue(time)
                             && tax.getPayment_date().get(Calendar.YEAR) == Calendar.getInstance().get(Calendar.YEAR)) {
-                        String text = tax.getPayment_date().get(Calendar.DAY_OF_MONTH) + " " + MonthName(tax.getPayment_date().get(Calendar.MONTH) + 1);
+                        String text = tax.getPayment_date().get(Calendar.DAY_OF_MONTH) + " " +
+                                MonthName(tax.getPayment_date().get(Calendar.MONTH) + 1);
                         if (values.containsKey(text)) {
                             values.replace(text, values.get(text) + tax.getPayment_amount());
 

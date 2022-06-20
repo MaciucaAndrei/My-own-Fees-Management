@@ -38,9 +38,8 @@ public class Notification {
             SystemTray tray = SystemTray.getSystemTray();
 
             Image image = Toolkit.getDefaultToolkit().createImage("@images/icon.png");
-            TrayIcon trayIcon = new TrayIcon(image, "Tray Demo");
+            TrayIcon trayIcon = new TrayIcon(image, "MYUNISIT: Reminders");
             trayIcon.setImageAutoSize(true);
-            trayIcon.setToolTip("myUniSit: Reminders");
             tray.add(trayIcon);
 
             trayIcon.displayMessage(title, message, TrayIcon.MessageType.INFO);

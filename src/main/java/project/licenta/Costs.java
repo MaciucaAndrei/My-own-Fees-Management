@@ -191,6 +191,7 @@ public class Costs {
         Stage logout = (Stage) btnLogout.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+        logout.setResizable(false);
         logout.setScene(scene);
     }
 

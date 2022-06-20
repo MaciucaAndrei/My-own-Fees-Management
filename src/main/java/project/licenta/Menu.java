@@ -165,7 +165,7 @@ public class Menu {
                 });
                 button.setOnAction(e -> {
                     try {
-                        Semesters_view(button.getText(), semester);
+                        semesters_view(button.getText(), semester);
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
@@ -179,7 +179,7 @@ public class Menu {
         }
     }
 
-    public void Semesters_view(String semester, Semester s) throws IOException {
+    public void semesters_view(String semester, Semester s) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("subjects_view.fxml"));
         Stage stage = (Stage) btnAdd.getScene().getWindow();
         stage.setScene(new Scene(loader.load()));
@@ -210,7 +210,7 @@ public class Menu {
         }
     }
 
-    public boolean FieldsValidation(String u, String c, String d, String y) {
+    public boolean fieldsValidation(String u, String c, String d, String y) {
         if (!u.isBlank() && !c.isBlank() && !d.isBlank() && !y.isBlank()) {
             return true;
         } else {
@@ -223,7 +223,7 @@ public class Menu {
         }
     }
 
-    public boolean SemesterValidation(Semester duplicate) {
+    public boolean semesterValidation(Semester duplicate) {
         List<Semester> semesters = semesterService.findAll();
         String duplicate_shortcuts = buttonText(duplicate);
         for (Semester semester : semesters) {
@@ -252,7 +252,7 @@ public class Menu {
         return true;
     }
 
-    public boolean Univ_yearValidation(String year) {
+    public boolean univ_yearValidation(String year) {
         if (year.contains("-")) {
             String[] years = year.split("-");
             int year1 = Integer.parseInt(years[0]);
@@ -324,11 +324,11 @@ public class Menu {
     }
 
     public void btnAddOnClick() {
-        if (FieldsValidation(txtUniv.getText(), txtColl.getText(), txtDep.getText()
-                , txtUniv_year.getText()) && Univ_yearValidation(txtUniv_year.getText())) {
+        if (fieldsValidation(txtUniv.getText(), txtColl.getText(), txtDep.getText()
+                , txtUniv_year.getText()) && univ_yearValidation(txtUniv_year.getText())) {
             Semester semester = new Semester(user, txtUniv.getText(), txtColl.getText()
                     , txtDep.getText(), txtUniv_year.getText(), spnYear.getValue(), spnSem.getValue(), chbTaxes.isSelected());
-            if (SemesterValidation(semester)) {
+            if (semesterValidation(semester)) {
                 Semester save = semesterService.save(semester);
                 Alert a = new Alert(Alert.AlertType.CONFIRMATION);
                 a.setHeaderText("The semester has been successfully added");

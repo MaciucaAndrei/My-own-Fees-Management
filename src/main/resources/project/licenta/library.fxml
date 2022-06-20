@@ -18,7 +18,7 @@
                   <Image url="@images/menu_background.jpg" />
                </image>
             </ImageView>
-            <Button fx:id="btnLogout" layoutX="760.0" layoutY="7.0" mnemonicParsing="false" onAction="#btnLogoutOnClick" style="-fx-background-color: transparent;" text="Log out" textFill="#d9e9f2">
+            <Button fx:id="btnLogout" layoutX="760.0" layoutY="7.0" mnemonicParsing="false" onAction="#btnLogoutOnClick" style="-fx-background-color: transparent;" text="Logout" textFill="#d9e9f2">
                <font>
                   <Font name="Gadugi Bold" size="20.0" />
                </font>

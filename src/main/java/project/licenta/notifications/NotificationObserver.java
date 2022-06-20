@@ -17,7 +17,8 @@ public class NotificationObserver implements Observer {
         List<Reminder> all = reminderService.findAll();
         for (Reminder reminder : all) {
             if (reminder.getUsername().equals(arg)) {
-                Notification not = new Notification(reminder.getTitle(), reminder.getMessage(), reminder.getDeadline(), reminder.getDays());
+                Notification not = new Notification(reminder.getTitle(), reminder.getMessage(),
+                        reminder.getDeadline(), reminder.getDays());
                 try {
                     not.display();
 

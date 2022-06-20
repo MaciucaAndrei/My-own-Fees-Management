@@ -29,31 +29,30 @@ public class NotificationObservable extends Observable implements Runnable {
         this.today = today;
     }
 
-    public void checkDatabase() {
-        ReminderService reminderService = GetInstance.of(ReminderService.class);
-        List<Reminder> all = reminderService.findAll();
-        for (Reminder reminder : all) {
-            if (reminder.getUsername().equals(user)) {
-                Notification not = new Notification(reminder.getTitle(), reminder.getMessage(), reminder.getDeadline(), reminder.getDays());
-                try {
-                    not.display();
-                } catch (AWTException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
 
-    public void trigger() {
+    @Override
+    public void run() {
 
         while (true) {
             if (!initialPass) {
-                checkDatabase();
                 this.initialPass = true;
+                ReminderService reminderService = GetInstance.of(ReminderService.class);
+                List<Reminder> all = reminderService.findAll();
+                for (Reminder reminder : all) {
+                    if (reminder.getUsername().equals(user)) {
+                        Notification not = new Notification(reminder.getTitle(), reminder.getMessage(), reminder.getDeadline(),
+                                reminder.getDays());
+                        try {
+                            not.display();
+                        } catch (AWTException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
             }
             try {
-                Thread.sleep(1000);
-                if (today.get(Calendar.YEAR) == Calendar.getInstance().get(Calendar.YEAR) && today.get(Calendar.MONTH) == Calendar.getInstance().get(Calendar.MONTH)
+                if (today.get(Calendar.YEAR) == Calendar.getInstance().get(Calendar.YEAR) &&
+                        today.get(Calendar.MONTH) == Calendar.getInstance().get(Calendar.MONTH)
                         && today.get(Calendar.DAY_OF_MONTH) + 1 == Calendar.getInstance().get(Calendar.DAY_OF_MONTH)) {
                     setChanged();
                     notifyObservers(user);
@@ -65,12 +64,6 @@ public class NotificationObservable extends Observable implements Runnable {
 
         }
 
-
-    }
-
-    @Override
-    public void run() {
-        trigger();
     }
 
 }

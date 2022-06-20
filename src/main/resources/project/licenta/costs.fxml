@@ -291,7 +291,7 @@
                     </image>
                 </ImageView>
                 <Button fx:id="btnLogout" layoutX="783.0" layoutY="7.0" mnemonicParsing="false"
-                        onAction="#btnLogoutOnClick" style="-fx-background-color: transparent;" text="Log out"
+                        onAction="#btnLogoutOnClick" style="-fx-background-color: transparent;" text="Logout"
                         textFill="#d9e9f2">
                     <font>
                         <Font name="Gadugi Bold" size="20.0"/>

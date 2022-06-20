@@ -1,0 +1,57 @@
+AC.I;Analiza matematica;1;1
+AC.I;Algebra si geometrie;1;1
+AC.I;Introducerea in programarea calculatoarelor;1;1
+AC.I;Logica si structuri discrete;1;1
+AC.I;Fundamentele calculatoarelor;1;1
+AC.I;Comunicare;1;1
+AC.I;Limba engleza 1;1;1
+AC.I;Limba germana 1;1;1
+AC.I;Educatie fizica 1;1;1
+AC.O;Psihologia educatiei;1;1
+AC.I;Matematici speciale;1;2
+AC.I;Matematici asistate de calculator;1;2
+AC.I;Tehnici de programare;1;2
+AC.I;Structuri de date si algoritmi;1;2
+AC.I;Arhitectura calculatoarelor;1;2
+AC.I;Microeconomie;1;2
+AC.I;Limba engleza 2;1;2
+AC.I;Limba germana 2;1;2
+AC.I;Educatie fizica 2;1;2
+AC.O;Pedagogie 1;1;2
+AC.I;Sisteme de operare;2;1
+AC.I;Proiectarea microsistemelor digitale;2;1
+AC.I;Elemente de automatica;2;1
+AC.I;Programarea orientata pe obiecte;2;1
+AC.I;Analiza algoritmilor;2;1
+AC.I;Management;2;1
+AC.I;Educatie fizica 3;2;1
+AC.I;Practica 1;2;1
+AC.O;Pedagogie 2;2;1
+AC.I;Programare Java;2;2
+AC.I;Marketing;2;2
+AC.I;Fundamentele de inginerie sofrware;2;2
+AC.I;Baze de date;2;2
+AC.I;Proiectarea interfetelor utilizator si grafica;2;2
+AC.I;Proiect sincretic A: Sisteme cu microcontroller si IoT industriale;2;2
+AC.I;Proiect sincretic B: Metode avansate de programare;2;2
+AC.I;Practica 2;2;2;
+AC.O;Didactica specializarii;2;2
+AC.I;Securitatea informatiei;3;1
+AC.I;Retele de calculatoare;3;1
+AC.I;Limbaje formale si tehnici de compilare;3;1
+AC.I;Cultura si civilizatie;3;1
+AC.I;Programare web;3;1
+AC.I;Proiect sincretic A: baze de date;3;1
+AC.I;Proiect sincretic B: Retele de calculatoare;3;1
+AC.I;Proiectarea bazelor de date;3;1
+AC.O;Instruirea asistata de calculator;3;1
+AC.O;Practica pedagogica 1;3;1
+AC.I;Proiectarea aplicatiilor pe platforme reconfigurabile;3;2
+AC.I;Proiectarea translatoarelor;3;2;
+AC.I;Programarea aplicatiilor multimedia;3;2
+AC.I;Sisteme Incorporate;3;2
+AC.I;Elaborare lucrare de licenta;3;2
+AC.I;Sustinere examen de licenta;3;2
+AC.O;Managementul clasei de elevi;3;2
+AC.O;Practica pedagogica 2;3;2
+AC.O;Examen de absolivire: nivel 1;3;2
